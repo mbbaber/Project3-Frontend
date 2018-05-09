@@ -9,6 +9,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { MainComponent } from './main/main.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,7 @@ import { MainComponent } from './main/main.component';
     AppRoutingModule, 
     HttpClientModule
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
