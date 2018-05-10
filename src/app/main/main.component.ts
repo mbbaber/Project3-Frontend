@@ -39,5 +39,15 @@ export class MainComponent implements OnInit {
       console.log(err)
     })
 }
+getCardsList() {
+  this.apiSubject.getSubDetails(this.subjectsId)
+  .then((result: Subjects[]) => {
+    this.subjects = result;
+  })
+  .catch((err) => {
+    console.log('Subject details error')
+    console.log(err)
+  })
+}
 }
   
