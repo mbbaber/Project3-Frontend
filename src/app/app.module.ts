@@ -10,6 +10,7 @@ import { MainComponent } from './main/main.component';
 import { FlashcardComponent } from './flashcard/flashcard.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,7 @@ import { FlashcardComponent } from './flashcard/flashcard.component';
     AppRoutingModule, 
     HttpClientModule
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
