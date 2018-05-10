@@ -4,7 +4,7 @@
     <div class="card front-card left">
       <div class="card-content">
         <div class="content">
-          <h3>This is the front side of flashcard</h3>
+          <h3 *ngFor="let card of subjects?.cards" class="center">{{card.front}}</h3>
           <a class="flash-button right"><b>➤</b></a>
         </div>
       </div>
@@ -14,7 +14,7 @@
     <div class="card swing-in-left-fwd left">
         <div class="card-content">
           <div class="content">
-            <h3 class="center">This is the back side of flashcard</h3>
+              <h3 *ngFor="let card of subjects?.cards" class="center">{{card.back}}</h3>
           </div>
         </div>
       </div>

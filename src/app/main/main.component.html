@@ -23,10 +23,10 @@
           <div class ="left">
               <h4 ><strong>{{subject.name}}</strong></h4>
           
-              <div *ngFor="let keyword of subject.keywords">{{keyword}}</div>
+              <span *ngFor="let keyword of subject.keywords">{{keyword}}</span>
               <!-- <p *ngIf="subjects">Tags: {{subjects?.tags}}</p> -->
           </div>
-          <a class="button is-link right">View Flashcards</a>
+          <a [routerLink]="['/subject', subject._id]" class="button is-link right">View Flashcards</a>
         </div>
       </div>
     </article>

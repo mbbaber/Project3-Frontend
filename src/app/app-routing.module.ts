@@ -7,12 +7,12 @@ import { FlashcardComponent } from './flashcard/flashcard.component';
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   //main component = user's main page (groups is in drop down menu)
-  //{path: 'main/:userId', component: MainComponent},
 
+  //{path: 'main/:userId', component: MainComponent},
   {path: 'group/:groupId', component: MainComponent},
 
 
-  {path: 'flashcard', component: FlashcardComponent},
+  {path: 'subject/:subjectId', component: FlashcardComponent},
 
   //Error Component
   //{path: '**', component: },

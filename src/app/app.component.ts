@@ -62,7 +62,7 @@ export class AppComponent {
     this.userService.postSignUp(this.formCredentials)
     .then(()=>{
       this.signUpState = false;
-      this.response.navigateByUrl('/main');
+      this.response.navigateByUrl('/');
     })
     .catch((err)=>{
       console.log('signup error');
