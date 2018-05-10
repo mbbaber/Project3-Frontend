@@ -10,6 +10,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { MainComponent } from './main/main.component';
 import { UserService } from './services/user.service';
 
+import { FlashcardComponent } from './flashcard/flashcard.component';
 
 
 
@@ -17,7 +18,8 @@ import { UserService } from './services/user.service';
   declarations: [
     AppComponent,
     HomepageComponent,
-    MainComponent
+    MainComponent,
+    FlashcardComponent
   ],
   imports: [
     BrowserModule,
