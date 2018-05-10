@@ -1,29 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService, User } from '../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Groups, GroupsService } from '../api/groups.service';
 
 @Component({
-  selector: 'app-your-account',
-  templateUrl: './your-account.component.html',
-  styleUrls: ['./your-account.component.css']
+  selector: 'app-users-groups',
+  templateUrl: './users-groups.component.html',
+  styleUrls: ['./users-groups.component.css']
 })
-export class YourAccountComponent implements OnInit {
+export class UsersGroupsComponent implements OnInit {
 
-  userData: User = this.userService.currentUser;
+  userData: User;
   userId: String;
+
+  search: String ="";
+  groupsId: String;
+  groups: Groups[];
 
   constructor(
     public userService: UserService,
     public request: ActivatedRoute,
-    public response: Router
+    public response: Router,
+    public apiGroup: GroupsService
   ) { }
 
   ngOnInit() {
+    this.apiGroup.getGroupsList()
+    .then((result: Groups[]) => {
+      this.groups = result;
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
     this.userService.checkLogin()
+    .then((result: User)=>{
+      this.userData = result;
+    })
     .catch((err)=>{
       console.log('App login check error');
       console.log(err);
     })
+
   }
 
   getUserData(){
@@ -37,4 +56,5 @@ export class YourAccountComponent implements OnInit {
       console.log(err);
     })
   }
+  
 }

@@ -1,0 +1,39 @@
+h1 {
+    font-size: 25px;
+    padding: 30px;
+}
+
+h3 {
+    padding: 5vh;
+}
+
+.center {
+    text-align: center;
+}
+
+.left {
+    float:left;
+}
+
+.right {
+    float: right;
+}
+
+.box {
+    width: 75%;
+    margin: auto;
+}
+
+.admin {
+    margin: 5%;
+}
+
+.stats-box {
+    background-color: grey;
+    height: 100vh;
+}
+
+
+.control {
+    width: 90vh;
+}

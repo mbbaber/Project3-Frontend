@@ -12,6 +12,10 @@ import { UserService } from './services/user.service';
 
 import { FlashcardComponent } from './flashcard/flashcard.component';
 import { YourAccountComponent } from './your-account/your-account.component';
+import { GroupsService } from './api/groups.service';
+import { SubjectsService } from './api/subjects.service';
+import { UsersGroupsComponent } from './users-groups/users-groups.component';
+import { InputFilterPipe } from './pipes/input-filter.pipe';
 
 
 
@@ -21,7 +25,9 @@ import { YourAccountComponent } from './your-account/your-account.component';
     HomepageComponent,
     MainComponent,
     FlashcardComponent,
-    YourAccountComponent
+    YourAccountComponent,
+    UsersGroupsComponent,
+    InputFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,7 @@ import { YourAccountComponent } from './your-account/your-account.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [ UserService ],
+  providers: [GroupsService, SubjectsService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

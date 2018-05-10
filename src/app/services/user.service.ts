@@ -55,6 +55,18 @@ export class UserService {
       return apiResponse;
     })
   }
+
+  getDataUser(userId){
+    return this.toBackEnd
+    .get(`http://localhost:3000/auth/user/${userId}`)
+    .toPromise()
+    .then((apiResponse: any)=>{
+      this.currentUser = apiResponse.userInfo;
+      return apiResponse;
+    })
+  }
+
+ 
 }
 
 
