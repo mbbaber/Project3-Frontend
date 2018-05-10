@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MainComponent } from './main/main.component';
 import { FlashcardComponent } from './flashcard/flashcard.component';
+import { GroupsService } from './api/groups.service';
+import { SubjectsService } from './api/subjects.service';
 
 
 
@@ -23,7 +25,7 @@ import { FlashcardComponent } from './flashcard/flashcard.component';
     AppRoutingModule, 
     HttpClientModule
   ],
-  providers: [ ],
+  providers: [GroupsService, SubjectsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

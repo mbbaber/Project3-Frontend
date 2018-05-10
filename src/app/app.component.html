@@ -21,16 +21,12 @@
             Groups
           </a>
           <div class="navbar-dropdown is-boxed">
-            <a class="navbar-item" href="#">
-              One Thing
+            
+            <!-- All of those are there to be restricted after loggin in anyways -->
+            <a [routerLink]="['/group', group._id]" *ngFor="let group of groups" class="navbar-item" href="#">
+              {{group.name}}
             </a>
-            <a class="navbar-item" href="#">
-              Another Thing
-            </a>
-            <a class="navbar-item" href="#">
-              See Comment from HERE
-              <!-- All of those are there to be restricted after loggin in anyways -->
-            </a>
+            
             <hr class="navbar-divider">
           </div>
         </div>

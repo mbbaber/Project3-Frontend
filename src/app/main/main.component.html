@@ -1,6 +1,6 @@
 <div class="columns">
 <div class="main-section column is-three-quarters">
-<h1 class = "center">Group 1: Your Subjects</h1>
+<h1 class = "center">{{groups?.name}}: Your Subjects</h1>
 
 <div class="box search">
     <div class="field has-addons">
@@ -16,13 +16,15 @@
 </div>
 <!-- add for each subject div below-->
 
-<div class="box">
+<div *ngFor="let subject of groups?.subjects" class="box">
     <article class="media">
       <div class="media-content">
         <div class="content">
           <div class ="left">
-              <h4><strong>Example Subject 1</strong></h4>
-              <p>Tags: science, programming</p>
+              <h4 ><strong>{{subject.name}}</strong></h4>
+          
+              <div *ngFor="let keyword of subject.keywords">{{keyword}}</div>
+              <!-- <p *ngIf="subjects">Tags: {{subjects?.tags}}</p> -->
           </div>
           <a class="button is-link right">View Flashcards</a>
         </div>
