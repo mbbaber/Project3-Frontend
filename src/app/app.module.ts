@@ -11,6 +11,7 @@ import { MainComponent } from './main/main.component';
 import { UserService } from './services/user.service';
 
 import { FlashcardComponent } from './flashcard/flashcard.component';
+import { YourAccountComponent } from './your-account/your-account.component';
 
 
 
@@ -19,7 +20,8 @@ import { FlashcardComponent } from './flashcard/flashcard.component';
     AppComponent,
     HomepageComponent,
     MainComponent,
-    FlashcardComponent
+    FlashcardComponent,
+    YourAccountComponent
   ],
   imports: [
     BrowserModule,
