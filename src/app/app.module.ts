@@ -3,10 +3,13 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import 'rxjs/operator/toPromise';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MainComponent } from './main/main.component';
+import { UserService } from './services/user.service';
+
 
 
 
@@ -19,9 +22,10 @@ import { MainComponent } from './main/main.component';
   imports: [
     BrowserModule,
     AppRoutingModule, 
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [ ],
+  providers: [ UserService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
