@@ -13,9 +13,9 @@ import { Stat, StatsService } from '../api/stats.service';
 export class FlashcardComponent implements OnInit {
   subjectId: string;
   subject: Subject;
-  groupsId: string;
-  groups: Groups;
-
+  //group: Groups = this.apiGroup.currentGroup;
+  groupId: string;
+  stats: any;
   currentCardId: number = -1;
 
   currentCard: Card;
@@ -36,10 +36,14 @@ export class FlashcardComponent implements OnInit {
     this.reqTruc.paramMap
       .subscribe((myParams) => {
         this.subjectId = myParams.get('subjectId');
+        this.groupId = myParams.get('groupId');
 
         this.getCardsList()
             .then( (subject: Subject) => this.getNextCard());
       })
+
+    
+    console.log(this.apiGroup.currentGroup)
   }
 
   
@@ -69,24 +73,24 @@ export class FlashcardComponent implements OnInit {
 
   rateCardandUpdate(rating: number) {
     this.getNextCard();
-    console.log(rating);
+
     let ids = {
-      card: this.currentCardId,
-      group: this.groups, 
+      card: this.currentCard,
+      group: this.groupId,
       subject: this.subjectId,
-      rating //rating
+      rating: rating
     }
-    console.log(this.groups)
-    console.log(ids);
+
 
     this.apiStats.getStatsList(ids)
-    .then((result)=>{
-      console.log(result);
-    })
-    .catch((err)=>{
-      console.log('error rate card and update');
-      console.log(err)
-    })
+      .then((result) => {
+        console.log(result);
+        this.stats = result;
+      })
+      .catch((err) => {
+        console.log('error rate card and update');
+        console.log(err)
+      })
 
   }
 }

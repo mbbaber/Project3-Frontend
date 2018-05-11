@@ -17,7 +17,7 @@
 <!-- add for each subject div below-->
 
 
-<a *ngFor="let subject of groups?.subjects" [routerLink]="['/subject', subject._id]" class="box">
+<a *ngFor="let subject of groups?.subjects" [routerLink]="['/g', groups._id, 'subject', subject._id]" class="box">
   <article class="media">
     <div class="media-content">
       <div class="content">

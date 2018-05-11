@@ -12,7 +12,7 @@
     <!-- add for each subject div below-->
     <!--  -->
     <!-- *ngFor="let subject of groups?.subjects  " -->
-    <div class="box" *ngFor="let group of groups | inputFilter : search">
+    <div class="box" *ngFor="let group of groups | inputFilter : search" (click)="groupState(group._id)">
         <article class="media">
           <div class="media-content">
             <div class="content">

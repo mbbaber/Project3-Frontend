@@ -43,7 +43,9 @@ export class AppComponent {
   }
   // addGroup(id, groupId) {
 
-
+  groupState(groupId){
+    this.apiGroup.currentGroup = groupId;
+  }
 
   logInShow(){
     if(this.signUpState===true){

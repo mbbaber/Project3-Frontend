@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'main', component: UsersGroupsComponent },
 
 
-  {path: 'subject/:subjectId', component: FlashcardComponent},
+  {path: 'g/:groupId/subject/:subjectId', component: FlashcardComponent},
 
   //Error Component
   //{path: '**', component: },

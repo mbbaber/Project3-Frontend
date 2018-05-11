@@ -8,7 +8,7 @@ export class StatsService {
   
   getStatsList(ids) {
     return this.ajaxTruc
-      .patch(`http://localhost:3000/stat`, {withCredentials: true})
+      .patch(`http://localhost:3000/stat`,ids, {withCredentials: true})
       .toPromise();
   }
 }
