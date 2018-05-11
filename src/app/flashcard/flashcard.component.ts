@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupsService, Group } from '../api/groups.service';
+import { GroupsService, Groups } from '../api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, SubjectsService, Card } from '../api/subjects.service';
 
@@ -13,7 +13,7 @@ export class FlashcardComponent implements OnInit {
   subjectId: string;
   subject: Subject;
   groupsId: string;
-  groups: Group[];
+  groups: Groups[];
 
   currentCardId: number = -1;
 

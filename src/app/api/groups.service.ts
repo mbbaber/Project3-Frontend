@@ -16,6 +16,6 @@ export class GroupsService {
   }
 }
 
-export class Group {
+export class Groups {
   name: string;
 }

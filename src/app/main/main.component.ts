@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupsService, Group } from '../api/groups.service';
+import { GroupsService, Groups } from '../api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, SubjectsService } from '../api/subjects.service';
 
@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
   subjectsId: string;
   subjects: Subject[];
   groupsId: string;
-  groups: Group[];
+  groups: Groups[];
 
   constructor(
     private reqTruc: ActivatedRoute,
@@ -31,7 +31,7 @@ export class MainComponent implements OnInit {
   }
   getSubjectsList() {
     this.apiGroup.getDetails(this.groupsId)
-    .then((result: Group[]) => {
+    .then((result: Groups[]) => {
       this.groups = result;
     })
     .catch((err) => {
