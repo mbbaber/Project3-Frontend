@@ -20,7 +20,13 @@ export class SubjectsService {
   }
 }
 
-export class Subjects {
+export class Subject {
+  cards: Card[];
   name: string; 
   keyword: string;
+}
+
+export class Card {
+  front: string;
+  back: string;
 }
