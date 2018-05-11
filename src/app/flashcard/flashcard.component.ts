@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GroupsService, Groups } from '../api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, SubjectsService, Card } from '../api/subjects.service';
+import { Stat, StatsService } from '../api/stats.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class FlashcardComponent implements OnInit {
   constructor(
     private reqTruc: ActivatedRoute,
     public apiGroup: GroupsService,
-    //public apiCard: CardsService,
+    //public apiCard: StatsService,
     public apiSubject: SubjectsService,
     private resTruc: Router
   ) { }
@@ -38,7 +39,6 @@ export class FlashcardComponent implements OnInit {
         this.getCardsList()
             .then( (subject: Subject) => this.getNextCard());
       })
-
   }
 
   getCardsList() {
@@ -57,20 +57,22 @@ export class FlashcardComponent implements OnInit {
     this.flipBackVisibility();
     this.currentCardId = (this.currentCardId + 1) % this.subject.cards.length;
     this.currentCard = this.subject.cards[this.currentCardId];
-
+    console.log(this.currentCard);
+    //    Math.floor((Math.random() * cards.length));
   }
-
-
 
   flipBackVisibility() {
     this.classState.showForm = !this.classState.showForm;
   }
 
-  rateCard(rating: number) {
+  rateCardandUpdate(rating: number) {
     this.getNextCard();
+
+    // Stats.rating = number
+    // connect this to stats service (service will receive all infro)
+    // ajax request
   }
 }
 
-//   NextCard() {
-//     Math.floor((Math.random() * cards.length));
-// }
+
+

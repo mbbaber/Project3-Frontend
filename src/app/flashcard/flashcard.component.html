@@ -14,7 +14,7 @@
     </div>
 
     <div *ngIf="classState.showForm">
-      <div class="card left swing-in-left-fwd">
+      <div class="card back-card left swing-in-left-fwd">
         <div class="card-content">
           <div class="content">
             <h3 class="center">{{currentCard.back}}</h3>
@@ -22,7 +22,6 @@
         </div>
       </div>
     </div>
-
 
     <!--only when back of card is shown-->
 
@@ -33,11 +32,11 @@
         </div>
         <div class="center">
           <span class="e-size left center">
-            <a (click)="rateCard(1)">😫</a>
-            <a (click)="rateCard(2)">☹️</a>
-            <a (click)="rateCard(3)">🤔</a>
-            <a (click)="rateCard(4)">😊</a>
-            <a (click)="rateCard(5)">😎</a>
+            <a (click)="rateCardandUpdate(1)">😫</a>
+            <a (click)="rateCardandUpdate(2)">☹️</a>
+            <a (click)="rateCardandUpdate(3)">🤔</a>
+            <a (click)="rateCardandUpdate(4)">😊</a>
+            <a (click)="rateCardandUpdate(5)">😎</a>
           </span>
         </div>
       </div>
