@@ -14,7 +14,7 @@ export class FlashcardComponent implements OnInit {
   subjectId: string;
   subject: Subject;
   groupsId: string;
-  groups: Groups[];
+  groups: Groups;
 
   currentCardId: number = -1;
 
@@ -27,7 +27,7 @@ export class FlashcardComponent implements OnInit {
   constructor(
     private reqTruc: ActivatedRoute,
     public apiGroup: GroupsService,
-    //public apiCard: StatsService,
+    public apiStats: StatsService,
     public apiSubject: SubjectsService,
     private resTruc: Router
   ) { }
@@ -36,11 +36,13 @@ export class FlashcardComponent implements OnInit {
     this.reqTruc.paramMap
       .subscribe((myParams) => {
         this.subjectId = myParams.get('subjectId');
+
         this.getCardsList()
             .then( (subject: Subject) => this.getNextCard());
       })
   }
 
+  
   getCardsList() {
     return this.apiSubject.getSubDetails(this.subjectId)
       .then((result: Subject) => {
@@ -67,10 +69,25 @@ export class FlashcardComponent implements OnInit {
 
   rateCardandUpdate(rating: number) {
     this.getNextCard();
+    console.log(rating);
+    let ids = {
+      card: this.currentCardId,
+      group: this.groups, 
+      subject: this.subjectId,
+      rating //rating
+    }
+    console.log(this.groups)
+    console.log(ids);
 
-    // Stats.rating = number
-    // connect this to stats service (service will receive all infro)
-    // ajax request
+    this.apiStats.getStatsList(ids)
+    .then((result)=>{
+      console.log(result);
+    })
+    .catch((err)=>{
+      console.log('error rate card and update');
+      console.log(err)
+    })
+
   }
 }
 

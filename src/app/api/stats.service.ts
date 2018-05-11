@@ -6,9 +6,9 @@ import 'rxjs/add/operator/toPromise';
 export class StatsService {
   constructor(private ajaxTruc: HttpClient) { }
   
-  getStatsList(statId) {
+  getStatsList(ids) {
     return this.ajaxTruc
-      .get(`http://localhost:3000/stat}`)
+      .patch(`http://localhost:3000/stat`, {withCredentials: true})
       .toPromise();
   }
 }
