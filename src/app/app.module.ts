@@ -16,6 +16,7 @@ import { GroupsService } from './api/groups.service';
 import { SubjectsService } from './api/subjects.service';
 import { UsersGroupsComponent } from './users-groups/users-groups.component';
 import { InputFilterPipe } from './pipes/input-filter.pipe';
+import { StatsService } from './api/stats.service';
 
 
 
@@ -35,7 +36,7 @@ import { InputFilterPipe } from './pipes/input-filter.pipe';
     HttpClientModule,
     FormsModule
   ],
-  providers: [GroupsService, SubjectsService, UserService],
+  providers: [GroupsService, SubjectsService, UserService, StatsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

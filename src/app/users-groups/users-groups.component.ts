@@ -15,7 +15,7 @@ export class UsersGroupsComponent implements OnInit {
   userId: String;
 
   search: String ="";
-  groupsId: String;
+  groupId: String;
   groups: Groups[];
 
   constructor(
@@ -45,6 +45,10 @@ export class UsersGroupsComponent implements OnInit {
 
   }
 
+  groupState(groupId){
+    this.apiGroup.currentGroup = groupId;
+  }
+
   getUserData(){
     this.userService.getDataUser(this.userId)
     .then((result: User)=>{
@@ -57,4 +61,5 @@ export class UsersGroupsComponent implements OnInit {
     })
   }
   
+
 }

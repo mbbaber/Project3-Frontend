@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupsService, Groups } from '../api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subjects, SubjectsService } from '../api/subjects.service';
+import { Subject, SubjectsService } from '../api/subjects.service';
 
 @Component({
   selector: 'app-main',
@@ -11,7 +11,7 @@ import { Subjects, SubjectsService } from '../api/subjects.service';
 
 export class MainComponent implements OnInit {
   subjectsId: string;
-  subjects: Subjects[];
+  subjects: Subject[];
   groupsId: string;
   groups: Groups[];
 
@@ -39,15 +39,6 @@ export class MainComponent implements OnInit {
       console.log(err)
     })
 }
-getCardsList() {
-  this.apiSubject.getSubDetails(this.subjectsId)
-  .then((result: Subjects[]) => {
-    this.subjects = result;
-  })
-  .catch((err) => {
-    console.log('Subject details error')
-    console.log(err)
-  })
-}
+
 }
   

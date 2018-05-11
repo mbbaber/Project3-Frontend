@@ -4,36 +4,44 @@
     <div class="card front-card left">
       <div class="card-content">
         <div class="content">
-          <h3 *ngFor="let card of subjects?.cards" class="center">{{card.front}}</h3>
-          <a class="flash-button right"><b>➤</b></a>
+          <h3 class="center">{{currentCard.front}}</h3>
+          <a (click)="flipBackVisibility()" class="flash-button right">
+            <b>➤</b>
+          </a>
         </div>
       </div>
-     
+
     </div>
 
-    <div class="card swing-in-left-fwd left">
+    <div *ngIf="classState.showForm">
+      <div class="card back-card left swing-in-left-fwd">
         <div class="card-content">
           <div class="content">
-              <h3 *ngFor="let card of subjects?.cards" class="center">{{card.back}}</h3>
+            <h3 class="center">{{currentCard.back}}</h3>
           </div>
         </div>
       </div>
-  
+    </div>
 
-      <!--only when back of card is shown-->
+    <!--only when back of card is shown-->
 
-       <div class="clear center">
-        <div class="answer-box">How well did you know the answer?</div>
+    <div class="clear center">
+      <div *ngIf="classState.showForm">
+        <div class="answer-box">
+          How well did you know the answer?
+        </div>
         <div class="center">
-          <p class="e-size left center">😫 ☹️ 🤔 😊 😎 </p>
-          <p class="e-size left"> </p>
-          <p class="e-size left"> </p>
-          <p class="e-size left"> </p>
-          <p class="e-size left"> </p>
+          <span class="e-size left center">
+            <a (click)="rateCardandUpdate(1)">😫</a>
+            <a (click)="rateCardandUpdate(2)">☹️</a>
+            <a (click)="rateCardandUpdate(3)">🤔</a>
+            <a (click)="rateCardandUpdate(4)">😊</a>
+            <a (click)="rateCardandUpdate(5)">😎</a>
+          </span>
         </div>
       </div>
     </div>
-    
+  </div>
   <div class="column stats-box">
     <h3>My Statistics: Subject 1</h3>
   </div>

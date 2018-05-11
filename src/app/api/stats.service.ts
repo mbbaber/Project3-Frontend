@@ -5,12 +5,15 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class StatsService {
   constructor(private ajaxTruc: HttpClient) { }
-  getStatsList() {
-    return this.ajaxTruc.get("http://localhost:3000/api/stats").toPromise();
+  
+  getStatsList(ids) {
+    return this.ajaxTruc
+      .patch(`http://localhost:3000/stat`,ids, {withCredentials: true})
+      .toPromise();
   }
 }
 
-export class Stats {
+export class Stat {
   rating: Number; 
   seen: Number;
 }
