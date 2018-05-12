@@ -59,7 +59,7 @@
     <!-- if admin show this below -->
     <div class="center admin" *ngIf="isAdmin">
       <p>Admin can see this:</p>
-      <a class="button is-link">Add Subject +</a>
+      <a class="button is-link" (click)="showAddSubForm()">Add Subject +</a>
     </div>
   </div>
 
@@ -70,3 +70,25 @@
 
 
 </div>
+
+<!-- <div class="sign-up-window" *ngIf="addSubState" >
+  <div class="sign-up-pop">
+    <h2> Subject adding</h2>
+    <form  (ngSubmit)="addThisSub()">
+      <label>Which subject do you want to add to your group ?
+        <div class="field has-addons">
+          <div class="control is-expanded">
+            <div class="select is-fullwidth">
+              <select name="country">
+                <option *ngFor="let oneSub of subjects" [(ngModel)]="thisSub.name">{{oneSub?.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="control">
+            <button type="submit" class="button is-primary">Choose</button>
+          </div>
+        </div>
+      </label>
+    </form>
+  </div>
+</div> -->

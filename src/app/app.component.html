@@ -13,8 +13,8 @@
   
     <div id="navbarExampleTransparentExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item">
-          Do we need that?
+        <a class="navbar-item" (click)="newSetShow()">
+          Create new set
         </a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">
@@ -134,6 +134,18 @@
     <form (ngSubmit)="groupFormSubmit()">
       <label>Name of your new group:
         <input type="text" name="username" [(ngModel)]="newGroup.name" >
+      </label>
+      <button>Create</button>
+    </form>
+  </div>
+</div>
+
+<div class="sign-up-window" *ngIf="newCardsState" >
+  <div class="sign-up-pop">
+    <h2>New set of cards</h2>
+    <form (ngSubmit)="subjectFormSubmit()">
+      <label>Name of your new group:
+        <input type="text" name="name" [(ngModel)]="newSetOfCards.name" >
       </label>
       <button>Create</button>
     </form>

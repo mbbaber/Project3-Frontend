@@ -5,7 +5,8 @@ import { toPromise } from 'rxjs/operator/toPromise';
 
 @Injectable()
 export class SubjectsService {
-
+  allSubs: Subject[];
+  subToSave: newSubSave;
   userSubs: Subject[];
   constructor(private ajaxTruc: HttpClient) { }
   
@@ -40,6 +41,45 @@ export class SubjectsService {
       return apiResponse;
     })
   }
+
+  newSub(subCred: NewSubject){
+    return this.ajaxTruc
+    .post(`http://localhost:3000/subject/new-subject`,
+    subCred,
+    {withCredentials: true})
+    .toPromise()
+    .then((apiResponse:any)=>{  
+      this.subToSave = apiResponse;
+      console.log(apiResponse)
+      return apiResponse;
+    })
+  }
+
+  getSubInfo(subId){
+    return this.ajaxTruc
+    .get(`http://localhost:3000/subject/${subId}`)
+    .toPromise()
+    .then((apiResponse: any)=>{
+      this.subToSave = apiResponse;
+      console.log(apiResponse)
+      return apiResponse;
+    })
+  }
+
+  getAllTheSubjects(){
+    return this.ajaxTruc
+    .get(`http://localhost:3000/subject/all-subjects`)
+    .toPromise()
+    .then((apiResponse: any)=>{
+      this.allSubs = apiResponse;
+      return apiResponse;
+    })
+  }
+
+  // getThisSub(subId){
+  //   return this.ajaxTruc
+  //   .
+  // }
 }
 
 export class Subject {
@@ -53,4 +93,21 @@ export class Card {
   _id: string;
   front: string;
   back: string;
+}
+
+export class NewSubject{
+  name: string;
+  admin: string;
+  cards: Array<any>
+}
+
+export class newSubSave{
+  _id: string;
+  name: string;
+  admin: string;
+  cards: Array<any>
+}
+
+export class chooseSub{
+  name: string
 }

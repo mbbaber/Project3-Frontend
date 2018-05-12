@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { GroupsService, Groups, BeginningGroup } from './api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService, SignUpCredentials } from './services/user.service';
+import { NewSubject, SubjectsService } from './api/subjects.service';
 
 
 @Component({
@@ -19,17 +20,19 @@ export class AppComponent {
   logInState: boolean = false;
   signUpState: boolean = false;
   newGroupState: boolean = false;
+  newCardsState: boolean = false;
 
   formCredentials: SignUpCredentials = new SignUpCredentials();
   newGroup: BeginningGroup = new BeginningGroup();
+  newSetOfCards: NewSubject = new NewSubject();
 
-  title = 'app';
   constructor(
     private reqTruc: ActivatedRoute,
     public apiGroup: GroupsService,
     private resTruc: Router,
     public userService: UserService,
-    public response: Router
+    public response: Router,
+    public apiSub: SubjectsService
   ){ }
 
   ngOnInit() {
@@ -89,6 +92,9 @@ export class AppComponent {
     }
     this.newGroupState = !this.newGroupState;
   }
+  newSetShow(){
+    this.newCardsState = !this.newCardsState;
+  }
 
   signUpSumbit(){
     this.userService.postSignUp(this.formCredentials)
@@ -132,6 +138,18 @@ export class AppComponent {
     .then(()=>{
       this.newGroupState = false;
       this.response.navigateByUrl(`/my-account/${this.userId}`);
+    })
+    .catch((err)=>{
+      console.log(err, 'error form Submit')
+    })
+  }
+  
+  subjectFormSubmit(){
+    this.apiSub.newSub(this.newSetOfCards)
+    .then((result)=>{
+      console.log(result)
+      this.newCardsState = false;
+      this.response.navigateByUrl(`/new-subject/${result._id}`);
     })
     .catch((err)=>{
       console.log(err, 'error form Submit')

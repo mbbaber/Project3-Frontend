@@ -8,6 +8,7 @@ import { YourAccountComponent } from './your-account/your-account.component';
 import { YourGroupsComponent } from './your-account/your-groups/your-groups.component';
 import { YourSubjectsComponent } from './your-account/your-subjects/your-subjects.component';
 import { UserAccountComponent } from './your-account/user-account/user-account.component';
+import { CreateNewSubjectComponent } from './create-new-subject/create-new-subject.component';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
       {path: 'subjects', component: YourSubjectsComponent}
     ]},
   { path: 'main', component: UsersGroupsComponent },
+  { path: 'new-subject/:subId', component: CreateNewSubjectComponent },
 
 
   {path: 'g/:groupId/subject/:subjectId', component: FlashcardComponent},
