@@ -4,7 +4,7 @@
     <div class="card front-card left">
       <div class="card-content">
         <div class="content">
-          <h3 class="center">{{currentCard.front}}</h3>
+          <h3 class="center">{{currentCard?.front}}</h3>
           <a (click)="flipBackVisibility()" class="flash-button right">
             <b>➤</b>
           </a>
@@ -17,7 +17,7 @@
       <div class="card back-card left swing-in-left-fwd">
         <div class="card-content">
           <div class="content">
-            <h3 class="center">{{currentCard.back}}</h3>
+            <h3 class="center">{{currentCard?.back}}</h3>
           </div>
         </div>
       </div>
