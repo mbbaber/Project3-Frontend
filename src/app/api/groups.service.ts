@@ -20,7 +20,7 @@ export class GroupsService {
   .then((result: any)=>{
     console.log("AAAAAAAAAAAAAAAAAAAAAA", result)
     this.currentGroup = result._id
-    return result
+    return result;
   })
   .catch((err)=>{
     console.log("get detais group service error", err);
@@ -45,7 +45,18 @@ export class GroupsService {
       this.userGroups = apiResponse;
       return apiResponse;
     })
+  }
 
+  newGroup(groupCred: BeginningGroup){
+    return this.ajaxTruc
+    .post('http://localhost:3000/api/new-group',
+    groupCred,
+    {withCredentials:true})
+    .toPromise()
+    .then((apiResponse:any)=>{  
+      this.userGroups = apiResponse;
+      return apiResponse;
+    })
   }
 }
 
@@ -53,4 +64,10 @@ export class Groups {
   _id: string;
   name: string;
   users: any;
+  admin: string
+}
+
+export class BeginningGroup{
+  name: string;
+  admin: string
 }

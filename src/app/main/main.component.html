@@ -1,9 +1,9 @@
 <div class="columns">
-<div class="main-section column is-three-quarters">
-<h1 class = "center">{{groups?.name}}: Your Subjects</h1>
+  <div class="main-section column is-three-quarters">
+    <h1 class="center">{{groups?.name}}: Subjects</h1>
 
-<div class="box search">
-    <div class="field has-addons">
+    <div class="box search">
+      <div class="field has-addons">
         <div class="control">
           <input class="input" type="text" placeholder="Search Group 1 Subjects">
         </div>
@@ -13,32 +13,32 @@
           </a>
         </div>
       </div>
-</div>
-<!-- add for each subject div below-->
-
-
-<a *ngFor="let subject of groups?.subjects" [routerLink]="['/g', groups._id, 'subject', subject._id]" class="box">
-  <article class="media">
-    <div class="media-content">
-      <div class="content">
-        <div class="left">
-          <h4>
-            <strong>{{subject.name}}</strong>
-          </h4>
-          Tags:
-          <span *ngFor="let keyword of subject.keywords">{{keyword}} </span>
-        </div>
-        <div class="right">
-        <p>number of cards?</p>
-        <p>percentage complete?</p>
-        </div>
-        
-      </div>
     </div>
-  </article>
-</a>
+    <!-- add for each subject div below-->
 
-<!-- <div *ngFor="let subject of groups?.subjects" class="box">
+
+    <a *ngFor="let subject of groups?.subjects" [routerLink]="['/g', groups._id, 'subject', subject._id]" class="box">
+      <article class="media">
+        <div class="media-content">
+          <div class="content">
+            <div class="left">
+              <h4>
+                <strong>{{subject.name}}</strong>
+              </h4>
+              Tags:
+              <span *ngFor="let keyword of subject.keywords">{{keyword}} </span>
+            </div>
+            <div class="right">
+              <p>number of cards?</p>
+              <p>percentage complete?</p>
+            </div>
+
+          </div>
+        </div>
+      </article>
+    </a>
+
+    <!-- <div *ngFor="let subject of groups?.subjects" class="box">
     <article class="media">
       <div class="media-content">
         <div class="content">
@@ -47,28 +47,26 @@
           
               <span *ngFor="let keyword of subject.keywords">{{keyword}}</span>
               <! <p *ngIf="subjects">Tags: {{subjects?.tags}}</p> -->
-          <!-- </div>
+    <!-- </div>
           <a [routerLink]="['/subject', subject._id]" class="button is-link right">View Flashcards</a>
         </div>
       </div>
     </article>
-  </div> --> 
+  </div> -->
 
 
 
-  <!-- if admin show this below -->
-  <div class="center admin">
-    <p>Admin can see this:</p>
-    <a class="button is-link">Add Subject +</a>
+    <!-- if admin show this below -->
+    <div class="center admin" *ngIf="isAdmin">
+      <p>Admin can see this:</p>
+      <a class="button is-link">Add Subject +</a>
+    </div>
   </div>
- </div>
 
-<div class="column stats-box">
-            <h3>Group 1 Statistics</h3>
-    
-        </div>
-    
+  <div class="column stats-box">
+    <h3>Group 1 Statistics</h3>
+
+  </div>
+
 
 </div>
-
-

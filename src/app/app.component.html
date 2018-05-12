@@ -23,11 +23,14 @@
           <div class="navbar-dropdown is-boxed">
             
             <!-- All of those are there to be restricted after loggin in anyways -->
-            <a [routerLink]="['/group', group._id]" *ngFor="let group of groups" (click)="groupState(group._id)" class="navbar-item" href="#">
+            <a [routerLink]="['/group', group._id]" *ngFor="let group of userGroups" (click)="groupState(group._id)" class="navbar-item" href="#">
               {{group.name}}
             </a>
             
             <hr class="navbar-divider">
+            <a (click)="newGroupShow()" class="navbar-item" href="#">
+              Add a group
+            </a>
           </div>
         </div>
       </div>
@@ -125,5 +128,15 @@
     </div>
 </div>
 
-
+<div class="sign-up-window" *ngIf="newGroupState" >
+  <div class="sign-up-pop">
+    <h2>Sign Up</h2>
+    <form (ngSubmit)="groupFormSubmit()">
+      <label>Name of your new group:
+        <input type="text" name="username" [(ngModel)]="newGroup.name" >
+      </label>
+      <button>Create</button>
+    </form>
+  </div>
+</div>
 <!-- TODO: Maybe a footer? -pk -->
