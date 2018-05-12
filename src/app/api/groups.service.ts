@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toPromise';
 export class GroupsService {
 
   currentGroup: string;
+  userGroups: Groups[];
 
   constructor(private ajaxTruc: HttpClient) { }
   getGroupsList() {
@@ -25,9 +26,31 @@ export class GroupsService {
     console.log("get detais group service error", err);
   })
   }
+
+  getGroups(userId){
+    return this.ajaxTruc
+    .get(`http://localhost:3000/api/user-groups/${userId}`)
+    .toPromise()
+    .then((apiResponse: any)=>{
+      this.userGroups = apiResponse;
+      return apiResponse;
+    })
+  }
+
+  deleteThisGroup(groupId, userId){
+    return this.ajaxTruc
+    .put(`http://localhost:3000/api/groups-of-the-user/${userId}/gr/${groupId}`, {new: true})
+    .toPromise()
+    .then((apiResponse: Groups[])=>{
+      this.userGroups = apiResponse;
+      return apiResponse;
+    })
+
+  }
 }
 
 export class Groups {
   _id: string;
   name: string;
+  users: any;
 }

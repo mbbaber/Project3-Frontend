@@ -12,7 +12,8 @@ import { UserService, SignUpCredentials } from './services/user.service';
 export class AppComponent {
   groupsId: string;
   groups: Groups[];
-  // isLoggedIn: boolean = false;
+  
+  
   logInState: boolean = false;
   signUpState: boolean = false;
   formCredentials: SignUpCredentials = new SignUpCredentials();
@@ -97,16 +98,4 @@ export class AppComponent {
     })
   }
 
-  yourAccount(userId){
-    this.userService.getDataUser(userId)
-    .then((result)=>{
-      // this.isLoggedIn = false;
-      console.log(result);
-      this.response.navigateByUrl('/my-account');
-    })
-    .catch((err)=>{
-      console.log(err);
-      console.log('log out error');
-    })
-  }
 }

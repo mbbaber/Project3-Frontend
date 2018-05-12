@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, User } from '../services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { UserService, User } from '../../services/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-your-account',
-  templateUrl: './your-account.component.html',
-  styleUrls: ['./your-account.component.css']
+  selector: 'app-user-account',
+  templateUrl: './user-account.component.html',
+  styleUrls: ['./user-account.component.css']
 })
-export class YourAccountComponent implements OnInit {
+export class UserAccountComponent implements OnInit {
 
-  userData: User = this.userService.currentUser;
-  userId: String ;
-
+  userData: User;
+  userId: string;
   constructor(
     public userService: UserService,
-    public request: ActivatedRoute,
-    public response: Router
+    public actRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -25,9 +23,10 @@ export class YourAccountComponent implements OnInit {
       console.log(err);
     })
 
-    this.request.paramMap
+    this.actRoute.parent.paramMap
       .subscribe((myParams) => {
         this.userId = myParams.get('userId');
+        console.log(this.userId)
       })
 
     this.getUserData()

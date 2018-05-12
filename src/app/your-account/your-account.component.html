@@ -1,31 +1,20 @@
-<section class="main-content columns is-fullheight">
-  <aside class="column is-2 is-fullheight section">
-    <p class="menu-label ">Your Account</p>
-    
-    <ul class="menu-list">
-      <li>
-        <a href="#" class="">
-          <span class="icon"><i class="fa fa-home"></i></span> Your groups
-        </a>
-      </li>
-      <li>
-        <a href="" class="">
-          <span class="icon"><i class="fa fa-table"></i></span> Your subjects
-        </a>
-      </li>
-      <li>
-        <a href="#" class="">
-          <span class="icon"><i class="fa fa-info"></i></span> Your profile
-        </a>
-      </li>
-      <li>
-        <a href="#" class="">
-          <span class="icon"><i class="fa fa-info"></i></span>Change password?
-        </a>
-      </li>
-    </ul>
-  </aside>
-  <div class="container column is-10">
-
-  </div>
-</section>
+<p class="menu-label">Hi, {{userData?.username}}!</p>
+<div class="columns">
+    <aside class="column is-2 is-fullheight section is-hidden-mobile">
+        <p class="menu-label is-hidden-touch">Navigation</p>
+        <ul class="menu-list">
+            <li>
+                <a [routerLink]="['./groups']" class=""> Groups</a>
+            </li>
+            <li>
+                <a [routerLink]="['./subjects']">Subjects </a>
+            </li>
+            <li>
+                <a [routerLink]="['./details']" class="">My Account</a>
+            </li>
+        </ul>
+    </aside>
+    <div class="column is-10">
+        <router-outlet></router-outlet>
+    </div>
+</div>

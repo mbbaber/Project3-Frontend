@@ -17,6 +17,10 @@ import { SubjectsService } from './api/subjects.service';
 import { UsersGroupsComponent } from './users-groups/users-groups.component';
 import { InputFilterPipe } from './pipes/input-filter.pipe';
 import { StatsService } from './api/stats.service';
+import { YourGroupsComponent } from './your-account/your-groups/your-groups.component';
+import { YourSubjectsComponent } from './your-account/your-subjects/your-subjects.component';
+import { UserAccountComponent } from './your-account/user-account/user-account.component';
+
 
 
 
@@ -28,7 +32,10 @@ import { StatsService } from './api/stats.service';
     FlashcardComponent,
     YourAccountComponent,
     UsersGroupsComponent,
-    InputFilterPipe
+    InputFilterPipe,
+    YourGroupsComponent,
+    YourSubjectsComponent,
+    UserAccountComponent
   ],
   imports: [
     BrowserModule,

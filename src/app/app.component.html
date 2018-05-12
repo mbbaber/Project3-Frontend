@@ -43,8 +43,7 @@
                     <a class="navbar-item" href="#">
                       One Thing
                     </a>
-                    <a class="navbar-item" 
-                    (click)="yourAccount(userService.currentUser._id)">
+                    <a class="navbar-item"  [routerLink]="['/my-account', userService.currentUser._id]">
                     <!-- [routerLink]="['/user', userService.currentUser._id]"  -->
                       Your Account
                       

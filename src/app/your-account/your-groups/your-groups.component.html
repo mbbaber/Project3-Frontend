@@ -1,0 +1,49 @@
+<div class="columns">
+  <div class="main-section column ">
+  <h1 class = "center"> Your Groups</h1>
+  
+  <div class="box search">
+      <div class="field has-addons">
+          <!--  -->
+            <input class="input" type="text" placeholder="find a group" [(ngModel)]="search" >
+         
+        </div>
+  </div>
+  <!-- add for each subject div below-->
+  <!--  -->
+  <!-- *ngFor="let subject of groups?.subjects  " -->
+  <div class="box" *ngFor="let group of userGroups | inputFilter : search">
+      <article class="media">
+        <div class="media-content">
+          <div class="content">
+            <div class ="left">
+                <h4 ><strong>{{group.name}}</strong></h4>
+            
+                <!-- <div *ngFor="let keyword of subject.keywords">{{keyword}}</div> -->
+                <!-- <p *ngIf="subjects">Tags: {{subjects?.tags}}</p> -->
+            </div>
+            <a class="button is-link right" [routerLink]="['/group', group._id]">See This Group</a>
+            <a class="button is-link right" (click)="deleteGroup(group._id, userData._id)">Delete Group</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  
+
+  
+    <!-- if admin show this below -->
+    <div class="center admin">
+      <p>Admin can see this:</p>
+      <a class="button is-link">Create a group +</a>
+    </div>
+  </div>
+<!--     
+  <div class="column stats-box">
+              <h3>Group 1 Statistics</h3>
+      
+          </div>
+      
+  
+  </div> -->
+  
+  

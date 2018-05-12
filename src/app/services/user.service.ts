@@ -65,7 +65,6 @@ export class UserService {
       return apiResponse;
     })
   }
-
  
 }
 
