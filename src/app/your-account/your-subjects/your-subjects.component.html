@@ -1,6 +1,6 @@
 <div class="columns">
   <div class="main-section column ">
-  <h1 class = "center"> Your Groups</h1>
+  <h1 class = "center"> Your Card Subjects</h1>
   
   <div class="box search">
       <div class="field has-addons">
@@ -12,17 +12,18 @@
   <!-- add for each subject div below-->
   <!--  -->
   <!-- *ngFor="let subject of groups?.subjects  " -->
-  <div class="box" *ngFor="let group of groups | inputFilter : search" (click)="groupState(group._id)">
+  <div class="box" *ngFor="let group of userSubs | inputFilter : search">
       <article class="media">
         <div class="media-content">
           <div class="content">
             <div class ="left">
-                <h4 ><strong>{{group.name}}</strong></h4>
+                <h4 ><strong>{{group?.name}}</strong></h4>
             
                 <!-- <div *ngFor="let keyword of subject.keywords">{{keyword}}</div> -->
                 <!-- <p *ngIf="subjects">Tags: {{subjects?.tags}}</p> -->
             </div>
-            <a class="button is-link right" [routerLink]="['/group', group._id]">See This Group</a>
+            <a class="button is-link right" [routerLink]="['/']">See This Group</a>
+            <a class="button is-link right" (click)="deleteSubject(group._id, userData._id)">Delete Group</a>
           </div>
         </div>
       </article>

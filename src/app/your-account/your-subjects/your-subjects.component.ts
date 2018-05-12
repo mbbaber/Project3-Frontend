@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService, User } from '../../services/user.service';
+import { SubjectsService, Subject, Card } from '../../api/subjects.service';
 
 @Component({
   selector: 'app-your-subjects',
@@ -11,9 +12,14 @@ export class YourSubjectsComponent implements OnInit {
 
   userData: User;
   userId: string;
+  userSubs: Subject[] = [];
+  search: string = "";
+  
   constructor(
     public userService: UserService,
-    public actRoute: ActivatedRoute
+    public actRoute: ActivatedRoute,
+    public apiGroup: SubjectsService,
+    public response: Router
   ) { }
 
   ngOnInit() {
@@ -26,10 +32,11 @@ export class YourSubjectsComponent implements OnInit {
     this.actRoute.parent.paramMap
       .subscribe((myParams) => {
         this.userId = myParams.get('userId');
-        console.log(this.userId)
       })
 
     this.getUserData()
+    this.getUsersSubjects()
+
   }
 
   getUserData(){
@@ -41,6 +48,28 @@ export class YourSubjectsComponent implements OnInit {
     .catch((err)=>{
       console.log("error fetching user data");
       console.log(err);
+    })
+  }
+
+  getUsersSubjects(){
+    this.apiGroup.getSubs(this.userId)
+    .then((result: Subject[])=>{
+      this.userSubs = result;
+    })
+    .catch((err)=>{
+      console.log('error fetching users groups', err);
+    })
+  }
+
+  deleteSubject(subId, userId){
+    this.apiGroup.deleteThisSub(subId, userId)
+    .then((result)=>{
+      this.userSubs = result;
+      console.log(result);
+      this.response.navigateByUrl(`/my-account/${userId}/subjects`)
+    })
+    .catch((err)=>{
+      console.log('error deleting group', err);
     })
   }
 }

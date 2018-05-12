@@ -13,7 +13,8 @@ export class YourGroupsComponent implements OnInit {
   userData: User;
   userId: string;
   userGroups: Groups[] = [];
-
+  search: string = "";
+  
   constructor(
     public userService: UserService,
     public actRoute: ActivatedRoute,
