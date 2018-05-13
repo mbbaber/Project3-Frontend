@@ -29,8 +29,10 @@ h3 {
 }
 
 .stats-box {
-    background-color: grey;
+    background-color: lightgray;
     height: 100vh;
+    color: black;
+    overflow: scroll;
 }
 
 

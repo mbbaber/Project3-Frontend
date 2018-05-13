@@ -26,15 +26,14 @@ export class StatsService {
 
   getAllStatsForUser(subjectId) {
     return this.httpClient
-    .get(`${BACKEND}/stat/subject/${subjectId}`, {withCredentials: true})
-    .toPromise();
+      .get(`${BACKEND}/stat/subject/${subjectId}`, {withCredentials: true})
+      .toPromise();
   }
 
-
-  //getAllStatsForGroup
-
-
 }
+
+
+
 
 
 

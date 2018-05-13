@@ -23,6 +23,7 @@ export class FlashcardComponent implements OnInit {
   classState: any = {
     showForm: true,
   };
+  individualStats: any;
 
   constructor(
     private reqTruc: ActivatedRoute, // where am I on the website + context (parameters)
@@ -32,19 +33,20 @@ export class FlashcardComponent implements OnInit {
     private resTruc: Router
   ) { }
 
-  
+
   ngOnInit() { // when you load the page
     this.reqTruc.paramMap
       .subscribe((myParams) => {
         this.subjectId = myParams.get('subjectId');
         this.groupId = myParams.get('groupId');
-
+        this.getIndividualStats();
         this.getCardsList()
-            .then( (subject: Subject) => this.getNextCard());
-      
+          .then((subject: Subject) => this.getNextCard());
+          
+
       })
 
-    
+
     console.log(this.apiGroup.currentGroup)
   }
 
@@ -79,69 +81,155 @@ export class FlashcardComponent implements OnInit {
 
   // // But for now, here is a simpler version.
 
-getNextCard() {
-  this.flipBackVisibility();
+  getNextCard() {
+    this.flipBackVisibility();
 
-  this.getStatsList()
-    .then((stats: Stat[]) => {
+    this.getStatsList()
+      .then((stats: Stat[]) => {
 
-      var ratedStats = stats.filter((stat) => {
-        return stat.rating !== 0;
-      });
-    
-      // The filter() method creates a new array with all elements that pass the test implemented by the provided function
-      // create an array that only contains cards that are not rated (not in ratedStats array)
-      var unseenCards = this.subject.cards.filter((card: Card) => {
-        for (var i=0; i < ratedStats.length; i++){
-          if (card._id == ratedStats[i].card) {
+        var ratedStats = stats.filter((stat) => {
+          return stat.rating !== 0;
+        });
+
+        // The filter() method creates a new array with all elements that pass the test implemented by the provided function
+        // create an array that only contains cards that are not rated (not in ratedStats array)
+        var unseenCards = this.subject.cards.filter((card: Card) => {
+          for (var i = 0; i < ratedStats.length; i++) {
+            if (card._id == ratedStats[i].card) {
+              return false
+            }
+          }
+          return true
+        });
+
+        // generate a random number between 0 and 1 (var num= Math.random();)
+        var chooseNewCard = (ratedStats.length <= 3) || ((unseenCards.length > 0) && (Math.random() < 0.4))
+
+
+        // set probabilty of getting new card (set whatever you want)
+        if (chooseNewCard) {  // for instance, 40% of the time
+          this.currentCard = unseenCards[0];
+        } else {
+
+          // show the cards by rank
+          var choices = [];
+          ratedStats.forEach((stat) => {
+            const numberOfAppearances = 6 - stat.rating
+            for (var i = 0; i < numberOfAppearances; i++) {
+              choices.push(stat.card)
+            }
+          })
+          var randomCardIndex = Math.floor(Math.random() * choices.length)
+          this.currentCard = choices[randomCardIndex];
+
+          this.currentCard = this.subject.cards.find((card) => {
+            if (card._id === choices[randomCardIndex]) {
+              return true
+            }
             return false
-          }
+          });
+          // this.currentCardId = (this.currentCardId + 1) % this.subject.cards.length;
+          // this.currentCard = this.subject.cards[this.currentCardId]
+
+          console.log(this.currentCard);
         }
-        return true
-      });
-
-    // generate a random number between 0 and 1 (var num= Math.random();)
-    var chooseNewCard = (ratedStats.length <= 3) || ((unseenCards.length > 0) && (Math.random() < 0.4))
-
-
-    // set probabilty of getting new card (set whatever you want)
-    if (chooseNewCard) {  // for instance, 40% of the time
-      this.currentCard = unseenCards[0];
-    } else {
-
-      // show the cards by rank
-      var choices = [];
-      ratedStats.forEach((stat) => {
-        const numberOfAppearances = 6-stat.rating
-        for (var i = 0; i < numberOfAppearances; i++){
-          choices.push(stat.card)
-        }  
       })
-      var randomCardIndex = Math.floor(Math.random()*choices.length)
-      this.currentCard = choices[randomCardIndex];
-      
-      this.currentCard = this.subject.cards.find((card) => {
-          if (card._id === choices[randomCardIndex]) {
-            return true
-          }
-        return false
-      });
-      // this.currentCardId = (this.currentCardId + 1) % this.subject.cards.length;
-      // this.currentCard = this.subject.cards[this.currentCardId]
-     
-      console.log(this.currentCard);
-    }
-  })
-}
+  }
+
+
+  getIndividualStats() {
+    var promiseCards = this.getCardsList()
+    var promiseStats = this.getStatsList()
+    Promise.all([promiseStats, promiseCards])
+      .then((result: any) => {
+        const ratedStats = result[0];
+        const subjectCards = result[1].cards;
+
+        //get basic stats
+        var numberOfCards = subjectCards.length
 
     
+        var sumOfRatings = ratedStats.reduce(function (a, b) {
+          return a + b.rating;
+        }, 0);
+        var averageRating = (sumOfRatings / numberOfCards)
+
+        var percentageComplete = averageRating / 5 * 100
+
+        var cardsViewed = ratedStats.length
+
+        //get card distribution and number of cards mastered (rating of 5)
+        var cardRatingsDistribution = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+        ratedStats.forEach((stat) => {
+          cardRatingsDistribution[stat.rating]++
+        })
+
+        var numberCardsMastered = cardRatingsDistribution[5];
+
+        // get best and worst cards
+
+        var maxRating = ratedStats.reduce(function(a: number, b: Stat) {
+          return Math.max(a, b.rating);
+        }, 0);
+        
+        var bestStat; //card with highest rating and minimum number of views
+        ratedStats.forEach((stat: Stat) => {
+          if (stat.rating === maxRating){
+            if (bestStat === undefined || (stat.seen < bestStat.seen)){
+              bestStat = stat;
+            }
+          }
+        })
+
+        var bestCard = subjectCards.find((card) => {
+          return bestStat.card === card._id
+        })
+        
+
+        var minRating = ratedStats.reduce(function(a: number, b: Stat) {
+          return Math.min(a, b.rating);
+        }, 5);
+        
+        var worstStat; //card with lowest rating and maximum number of views
+        ratedStats.forEach((stat: Stat) => {
+          if (stat.rating === minRating){
+            if (worstStat === undefined || (stat.seen > worstStat.seen)){
+              worstStat = stat;
+            }
+          }
+        })
+
+        var worstCard = subjectCards.find((card) => {
+          return worstStat.card === card._id
+        })
+
+        this.individualStats = {
+          numberOfCards, 
+          sumOfRatings, 
+          averageRating, 
+          percentageComplete,  
+          cardsViewed, 
+          cardRatingsDistribution, 
+          numberCardsMastered,
+          bestCard, 
+          worstCard
+        }
+        console.log("IndividualStats recalculated:" + JSON.stringify(this.individualStats))
+      })
+      .catch((err) => { 
+        console.log("individual stats error")
+        console.log(err)
+      })
+  };
+
+
   flipBackVisibility() {
     this.classState.showForm = !this.classState.showForm;
   }
 
   rateCardandUpdate(rating: number) {
     this.getNextCard();
-
+  
     let ids = {
       card: this.currentCard,
       group: this.groupId,
@@ -149,11 +237,11 @@ getNextCard() {
       rating: rating
     }
 
-
     this.apiStats.getStatsList(ids)
       .then((result: Stat[]) => {
         console.log(result);
         this.stats = result;
+        this.getIndividualStats();
       })
       .catch((err) => {
         console.log('error rate card and update');

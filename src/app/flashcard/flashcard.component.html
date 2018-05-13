@@ -44,5 +44,22 @@
   </div>
   <div class="column stats-box">
     <h3>My Statistics: Subject 1</h3>
+
+    <div *ngIf="individualStats">
+
+        <div>Average Rating: {{individualStats?.averageRating}}</div>
+        <div>Percentage Complete: {{individualStats?.percentageComplete | number:'.0'}}%</div>
+        <div>Cards Viewed: {{individualStats?.cardsViewed}} / {{individualStats?.numberOfCards}} </div>
+        <div>Number of Cards Mastered: {{individualStats?.numberCardsMastered}} / {{individualStats?.numberOfCards}}</div>
+        <div>Best card: {{individualStats?.bestCard.front}}</div>
+        <div>Worst card: {{individualStats?.worstCard.front}}</div>
+    <div>Number of 1: {{individualStats?.cardRatingsDistribution['1']}}</div>
+    <div>Number of 2: {{individualStats?.cardRatingsDistribution['2']}}</div>
+    <div>Number of 3: {{individualStats?.cardRatingsDistribution['3']}}</div>
+    <div>Number of 4: {{individualStats?.cardRatingsDistribution['4']}}</div>
+    <div>Number of 5: {{individualStats?.cardRatingsDistribution['5']}}</div>
+        
+    </div>
+    
   </div>
 </div>

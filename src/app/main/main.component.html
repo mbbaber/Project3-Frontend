@@ -64,7 +64,22 @@
   </div>
 
   <div class="column stats-box">
-    <h3>Group 1 Statistics</h3>
+    <div>
+      <h3 class="center">Group Statistics</h3>
+      <h3 class="center">{{groups?.name}}:</h3>
+      <p>Number of Students: </p>
+      <p>Number of Cards: </p>
+      <p>Percentage Complete:</p>
+    </div>
+
+    <div *ngFor="let subject of groups?.subjects">
+        <h3>{{subject.name}}</h3>
+        <p>Percentage Complete:</p>
+        <p>Studied Cards: </p>
+        <p>Average Card Rating: </p>
+        <p>Easiest Cards: </p>
+        <p>Hardest Cards: </p>
+    </div> 
 
   </div>
 
