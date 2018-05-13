@@ -5,7 +5,7 @@
     <div class="box search">
       <div class="field has-addons">
         <div class="control">
-          <input class="input" type="text" placeholder="Search Group 1 Subjects">
+          <input class="input" type="text" placeholder="Search Group 1 Subjects" [(ngModel)]="search">
         </div>
         <div class="control">
           <a class="button is-info">
@@ -17,16 +17,16 @@
     <!-- add for each subject div below-->
 
 
-    <a *ngFor="let subject of groups?.subjects" [routerLink]="['/g', groups._id, 'subject', subject._id]" class="box">
+    <a *ngFor="let subject of groups?.subjects | inputFilter : search" [routerLink]="['/g', groups._id, 'subject', subject._id]" class="box">
       <article class="media">
         <div class="media-content">
           <div class="content">
             <div class="left">
               <h4>
-                <strong>{{subject.name}}</strong>
+                <strong>{{subject?.name}}</strong>
               </h4>
               Tags:
-              <span *ngFor="let keyword of subject.keywords">{{keyword}} </span>
+              <span *ngFor="let keyword of subject?.keywords">{{keyword}} </span>
             </div>
             <div class="right">
               <p>number of cards?</p>
@@ -71,24 +71,24 @@
 
 </div>
 
-<!-- <div class="sign-up-window" *ngIf="addSubState" >
+<div class="sign-up-window" *ngIf="addSubState">
   <div class="sign-up-pop">
     <h2> Subject adding</h2>
-    <form  (ngSubmit)="addThisSub()">
+    <form (change)="chooseThisSub($event)">
       <label>Which subject do you want to add to your group ?
         <div class="field has-addons">
           <div class="control is-expanded">
             <div class="select is-fullwidth">
               <select name="country">
-                <option *ngFor="let oneSub of subjects" [(ngModel)]="thisSub.name">{{oneSub?.name}}</option>
+                <option *ngFor="let oneSub of subjects" value="{{oneSub?._id}}">{{oneSub?.name}}</option>
               </select>
             </div>
           </div>
           <div class="control">
-            <button type="submit" class="button is-primary">Choose</button>
+            <button type="submit" class="button is-primary" (click)="addThisSub()">Choose</button>
           </div>
         </div>
       </label>
     </form>
   </div>
-</div> -->
+</div>

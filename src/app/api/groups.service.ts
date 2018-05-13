@@ -10,6 +10,7 @@ export class GroupsService {
 
   currentGroup: string;
   userGroups: Group[];
+  currentGroupData: Group;
 
   constructor(private ajaxTruc: HttpClient) { }
 
@@ -58,6 +59,17 @@ export class GroupsService {
     .toPromise()
     .then((apiResponse:any)=>{  
       this.userGroups = apiResponse;
+      return apiResponse;
+    })
+  }
+
+  addSubjectToGroup(subId, groupId){
+    return this.ajaxTruc
+    .put(`${BACKEND}/api/gr/${groupId}/sb/${subId}`,
+      {withCredentials: true})
+    .toPromise()
+    .then((apiResponse: any)=>{
+      this.currentGroupData = apiResponse;
       return apiResponse;
     })
   }

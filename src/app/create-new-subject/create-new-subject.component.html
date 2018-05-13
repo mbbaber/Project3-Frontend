@@ -1,2 +1,18 @@
 <h2>{{subjectData?.name}}</h2>
 
+<div class="one-card" *ngFor="let oneCard of subjectCards">
+    <div class="question">{{oneCard.front}}</div>
+    <div class="answer">{{oneCard.back}}</div>
+    <button (click)="deleteCardSubmit(oneCard._id)">Delete</button>
+</div>
+<div class="add-new-card">
+    <form (ngSubmit)="newCardSubmit()">
+            <label>Front:
+                <input type="text" name="front" [(ngModel)]="newCard.front" >
+            </label>
+            <label>Back:
+                <input type="text" name="back" [(ngModel)]="newCard.back" >
+            </label>
+            <button>Add</button>
+    </form>
+</div>

@@ -8,7 +8,11 @@ const BACKEND= "http://localhost:3000";
 @Injectable()
 export class SubjectsService {
   allSubs: Subject[];
+
   subToSave: newSubSave;
+  cardOfThisSub: Card[];
+  kewordsOfThisSub: Array<string>;
+
   userSubs: Subject[];
   constructor(private ajaxTruc: HttpClient) { }
   
@@ -62,6 +66,8 @@ export class SubjectsService {
     .get(`${BACKEND}/subject/${subId}`)
     .toPromise()
     .then((apiResponse: any)=>{
+      this.cardOfThisSub = apiResponse.cards;
+      this.kewordsOfThisSub = apiResponse.keywords;
       this.subToSave = apiResponse;
       console.log(apiResponse)
       return apiResponse;
@@ -78,10 +84,34 @@ export class SubjectsService {
     })
   }
 
-  // getThisSub(subId){
-  //   return this.ajaxTruc
-  //   .
-  // }
+  getCardInfo(cardInfo: NewCard, subId: string){
+    return this.ajaxTruc
+    .put(`${BACKEND}/subject/add-card/${subId}`,
+        cardInfo,
+      {withCredentials: true})
+    .toPromise()
+    .then((apiResponse: any)=>{
+      this.subToSave = apiResponse;
+      console.log(apiResponse)
+      return apiResponse;
+    })
+  }
+
+  deleteThisCard(card, subjectId){
+    return this.ajaxTruc
+    .put(`${BACKEND}/subject/sub/${subjectId}/card/${card}`,
+    card,
+    {withCredentials: true})
+    .toPromise()
+    .then((apiResponse: any)=>{
+      this.subToSave = apiResponse;
+      console.log(apiResponse)
+      return apiResponse;
+    })
+  }
+  
+ 
+
 }
 
 export class Subject {
@@ -93,6 +123,11 @@ export class Subject {
 
 export class Card {
   _id: string;
+  front: string;
+  back: string;
+}
+
+export class NewCard {
   front: string;
   back: string;
 }

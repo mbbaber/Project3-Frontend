@@ -20,6 +20,7 @@ export class MainComponent implements OnInit {
 
   thisSub: chooseSub;
   addSubState: boolean = false;
+  search: string = "";
 
   constructor(
     private reqTruc: ActivatedRoute,
@@ -83,13 +84,23 @@ export class MainComponent implements OnInit {
 
   }
 
-  // addThisSub(subId){
-  //   this.apiSubject.getThisSub(subId)
-  //   .then(()=>{
-  //     this.addSubState = !this.addSubState;
-  //   })
-  //   .catch(()=>{})
+  selectedSubjectId: string ="";
+  chooseThisSub(event:any){
+    this.selectedSubjectId = event.target.value;
+    console.log(this.selectedSubjectId)
+  }
 
-  // }
+  addThisSub(){
+    this.apiGroup.addSubjectToGroup(this.selectedSubjectId, this.groupsId)
+    .then((result)=>{
+      this.addSubState = false;
+      this.getSubjectsList()
+      console.log('added this subject to group')
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+
 }
   
