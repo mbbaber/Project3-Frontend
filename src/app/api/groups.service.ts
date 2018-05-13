@@ -2,34 +2,39 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
+// this is backend base url
+const BACKEND = "http://localhost:3000";
+
 @Injectable()
 export class GroupsService {
 
   currentGroup: string;
-  userGroups: Groups[];
+  userGroups: Group[];
 
   constructor(private ajaxTruc: HttpClient) { }
+
   getGroupsList() {
-    // this is backend url
-    return this.ajaxTruc.get("http://localhost:3000/api/groups", {withCredentials: true}).toPromise();
+    return this.ajaxTruc
+      .get(`${BACKEND}/api/groups`, { withCredentials: true })
+      .toPromise();
   }
-  getDetails(groupId){
-    return this.ajaxTruc 
-  .get(`http://localhost:3000/group/${groupId}`)
-  .toPromise()
-  .then((result: any)=>{
-    console.log("AAAAAAAAAAAAAAAAAAAAAA", result)
-    this.currentGroup = result._id
-    return result;
-  })
-  .catch((err)=>{
-    console.log("get detais group service error", err);
-  })
+
+  getDetails(groupId: string) {
+    return this.ajaxTruc
+      .get(`${BACKEND}/group/${groupId}`)
+      .toPromise()
+      .then((result: any) => {
+        this.currentGroup = result._id
+        return result
+      })
+      .catch((err) => {
+        console.log("get detais group service error", err);
+      })
   }
 
   getGroups(userId){
     return this.ajaxTruc
-    .get(`http://localhost:3000/api/user-groups/${userId}`)
+    .get(`${BACKEND}/api/user-groups/${userId}`)
     .toPromise()
     .then((apiResponse: any)=>{
       this.userGroups = apiResponse;
@@ -39,9 +44,9 @@ export class GroupsService {
 
   deleteThisGroup(groupId, userId){
     return this.ajaxTruc
-    .put(`http://localhost:3000/api/groups-of-the-user/${userId}/gr/${groupId}`, {new: true})
+    .put(`${BACKEND}/api/groups-of-the-user/${userId}/gr/${groupId}`, {new: true})
     .toPromise()
-    .then((apiResponse: Groups[])=>{
+    .then((apiResponse: Group[])=>{
       this.userGroups = apiResponse;
       return apiResponse;
     })
@@ -49,9 +54,7 @@ export class GroupsService {
 
   newGroup(groupCred: BeginningGroup){
     return this.ajaxTruc
-    .post('http://localhost:3000/api/new-group',
-    groupCred,
-    {withCredentials:true})
+    .post(`${BACKEND}/api/new-group`, groupCred, {withCredentials:true})
     .toPromise()
     .then((apiResponse:any)=>{  
       this.userGroups = apiResponse;
@@ -60,7 +63,7 @@ export class GroupsService {
   }
 }
 
-export class Groups {
+export class Group {
   _id: string;
   name: string;
   users: any;

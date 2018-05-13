@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupsService, Groups } from '../api/groups.service';
+import { GroupsService, Group } from '../api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, SubjectsService, chooseSub } from '../api/subjects.service';
 import { UserService } from '../services/user.service';
@@ -42,7 +42,7 @@ export class MainComponent implements OnInit {
 
   getSubjectsList() {
     this.apiGroup.getDetails(this.groupsId)
-    .then((result: Groups[]) => {
+    .then((result: Group[]) => {
       this.groups = result;
       this.checkIfAdmin();
     })

@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/operator/toPromise';
 import { toPromise } from 'rxjs/operator/toPromise';
 
+const BACKEND= "http://localhost:3000";
+
 @Injectable()
 export class SubjectsService {
   allSubs: Subject[];
@@ -12,19 +14,19 @@ export class SubjectsService {
   
   getSubjectsList(groupId) {
     return this.ajaxTruc
-      .get(`http://localhost:3000/group/${groupId}`)
+      .get(`${BACKEND}/group/${groupId}`)
       .toPromise();
   }
 
   getSubDetails(subjectId){
     return this.ajaxTruc 
-      .get(`http://localhost:3000/subject/${subjectId}`)
+      .get(`${BACKEND}/subject/${subjectId}`)
       .toPromise()
   }
 
   getSubs(userId){
     return this.ajaxTruc
-    .get(`http://localhost:3000/subject/user-subs/${userId}`)
+    .get(`${BACKEND}/subject/user-subs/${userId}`)
     .toPromise()
     .then((apiResponse: any)=>{
       this.userSubs = apiResponse;
@@ -34,7 +36,7 @@ export class SubjectsService {
 
   deleteThisSub(subId, userId){
     return this.ajaxTruc
-    .put(`http://localhost:3000/subject/subs-of-the-user/${userId}/gr/${subId}`, {new: true})
+    .put(`${BACKEND}/subject/subs-of-the-user/${userId}/gr/${subId}`, {new: true})
     .toPromise()
     .then((apiResponse: Subject[])=>{
       this.userSubs = apiResponse;
@@ -44,7 +46,7 @@ export class SubjectsService {
 
   newSub(subCred: NewSubject){
     return this.ajaxTruc
-    .post(`http://localhost:3000/subject/new-subject`,
+    .post(`${BACKEND}/subject/new-subject`,
     subCred,
     {withCredentials: true})
     .toPromise()
@@ -57,7 +59,7 @@ export class SubjectsService {
 
   getSubInfo(subId){
     return this.ajaxTruc
-    .get(`http://localhost:3000/subject/${subId}`)
+    .get(`${BACKEND}/subject/${subId}`)
     .toPromise()
     .then((apiResponse: any)=>{
       this.subToSave = apiResponse;
@@ -68,7 +70,7 @@ export class SubjectsService {
 
   getAllTheSubjects(){
     return this.ajaxTruc
-    .get(`http://localhost:3000/subject/all-subjects`)
+    .get(`${BACKEND}/subject/all-subjects`)
     .toPromise()
     .then((apiResponse: any)=>{
       this.allSubs = apiResponse;
