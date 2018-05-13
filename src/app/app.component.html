@@ -16,8 +16,8 @@
         <a class="navbar-item" (click)="newSetShow()">
           Create new set
         </a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">
+        <div class="navbar-item has-dropdown is-hoverable" *ngIf="userService.isLoggedIn">
+          <a class="navbar-link" >
             Groups
           </a>
           <div class="navbar-dropdown is-boxed">
@@ -28,7 +28,7 @@
             </a>
             
             <hr class="navbar-divider">
-            <a (click)="newGroupShow()" class="navbar-item" href="#">
+            <a (click)="newGroupShow()" class="navbar-item">
               Add a group
             </a>
           </div>
@@ -38,15 +38,15 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="field is-grouped">
-              <div class="navbar-item has-dropdown is-hoverable" *ngIf="userService.currentUser">
-                  <a class="navbar-link" href="#">
-                    {{userService.currentUser.username}}
+              <div class="navbar-item has-dropdown is-hoverable" *ngIf="userService.isLoggedIn">
+                  <a class="navbar-link">
+                    {{currentUser?.username}}
                   </a>
                   <div class="navbar-dropdown is-boxed is-right">
                     <a class="navbar-item" href="#">
                       One Thing
                     </a>
-                    <a class="navbar-item"  [routerLink]="['/my-account', userService.currentUser._id]">
+                    <a class="navbar-item"  [routerLink]="['/my-account', userId]">
                     <!-- [routerLink]="['/user', userService.currentUser._id]"  -->
                       Your Account
                       
@@ -60,7 +60,7 @@
                     </a>
                   </div>
                 </div>
-            <p class="control" *ngIf="!userService.currentUser">
+            <p class="control" *ngIf="!userService.isLoggedIn">
               <a class="bd-tw-button button" (click)="logInShow()">
                 <!-- <span class="icon">
                   <i class="fab fa-twitter"></i>
@@ -70,7 +70,7 @@
                 </span>
               </a>
             </p>
-            <p class="control" *ngIf="!userService.currentUser">
+            <p class="control" *ngIf="!userService.isLoggedIn">
               <a class="button is-primary" (click)="signUpShow()">
                 <!-- <span class="icon">
                   <i class="fas fa-download"></i>

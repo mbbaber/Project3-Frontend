@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { GroupsService, Groups, BeginningGroup } from './api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService, SignUpCredentials } from './services/user.service';
+import { UserService, SignUpCredentials, User } from './services/user.service';
 import { NewSubject, SubjectsService } from './api/subjects.service';
 
 
@@ -15,6 +15,7 @@ export class AppComponent {
   groups: Groups[];
 
   userId: string;
+  currentUser: User;
   userGroups: Groups[];
 
   logInState: boolean = false;
@@ -47,7 +48,8 @@ export class AppComponent {
     this.userService.checkLogin()
     .then((result)=>{
       this.userId = result.userInfo._id;
-      this.getUsersGroups()
+      this.currentUser = result.userInfo;
+      this.getUsersGroups(this.userId)
     })
     .catch((err)=>{
       console.log('App login check error');
@@ -57,8 +59,8 @@ export class AppComponent {
   } //end onInit
 
 
-  getUsersGroups(){
-    this.apiGroup.getGroups(this.userId)
+  getUsersGroups(userId){
+    this.apiGroup.getGroups(userId)
     .then((result: Groups[])=>{
       this.userGroups = result;
     })
@@ -110,10 +112,12 @@ export class AppComponent {
 
   logInSubmit(){
     this.userService.postLogIn(this.formCredentials)
-    .then(()=>{
-      // this.isLoggedIn = true;
+    .then((result)=>{
+      this.getUsersGroups(result.userInfo._id);
+      this.userId = result.userInfo._id;
       this.logInState = false;
       this.response.navigateByUrl('/main');
+
     })
     .catch((err)=>{
       console.log('login error');
@@ -136,6 +140,7 @@ export class AppComponent {
   groupFormSubmit(){
     this.apiGroup.newGroup(this.newGroup)
     .then(()=>{
+      this.getUsersGroups(this.userId);
       this.newGroupState = false;
       this.response.navigateByUrl(`/my-account/${this.userId}`);
     })

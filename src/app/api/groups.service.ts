@@ -74,3 +74,10 @@ export class BeginningGroup{
   name: string;
   admin: string
 }
+
+export class Groups {
+  _id: string;
+  name: string;
+  users: any;
+  admin: string
+}
