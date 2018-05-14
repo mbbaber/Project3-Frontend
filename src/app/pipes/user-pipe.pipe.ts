@@ -1,15 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'inputFilter'
+  name: 'userPipe'
 })
-export class InputFilterPipe implements PipeTransform {
+export class UserPipePipe implements PipeTransform {
 
   transform(items: Array<any>, searchThing: string): Array<any> {
 
     return items.filter(item=> 
 
-      item.name.toLowerCase().includes(searchThing.toLowerCase())
+      item.username.toLowerCase().includes(searchThing.toLowerCase())
       // item.keywords.includes(searchThing.toLowerCase())
     );
   }

@@ -73,6 +73,17 @@ export class GroupsService {
       return apiResponse;
     })
   }
+
+  addThisUserToThisGroup(userId, groupId){
+    console.log('works')
+    return this.ajaxTruc
+    .put(`${BACKEND}/api/us/${userId}/gr/${groupId}`,
+    {withCredentials: true})
+    .toPromise()
+    .then((apiResponse: any)=>{
+      return apiResponse;
+    })
+  }
 }
 
 export class Group {
@@ -84,7 +95,8 @@ export class Group {
 
 export class BeginningGroup{
   name: string;
-  admin: string
+  admin: string;
+  users: Array<any>;
 }
 
 export class Groups {

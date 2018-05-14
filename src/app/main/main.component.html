@@ -60,6 +60,7 @@
     <div class="center admin" *ngIf="isAdmin">
       <p>Admin can see this:</p>
       <a class="button is-link" (click)="showAddSubForm()">Add Subject +</a>
+      <a class="button is-link" (click)="showAddUserForm()">Add User +</a>
     </div>
   </div>
 
@@ -107,3 +108,22 @@
     </form>
   </div>
 </div>
+
+<div class="sign-up-window" *ngIf="addUserState">
+  <div class="sign-up-pop columns">
+    <div class="column is-half" *ngFor="let one of allUsersWhoBelong">
+      {{one.username}}
+    </div>
+    <div class="column is-half">
+      <h2> User adding</h2>
+      <input type="text" name="username" [(ngModel)]="searchUser">
+      <div *ngFor="let user of allUsersWhoDontBelong | userPipe : searchUser">
+        <span>{{user.username}}</span>
+        <button (click)="addUserToGroup(user._id)">Add</button>
+      </div>
+      <button (click)="showAddUserForm()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!--  -->

@@ -21,6 +21,7 @@ import { YourGroupsComponent } from './your-account/your-groups/your-groups.comp
 import { YourSubjectsComponent } from './your-account/your-subjects/your-subjects.component';
 import { UserAccountComponent } from './your-account/user-account/user-account.component';
 import { CreateNewSubjectComponent } from './create-new-subject/create-new-subject.component';
+import { UserPipePipe } from './pipes/user-pipe.pipe';
 
 
 
@@ -37,7 +38,8 @@ import { CreateNewSubjectComponent } from './create-new-subject/create-new-subje
     YourGroupsComponent,
     YourSubjectsComponent,
     UserAccountComponent,
-    CreateNewSubjectComponent
+    CreateNewSubjectComponent,
+    UserPipePipe
   ],
   imports: [
     BrowserModule,

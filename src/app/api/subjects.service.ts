@@ -118,7 +118,7 @@ export class Subject {
   _id: string;
   cards: Card[];
   name: string; 
-  keyword: string;
+  keywords: Array<string>;
 }
 
 export class Card {

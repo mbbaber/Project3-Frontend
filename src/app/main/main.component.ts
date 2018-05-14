@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GroupsService, Group } from '../api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, SubjectsService, chooseSub } from '../api/subjects.service';
-import { UserService } from '../services/user.service';
+import { UserService, User } from '../services/user.service';
 
 @Component({
   selector: 'app-main',
@@ -12,15 +12,19 @@ import { UserService } from '../services/user.service';
 
 export class MainComponent implements OnInit {
   subjectsId: string;
-  subjects: Subject[];
+  subjects: any;
   groupsId: string;
   groups: any;
-
+  subject: Subject;
   isAdmin: boolean;
 
+  allUsersWhoBelong: User[];
+  allUsersWhoDontBelong: User[];
   thisSub: chooseSub;
+  addUserState: boolean = false;
   addSubState: boolean = false;
   search: string = "";
+  // searchUser: string = "";
 
   constructor(
     private reqTruc: ActivatedRoute,
@@ -82,9 +86,11 @@ export class MainComponent implements OnInit {
       console.log(err);
     })
 
+    console.log(this.subjects)
+
   }
 
-  selectedSubjectId: string ="";
+  selectedSubjectId: string = "";
   chooseThisSub(event:any){
     this.selectedSubjectId = event.target.value;
     console.log(this.selectedSubjectId)
@@ -102,5 +108,37 @@ export class MainComponent implements OnInit {
     })
   }
 
+  showAddUserForm(){
+    this.addUserState = !this.addUserState;
+    this.userService.getAllUsersWhoBelong(this.groupsId)
+    .then((result)=>{
+      this.allUsersWhoBelong = result;
+      console.log(this.allUsersWhoBelong)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+    this.userService.getAllUsersWhoDontBelong(this.groupsId)
+    .then((result)=>{
+      this.allUsersWhoDontBelong = result;
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+
+  addUserToGroup(userId){
+    this.apiGroup.addThisUserToThisGroup(userId, this.groupsId)
+    .then((result)=>{
+      // this.addUserState = !this.addUserState;
+      this.userService.getAllUsersWhoBelong(this.groupsId)
+      this.userService.getAllUsersWhoDontBelong(this.groupsId)
+      // this.allUsers = result;
+      console.log(result)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
 }
   
