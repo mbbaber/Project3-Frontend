@@ -12,7 +12,7 @@ import { StatsService, Stat, groupStats } from '../api/stats.service';
 })
 
 export class MainComponent implements OnInit {
-  subjectId: string;
+  subjectId: string = "5af4551e2c4927aa694c05e0";
   subject: Subject;
   groupsId: string;
   groups: any;
@@ -20,6 +20,9 @@ export class MainComponent implements OnInit {
   groupStats: any;
   subjects: any;
   isAdmin: boolean;
+  usersArray: Array<string> = [];
+
+  // arrayOfUsersInGroup = groupStats.users
 
   allUsersWhoBelong: User[];
   allUsersWhoDontBelong: User[];
@@ -44,15 +47,19 @@ export class MainComponent implements OnInit {
     .then((result)=> {
       console.log("getAllStatsForUserById!!!!!!!!!!!!!!!!!!!!!!!!!!")
       console.log(result)
+
     })
 
     this.reqTruc.paramMap
       .subscribe((myParams) => {
         this.groupsId = myParams.get('groupId');
         this.getSubjectsList();
-        // this.getGroupStatsList();
-        // this.getIndividualStats();
+        this.getGroupStatsList();
+        // this.mapAndReduceFunction();
+        // this.getIndividualStats(user);
       })
+
+      this.mapAndReduceFunction().then(x => {console.log(x)})
 
   }
 
@@ -75,19 +82,19 @@ export class MainComponent implements OnInit {
         return this.subject;
       })
       .catch((err) => {
-        console.log('Subject details error')
+        console.log('getCardsList details error')
         console.log(err)
       })
   }
 
-  getCardsListByID(userId) {
+  getCardsListById(userId) {
     return this.apiSubject.getSubDetails(this.subjectId)
       .then((result: Subject) => {
         this.subject = result;
         return this.subject;
       })
       .catch((err) => {
-        console.log('Subject details error')
+        console.log('getCardsListById details error')
         console.log(err)
       })
   }
@@ -99,7 +106,19 @@ export class MainComponent implements OnInit {
         return this.stats;
       })
       .catch((err) => {
-        console.log('Stats details error')
+        console.log('getStatsList details error')
+        console.log(err)
+      })
+  }
+
+  getStatsListById(userId) {
+    return this.apiStats.getAllStatsForUser(this.subjectId)
+      .then((result: Stat[]) => {
+        this.stats = result;
+        return this.stats;
+      })
+      .catch((err) => {
+        console.log('getStatsList details error')
         console.log(err)
       })
   }
@@ -142,7 +161,6 @@ export class MainComponent implements OnInit {
     console.log(this.selectedSubjectId)
   }
 
-
   addThisSub(){
     this.apiGroup.addSubjectToGroup(this.selectedSubjectId, this.groupsId)
     .then((result)=>{
@@ -178,6 +196,26 @@ export class MainComponent implements OnInit {
     this.usersUpdate();
   }
 
+  getGroupStatsList() {
+    return this.apiStats.getAllStatsForUsersInGroup(this.groupsId)
+      .then((result: groupStats[]) => {
+        this.groupStats = result;
+        console.log("GROUP STATS LIST")
+        console.log(result)
+      
+        this.groupStats.users.forEach((one)=> {
+          this.usersArray.push(one._id)
+        })
+        
+        //console.log('one ',this.usersArray[0]);
+        this.mapAndReduceFunction();
+        return this.groupStats;
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+  }
+
   addUserToGroup(userId){
     this.apiGroup.addThisUserToThisGroup(userId, this.groupsId)
     .then((result)=>{
@@ -199,110 +237,110 @@ export class MainComponent implements OnInit {
       console.log(err)
     })
   }
-}
-  // getGroupStatsList() {
-  //   return this.apiStats.getAllStatsForUsersInGroup(this.groupsId)
-  //     .then((result: groupStats[]) => {
-  //       this.groupStats = result;
-  //       console.log("GROUP STATS LIST")
-  //       console.log(result)
-  //       return this.groupStats;
-  //     })
-  //     .catch((err) => {
-
-  //       console.log('Stats details error')
-  //       console.log(err)
-  //     })
-  // }
-
-  // getGroupStats() {
-  //   this.groupStats.users.map(x => this.getIndividualStats());
-  // }
-// function(arry) => averages
   
-  // getIndividualStats() {
-  //    var promiseStats = this.getStatsList()
-  //    var promiseCards = this.getCardsList()
-  //   Promise.all([promiseStats, promiseCards])
-  //     .then((result: any) => {
-  //       const ratedStats = result[0];
-  //       const subjectCards = result[1].cards;
 
-  //       //get basic stats
-  //       var numberOfCards = subjectCards.length
+  mapAndReduceFunction() {
+    //console.log("AAAAAAAAAAAAAA", this.usersArray)
+    return Promise.all(this.usersArray.map(id => {
+      return this.getIndividualStats(id)
+    }) )
+
+    // var aveNumberOfCards = (arr.reduce(function (a, b) {return a + b.numberOfCards}, 0))/(groupStats.users.length);
+    // var aveAverageRating = (arr.reduce(function (a, b) {return a + b.averageRating}, 0))/(groupStats.users.length);
+    // // var avePercentageComplete = (arr.reduce(function (a, b) {return a + b.percentageComplete}, 0))/(groupStats.users.length);
+    // var aveCardsViewed = (arr.reduce(function (a, b) {return a + b.cardsViewed}, 0))/(groupStats.users.length);        
+    // var aveNumberCardsMastered = (arr.reduce(function (a, b) {return a + b.numberCardsMastered}, 0))/(groupStats.users.length);
+  }
+
+  //         cardRatingsDistribution, (another object, not direct average)
+  //         bestCard (max, iteration, not average), 
+  //         worstCard (max, iteration, not average) 
+ 
+// function(arry) => averages
+  //user needs to be passed to the service through either getStatsList or getCardsList
+  getIndividualStats(user) {
+     var promiseStats = this.getStatsListById(user)
+     var promiseCards = this.getCardsListById(user)
+    return Promise.all([promiseStats, promiseCards])
+      .then((result: any) => {
+        const ratedStats = result[0];
+        const subjectCards = result[1].cards;
+        console.log({ratedStats, subjectCards})
+
+        //get basic stats
+        var numberOfCards = subjectCards.length
 
     
-  //       var sumOfRatings = ratedStats.reduce(function (a, b) {
-  //         return a + b.rating;
-  //       }, 0);
-  //       var averageRating = (sumOfRatings / numberOfCards)
+        var sumOfRatings = ratedStats.reduce(function (a, b) {
+          return a + b.rating;
+        }, 0);
+        var averageRating = (sumOfRatings / numberOfCards)
 
-  //       var percentageComplete = averageRating / 5 * 100
+        var percentageComplete = averageRating / 5 * 100
 
-  //       var cardsViewed = ratedStats.length
+        var cardsViewed = ratedStats.length
 
-  //       //get card distribution and number of cards mastered (rating of 5)
-  //       var cardRatingsDistribution = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-  //       ratedStats.forEach((stat) => {
-  //         cardRatingsDistribution[stat.rating]++
-  //       })
+        //get card distribution and number of cards mastered (rating of 5)
+        var cardRatingsDistribution = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+        ratedStats.forEach((stat) => {
+          cardRatingsDistribution[stat.rating]++
+        })
 
-  //       var numberCardsMastered = cardRatingsDistribution[5];
+        var numberCardsMastered = cardRatingsDistribution[5];
 
-  //       // get best and worst cards
+        // get best and worst cards
 
-  //       var maxRating = ratedStats.reduce(function(a: number, b: Stat) {
-  //         return Math.max(a, b.rating);
-  //       }, 0);
+        var maxRating = ratedStats.reduce(function(a: number, b: Stat) {
+          return Math.max(a, b.rating);
+        }, 0);
         
-  //       var bestStat; //card with highest rating and minimum number of views
-  //       ratedStats.forEach((stat: Stat) => {
-  //         if (stat.rating === maxRating){
-  //           if (bestStat === undefined || (stat.seen < bestStat.seen)){
-  //             bestStat = stat;
-  //           }
-  //         }
-  //       })
+        var bestStat; //card with highest rating and minimum number of views
+        ratedStats.forEach((stat: Stat) => {
+          if (stat.rating === maxRating){
+            if (bestStat === undefined || (stat.seen < bestStat.seen)){
+              bestStat = stat;
+            }
+          }
+        })
 
-  //       var bestCard = subjectCards.find((card) => {
-  //         return bestStat.card === card._id
-  //       })
+        var bestCard = subjectCards.find((card) => {
+          return bestStat.card === card._id
+        })
         
 
-  //       var minRating = ratedStats.reduce(function(a: number, b: Stat) {
-  //         return Math.min(a, b.rating);
-  //       }, 5);
+        var minRating = ratedStats.reduce(function(a: number, b: Stat) {
+          return Math.min(a, b.rating);
+        }, 5);
         
-  //       var worstStat; //card with lowest rating and maximum number of views
-  //       ratedStats.forEach((stat: Stat) => {
-  //         if (stat.rating === minRating){
-  //           if (worstStat === undefined || (stat.seen > worstStat.seen)){
-  //             worstStat = stat;
-  //           }
-  //         }
-  //       })
+        var worstStat; //card with lowest rating and maximum number of views
+        ratedStats.forEach((stat: Stat) => {
+          if (stat.rating === minRating){
+            if (worstStat === undefined || (stat.seen > worstStat.seen)){
+              worstStat = stat;
+            }
+          }
+        })
 
-  //       var worstCard = subjectCards.find((card) => {
-  //         return worstStat.card === card._id
-  //       })
+        var worstCard = subjectCards.find((card) => {
+          return worstStat.card === card._id
+        })
 
-  //       this.groupStats = {
-  //         numberOfCards, 
-  //         sumOfRatings, 
-  //         averageRating, 
-  //         percentageComplete,  
-  //         cardsViewed, 
-  //         cardRatingsDistribution, 
-  //         numberCardsMastered,
-  //         bestCard, 
-  //         worstCard
-  //       }
-  //     })
-  //     .catch((err) => { 
-  //       console.log("individual stats error")
-  //       console.log(err)
-  //     })
-  // };
+        return {
+          numberOfCards, 
+          sumOfRatings, 
+          averageRating, 
+          percentageComplete,  
+          cardsViewed, 
+          cardRatingsDistribution, 
+          numberCardsMastered,
+          bestCard, 
+          worstCard
+        }
+      })
+      .catch((err) => { 
+        console.log("individual stats error")
+        console.log(err)
+      })
+  };
 
-// };
-  
+}

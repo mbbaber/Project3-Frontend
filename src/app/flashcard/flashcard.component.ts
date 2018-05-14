@@ -237,7 +237,6 @@ export class FlashcardComponent implements OnInit {
       })
   };
 
-
   flipBackVisibility() {
     this.classState.showForm = !this.classState.showForm;
   }
