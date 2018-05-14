@@ -84,6 +84,18 @@ export class GroupsService {
       return apiResponse;
     })
   }
+
+  deleteThisUserFromTheGroup(userId, groupId){
+    return this.ajaxTruc
+    .put(`${BACKEND}/api/delete/user/${userId}/group/${groupId}`,
+  {withCredentials: true})
+    .toPromise()
+    .then((apiResponse: any)=>{
+      return apiResponse;
+    })
+  }
+
+  
 }
 
 export class Group {

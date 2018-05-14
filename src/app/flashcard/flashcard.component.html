@@ -47,18 +47,56 @@
 
     <div *ngIf="individualStats">
 
-        <div>Average Rating: {{individualStats?.averageRating}}</div>
-        <div>Percentage Complete: {{individualStats?.percentageComplete | number:'.0'}}%</div>
-        <div>Cards Viewed: {{individualStats?.cardsViewed}} / {{individualStats?.numberOfCards}} </div>
-        <div>Number of Cards Mastered: {{individualStats?.numberCardsMastered}} / {{individualStats?.numberOfCards}}</div>
-        <div>Best card: {{individualStats?.bestCard.front}}</div>
-        <div>Worst card: {{individualStats?.worstCard.front}}</div>
-    <div>Number of 1: {{individualStats?.cardRatingsDistribution['1']}}</div>
-    <div>Number of 2: {{individualStats?.cardRatingsDistribution['2']}}</div>
-    <div>Number of 3: {{individualStats?.cardRatingsDistribution['3']}}</div>
-    <div>Number of 4: {{individualStats?.cardRatingsDistribution['4']}}</div>
-    <div>Number of 5: {{individualStats?.cardRatingsDistribution['5']}}</div>
+        <div>Percentage Complete: {{individualStats?.percentageComplete | number:'.0'}}%
+        <progress class="progress" value="{{individualStats?.percentageComplete | number:'.0'}}" max="100"></progress>
+        <!-- {{individualStats?.percentageComplete | number:'.0'}}% -->
+        </div>
+
+        <div>Cards Viewed: {{individualStats?.cardsViewed}}/{{individualStats?.numberOfCards}}
+        <progress class="progress" value="{{individualStats?.cardsViewed}}" max="{{individualStats?.numberOfCards}}"></progress>
+        </div>
+
+    
+        <div>Cards Mastered: {{individualStats?.numberCardsMastered}}/{{individualStats?.numberOfCards}}
+        <progress class="progress is-link" value="{{individualStats?.numberCardsMastered}}" max="{{individualStats?.numberOfCards}}"></progress>
+        </div>
+
+      <div>Card Distribution:
+          1: <progress class="progress is-danger" value="{{individualStats?.cardRatingsDistribution['1']}}" max="{{individualStats?.numberOfCards}}"></progress>
+          2: <progress class="progress is-warning" value="{{individualStats?.cardRatingsDistribution['2']}}" max="{{individualStats?.numberOfCards}}"></progress>
+          3: <progress class="progress is-success" value="{{individualStats?.cardRatingsDistribution['3']}}" max="{{individualStats?.numberOfCards}}"></progress>
+          4: <progress class="progress is-info" value="{{individualStats?.cardRatingsDistribution['4']}}" max="{{individualStats?.numberOfCards}}"></progress>
+          5: <progress class="progress is-link" value="{{individualStats?.cardRatingsDistribution['5']}}" max="{{individualStats?.numberOfCards}}"></progress>
+
+        </div>
+
+        <!-- <div style="display: block">
+            <canvas baseChart
+                    [data]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div> -->
+        <div class="columns">
+          <div class="column">
+            <p>Best card:</p>
+            <div class="card small-card">
+              <p class="center">{{individualStats?.bestCard.front}}</p>
+          </div>
+        </div>
+
+        <div class="column">Worst Card:
+            <div class="card small-card">
+              <p class="center">{{individualStats?.worstCard.front}}</p>
+          </div>
+        </div>
+        </div>
+          
+
+
         
+
     </div>
     
   </div>

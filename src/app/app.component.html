@@ -23,8 +23,8 @@
           <div class="navbar-dropdown is-boxed">
             
             <!-- All of those are there to be restricted after loggin in anyways -->
-            <a [routerLink]="['/group', group._id]" *ngFor="let group of userGroups" (click)="groupState(group._id)" class="navbar-item" href="#">
-              {{group.name}}
+            <a [routerLink]="['/group', group?._id]" *ngFor="let group of userGroups" (click)="groupState(group._id)" class="navbar-item" >
+              {{group?.name}}
             </a>
             
             <hr class="navbar-divider">

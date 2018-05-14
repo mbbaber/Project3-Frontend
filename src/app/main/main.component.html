@@ -111,8 +111,10 @@
 
 <div class="sign-up-window" *ngIf="addUserState">
   <div class="sign-up-pop columns">
-    <div class="column is-half" *ngFor="let one of allUsersWhoBelong">
-      {{one.username}}
+    <div class="column is-half" >
+      <div *ngFor="let one of allUsersWhoBelong"> {{one.username}} 
+          <button (click)="deleteUserFromGroup(one._id)">Delete</button>
+      </div>
     </div>
     <div class="column is-half">
       <h2> User adding</h2>
@@ -121,9 +123,8 @@
         <span>{{user.username}}</span>
         <button (click)="addUserToGroup(user._id)">Add</button>
       </div>
-      <button (click)="showAddUserForm()">Close</button>
     </div>
+    <button (click)="showAddUserForm()">Close</button>
   </div>
 </div>
 
-<!--  -->

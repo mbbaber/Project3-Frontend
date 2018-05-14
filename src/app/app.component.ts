@@ -115,6 +115,7 @@ export class AppComponent {
     .then((result)=>{
       this.getUsersGroups(result.userInfo._id);
       this.userId = result.userInfo._id;
+      this.currentUser = result.userInfo;
       this.logInState = false;
       this.response.navigateByUrl('/main');
 
@@ -129,6 +130,7 @@ export class AppComponent {
     this.userService.getLogOut()
     .then(()=>{
       // this.isLoggedIn = false;
+      this.currentUser = undefined;
       this.response.navigateByUrl('/');
     })
     .catch((err)=>{
