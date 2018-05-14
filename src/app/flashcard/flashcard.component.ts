@@ -4,13 +4,35 @@ import { GroupsService, Group } from '../api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, SubjectsService, Card } from '../api/subjects.service';
 import { Stat, StatsService } from '../api/stats.service';
+//Pie chart
+//import { Component } from '@angular/core';
 
 
 @Component({
   selector: 'app-flashcard',
   templateUrl: './flashcard.component.html',
-  styleUrls: ['./flashcard.component.css']
+  styleUrls: ['./flashcard.component.css'],
+  //Pie chart
+  //selector: ,
+  //templateUrl: './pie-chart-demo.html'
 })
+
+// //Pie chart
+// export class PieChartDemoComponent {
+//   // Pie
+//   public pieChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
+//   public pieChartData:number[] = [300, 500, 100];
+//   public pieChartType:string = 'pie';
+ 
+//   // events
+//   public chartClicked(e:any):void {
+//     console.log(e);
+//   }
+ 
+//   public chartHovered(e:any):void {
+//     console.log(e);
+//   }
+// }
 
 export class FlashcardComponent implements OnInit {
   // properties (aka fields) of the class
@@ -74,12 +96,7 @@ export class FlashcardComponent implements OnInit {
       })
   }
 
-  // //OTHER NOTES ABOUT CARD ORDER
-  // // var randomNewCardNumber = Math.floor(Math.random()*this.subject.cards.length
-  // // cardSeenWeight = (5-ranking)/(sumOfTotalCardWeights)
-  // // eventually, will rank based on card weights and then print all already-seen cards in this order
-
-  // // But for now, here is a simpler version.
+  // DETERMINE CARD ORDER
 
   getNextCard() {
     this.flipBackVisibility();
@@ -103,11 +120,10 @@ export class FlashcardComponent implements OnInit {
         });
 
         // generate a random number between 0 and 1 (var num= Math.random();)
-        var chooseNewCard = (ratedStats.length <= 3) || ((unseenCards.length > 0) && (Math.random() < 0.4))
-
+        var chooseNewCard = (ratedStats.length <= 3) || ((unseenCards.length > 0) && (Math.random() < 0.7))
 
         // set probabilty of getting new card (set whatever you want)
-        if (chooseNewCard) {  // for instance, 40% of the time
+        if (chooseNewCard) {  // for instance, 70% of the time
           this.currentCard = unseenCards[0];
         } else {
 
@@ -135,7 +151,6 @@ export class FlashcardComponent implements OnInit {
         }
       })
   }
-
 
   getIndividualStats() {
     var promiseCards = this.getCardsList()
