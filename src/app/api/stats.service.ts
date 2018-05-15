@@ -23,7 +23,6 @@ export class StatsService {
       .toPromise();
   }
 
-
   getAllStatsForUser(subjectId) {
     return this.httpClient
       .get(`${BACKEND}/stat/subject/${subjectId}`, {withCredentials: true})
@@ -36,6 +35,7 @@ export class StatsService {
       .toPromise();
   }
 
+    
   getAllStatsForUsersInGroup(groupId) {
     return this.httpClient
       .get(`${BACKEND}/group-info/${groupId}`, {withCredentials: true})
@@ -58,6 +58,6 @@ export class Stat {
   seen: number;
 }
 
-export class groupStats {
+export class GroupStats {
   users: any[];
 }

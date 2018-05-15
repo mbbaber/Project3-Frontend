@@ -4,6 +4,7 @@ import { GroupsService, Group } from '../api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, SubjectsService, Card } from '../api/subjects.service';
 import { Stat, StatsService } from '../api/stats.service';
+
 //Pie chart
 //import { Component } from '@angular/core';
 

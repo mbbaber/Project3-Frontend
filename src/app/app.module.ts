@@ -22,6 +22,9 @@ import { YourSubjectsComponent } from './your-account/your-subjects/your-subject
 import { UserAccountComponent } from './your-account/user-account/user-account.component';
 import { CreateNewSubjectComponent } from './create-new-subject/create-new-subject.component';
 import { UserPipePipe } from './pipes/user-pipe.pipe';
+import { ChartsModule } from 'ng2-charts';
+import { DonutChartComponent } from './donut-chart/donut-chart.component';
+
 
 
 
@@ -39,13 +42,15 @@ import { UserPipePipe } from './pipes/user-pipe.pipe';
     YourSubjectsComponent,
     UserAccountComponent,
     CreateNewSubjectComponent,
-    UserPipePipe
+    UserPipePipe,
+    DonutChartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [GroupsService, SubjectsService, UserService, StatsService],
   bootstrap: [AppComponent]

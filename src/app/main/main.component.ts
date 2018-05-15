@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupsService, Group } from '../api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, SubjectsService, Card, chooseSub,  } from '../api/subjects.service';
+import { Subject, SubjectsService, Card, chooseSub, } from '../api/subjects.service';
 import { UserService, User } from '../services/user.service';
-import { StatsService, Stat, groupStats } from '../api/stats.service';
+import { StatsService, Stat, GroupStats } from '../api/stats.service';
 
 @Component({
   selector: 'app-main',
@@ -21,6 +21,8 @@ export class MainComponent implements OnInit {
   subjects: any;
   isAdmin: boolean;
   usersArray: Array<string> = [];
+
+  statsBySubject = {};
 
   // arrayOfUsersInGroup = groupStats.users
 
@@ -43,38 +45,38 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apiStats.getAllStatsForUserById("5af4551e2c4927aa694c05e0" , "5af4551e2c4927aa694c05da")
-    .then((result)=> {
-      console.log("getAllStatsForUserById!!!!!!!!!!!!!!!!!!!!!!!!!!")
-      console.log(result)
-
-    })
-
     this.reqTruc.paramMap
       .subscribe((myParams) => {
         this.groupsId = myParams.get('groupId');
-        this.getSubjectsList();
-        this.getGroupStatsList();
+        this.getSubjectsList()
+          .then(group => {
+            this.getGroupStatsList();
+          })
+
+
+
         // this.mapAndReduceFunction();
         // this.getIndividualStats(user);
       })
 
-      this.mapAndReduceFunction().then(x => {console.log(x)})
+    // this.mapAndReduceFunction().then(x => {console.log(x)})
 
   }
 
   getSubjectsList() {
-    this.apiGroup.getDetails(this.groupsId)
-    .then((result: Group[]) => {
-      this.groups = result;
-      this.checkIfAdmin();
-    })
-    .catch((err) => {
-      console.log('Group details error')
-      console.log(err)
-    })
+    return this.apiGroup.getDetails(this.groupsId)
+      .then((result: Group[]) => {
+        this.groups = result;
+        this.checkIfAdmin();
+        return result
+      })
+      .catch((err) => {
+        console.log('Group details error')
+        console.log(err)
+      })
   }
 
+  //This function returns all the cards attached to the current subject
   getCardsList() {
     return this.apiSubject.getSubDetails(this.subjectId)
       .then((result: Subject) => {
@@ -87,7 +89,7 @@ export class MainComponent implements OnInit {
       })
   }
 
-  getCardsListById(userId) {
+  getCardsListForUser(userId: string) {
     return this.apiSubject.getSubDetails(this.subjectId)
       .then((result: Subject) => {
         this.subject = result;
@@ -111,8 +113,8 @@ export class MainComponent implements OnInit {
       })
   }
 
-  getStatsListById(userId) {
-    return this.apiStats.getAllStatsForUser(this.subjectId)
+  getStatsListForUser(subjectId: string, userId: string) {
+    return this.apiStats.getAllStatsForUserById(subjectId, userId)
       .then((result: Stat[]) => {
         this.stats = result;
         return this.stats;
@@ -123,154 +125,206 @@ export class MainComponent implements OnInit {
       })
   }
 
-  checkIfAdmin(){
+  checkIfAdmin() {
     this.userService.checkLogin()
-    .then((result)=>{
-      if(result.userInfo._id === this.groups.admin){
-        console.log(result.userInfo._id , this.groups.admin)
-        console.log('youre the admin of this group')
-        this.isAdmin = true;
-      }else{
-        console.log(result.userInfo._id , this.groups.admin)
-        this.isAdmin = false;
-        console.log('youre NOT the admin of this group')
-      }
-    })
-    .catch((err)=>{
-      console.log('err seeing if admin')
-    })
+      .then((result) => {
+        if (result.userInfo._id === this.groups.admin) {
+          console.log(result.userInfo._id, this.groups.admin)
+          console.log('youre the admin of this group')
+          this.isAdmin = true;
+        } else {
+          console.log(result.userInfo._id, this.groups.admin)
+          this.isAdmin = false;
+          console.log('youre NOT the admin of this group')
+        }
+      })
+      .catch((err) => {
+        console.log('err seeing if admin')
+      })
   }
 
-  showAddSubForm(){
+  showAddSubForm() {
     this.apiSubject.getAllTheSubjects()
-    .then((result)=>{
-      this.subjects = result;
-      this.addSubState = !this.addSubState;
-      console.log(result)
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
+      .then((result) => {
+        this.subjects = result;
+        this.addSubState = !this.addSubState;
+        console.log(result)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
 
     console.log(this.subjects)
 
   }
 
-  chooseThisSub(event:any){
+  chooseThisSub(event: any) {
     this.selectedSubjectId = event.target.value;
     console.log(this.selectedSubjectId)
   }
 
-  addThisSub(){
+  addThisSub() {
     this.apiGroup.addSubjectToGroup(this.selectedSubjectId, this.groupsId)
-    .then((result)=>{
-      this.addSubState = false;
-      this.getSubjectsList()
-      console.log('added this subject to group')
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  }
-
-  usersUpdate(){
-    this.userService.getAllUsersWhoBelong(this.groupsId)
-    .then((result)=>{
-      this.allUsersWhoBelong = result;
-      console.log(this.allUsersWhoBelong)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-    this.userService.getAllUsersWhoDontBelong(this.groupsId)
-    .then((result)=>{
-      this.allUsersWhoDontBelong = result;
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  }
-
-  showAddUserForm(){
-    this.addUserState = !this.addUserState;
-    this.usersUpdate();
-  }
-
-  getGroupStatsList() {
-    return this.apiStats.getAllStatsForUsersInGroup(this.groupsId)
-      .then((result: groupStats[]) => {
-        this.groupStats = result;
-        console.log("GROUP STATS LIST")
-        console.log(result)
-      
-        this.groupStats.users.forEach((one)=> {
-          this.usersArray.push(one._id)
-        })
-        
-        //console.log('one ',this.usersArray[0]);
-        this.mapAndReduceFunction();
-        return this.groupStats;
+      .then((result) => {
+        this.addSubState = false;
+        this.getSubjectsList()
+        console.log('added this subject to group')
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err)
       })
   }
 
-  addUserToGroup(userId){
+  usersUpdate() {
+    this.userService.getAllUsersWhoBelong(this.groupsId)
+      .then((result) => {
+        this.allUsersWhoBelong = result;
+        console.log(this.allUsersWhoBelong)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    this.userService.getAllUsersWhoDontBelong(this.groupsId)
+      .then((result) => {
+        this.allUsersWhoDontBelong = result;
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  showAddUserForm() {
+    this.addUserState = !this.addUserState;
+    this.usersUpdate();
+  }
+
+  getAverageCompleteForSubject(subjectId){
+    if (!this.statsBySubject[subjectId]) {
+      return {};
+    }
+    return this.statsBySubject[subjectId].avePercentageComplete; 
+  }
+
+  //this function populates the stats for the current group
+  getGroupStatsList() {
+    var usersArray = this.groups.users.map(one => one._id); // extract the user ids
+    usersArray.push(this.groups.admin);
+
+    //Compute stats for each subject across all users in the group
+    this.groups.subjects.forEach(subject => {
+
+      this.computeStatsAcrossUsers(subject._id, usersArray)
+        .then((result: any) => {
+          console.log("StatsBySubject: ")
+          console.log(result)
+          this.statsBySubject[result.subjectId] = result
+        })
+    })
+
+    // this.groupStats = result;
+    // console.log("GROUP STATS LIST")
+    // console.log(result)
+
+    // //console.log('one ',this.usersArray[0]);
+    // this.computeStatsAcrossUsers(this.usersArray); 
+    // return this.groupStats;
+  }
+
+  addUserToGroup(userId) {
     this.apiGroup.addThisUserToThisGroup(userId, this.groupsId)
-    .then((result)=>{
-      this.usersUpdate();
-      console.log(result)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
+      .then((result) => {
+        this.usersUpdate();
+        console.log(result)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
-  deleteUserFromGroup(userId){
+  deleteUserFromGroup(userId) {
     this.apiGroup.deleteThisUserFromTheGroup(userId, this.groupsId)
-    .then((result)=>{
-      this.usersUpdate();
-      console.log(result);
-    })
-    .catch((err)=>{
+      .then((result) => {
+        this.usersUpdate();
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  computeStatsAcrossUsers(subjectId: string, users: string[]) {
+    return Promise.all(
+      users.map(userId => this.getIndividualStats(subjectId, userId))
+    ).then((individualStatsByUser: any) => {
+
+      const numberOfUsers = this.groups.users.length
+      var arr = individualStatsByUser.filter(s => s.cardsViewed > 0) // ?????
+
+      var numberOfCards = this.groups.subjects.find(s => s._id === subjectId).cards.length
+
+      var aveAverageRating = (arr.reduce(function (a, b) { return a + b.averageRating }, 0)) / numberOfUsers;
+      var avePercentageComplete = (arr.reduce(function (a, b) { return a + b.percentageComplete }, 0)) / numberOfUsers;
+      var aveCardsViewed = (arr.reduce(function (a, b) { return a + b.cardsViewed }, 0)) / numberOfUsers;
+      var aveNumberCardsMastered = (arr.reduce(function (a, b) { return a + b.numberCardsMastered }, 0)) / numberOfUsers;
+
+      var cardRatingsDistribution = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+      arr.forEach((stat) => {
+        cardRatingsDistribution[1] += stat.cardRatingsDistribution[1];
+        cardRatingsDistribution[2] += stat.cardRatingsDistribution[2];
+        cardRatingsDistribution[3] += stat.cardRatingsDistribution[3];
+        cardRatingsDistribution[4] += stat.cardRatingsDistribution[4];
+        cardRatingsDistribution[5] += stat.cardRatingsDistribution[5];
+      })
+
+      return {
+        subjectId,
+        aveAverageRating,
+        avePercentageComplete,
+        aveCardsViewed,
+        aveNumberCardsMastered,
+        numberOfCards,
+        cardRatingsDistribution
+      }
+
+    }).catch(err => {
       console.log(err)
     })
-  }
-  
 
-  mapAndReduceFunction() {
-    //console.log("AAAAAAAAAAAAAA", this.usersArray)
-    return Promise.all(this.usersArray.map(id => {
-      return this.getIndividualStats(id)
-    }) )
 
-    // var aveNumberOfCards = (arr.reduce(function (a, b) {return a + b.numberOfCards}, 0))/(groupStats.users.length);
-    // var aveAverageRating = (arr.reduce(function (a, b) {return a + b.averageRating}, 0))/(groupStats.users.length);
-    // // var avePercentageComplete = (arr.reduce(function (a, b) {return a + b.percentageComplete}, 0))/(groupStats.users.length);
-    // var aveCardsViewed = (arr.reduce(function (a, b) {return a + b.cardsViewed}, 0))/(groupStats.users.length);        
-    // var aveNumberCardsMastered = (arr.reduce(function (a, b) {return a + b.numberCardsMastered}, 0))/(groupStats.users.length);
   }
 
   //         cardRatingsDistribution, (another object, not direct average)
   //         bestCard (max, iteration, not average), 
   //         worstCard (max, iteration, not average) 
+
  
-// function(arry) => averages
-  //user needs to be passed to the service through either getStatsList or getCardsList
-  getIndividualStats(user) {
-     var promiseStats = this.getStatsListById(user)
-     var promiseCards = this.getCardsListById(user)
-    return Promise.all([promiseStats, promiseCards])
-      .then((result: any) => {
-        const ratedStats = result[0];
-        const subjectCards = result[1].cards;
-        console.log({ratedStats, subjectCards})
+  getIndividualStats(subjectId, userId) {
+    return this.getStatsListForUser(subjectId, userId)
+      .then((ratedStats: any) => {
+        const subjectCards = this.groups.subjects.find(s => s._id === this.subjectId).cards;
 
         //get basic stats
         var numberOfCards = subjectCards.length
 
-    
+        if (ratedStats.length == 0) {
+          return {
+            subjectId,
+            userId,
+            numberOfCards,
+            sumOfRatings: null,
+            averageRating: null,
+            percentageComplete: 0,
+            cardsViewed: 0,
+            cardRatingsDistribution: null,
+            numberCardsMastered: 0,
+            bestCard: null,
+            worstCard: null
+          }
+        }
+
+        console.log('rated stats', ratedStats)
+
+
         var sumOfRatings = ratedStats.reduce(function (a, b) {
           return a + b.rating;
         }, 0);
@@ -290,14 +344,14 @@ export class MainComponent implements OnInit {
 
         // get best and worst cards
 
-        var maxRating = ratedStats.reduce(function(a: number, b: Stat) {
+        var maxRating = ratedStats.reduce(function (a: number, b: Stat) {
           return Math.max(a, b.rating);
         }, 0);
-        
+
         var bestStat; //card with highest rating and minimum number of views
         ratedStats.forEach((stat: Stat) => {
-          if (stat.rating === maxRating){
-            if (bestStat === undefined || (stat.seen < bestStat.seen)){
+          if (stat.rating === maxRating) {
+            if (bestStat === undefined || (stat.seen < bestStat.seen)) {
               bestStat = stat;
             }
           }
@@ -306,16 +360,16 @@ export class MainComponent implements OnInit {
         var bestCard = subjectCards.find((card) => {
           return bestStat.card === card._id
         })
-        
 
-        var minRating = ratedStats.reduce(function(a: number, b: Stat) {
+
+        var minRating = ratedStats.reduce(function (a: number, b: Stat) {
           return Math.min(a, b.rating);
         }, 5);
-        
+
         var worstStat; //card with lowest rating and maximum number of views
         ratedStats.forEach((stat: Stat) => {
-          if (stat.rating === minRating){
-            if (worstStat === undefined || (stat.seen > worstStat.seen)){
+          if (stat.rating === minRating) {
+            if (worstStat === undefined || (stat.seen > worstStat.seen)) {
               worstStat = stat;
             }
           }
@@ -326,18 +380,20 @@ export class MainComponent implements OnInit {
         })
 
         return {
-          numberOfCards, 
-          sumOfRatings, 
-          averageRating, 
-          percentageComplete,  
-          cardsViewed, 
-          cardRatingsDistribution, 
+          subjectId,
+          userId,
+          numberOfCards,
+          sumOfRatings,
+          averageRating,
+          percentageComplete,
+          cardsViewed,
+          cardRatingsDistribution,
           numberCardsMastered,
-          bestCard, 
+          bestCard,
           worstCard
         }
       })
-      .catch((err) => { 
+      .catch((err) => {
         console.log("individual stats error")
         console.log(err)
       })

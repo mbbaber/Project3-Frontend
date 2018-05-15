@@ -29,8 +29,9 @@
               <span *ngFor="let keyword of subject?.keywords">{{keyword}} </span>
             </div>
             <div class="right">
-              <p>number of cards?</p>
-              <p>percentage complete?</p>
+              <p>{{statsBySubject[subject?._id]?.numberOfCards}} cards</p>
+              <p>{{individualStats?.percentageComplete | number:'.0'}}% Complete</p>
+              <!-- <p>{{statsBySubject[subject?._id]?.avePercentageComplete | number: ".0" }}% Complete</p> -->
             </div>
 
           </div>
@@ -55,7 +56,6 @@
   </div> -->
 
 
-
     <!-- if admin show this below -->
     <div class="center admin" *ngIf="isAdmin">
       <p>Admin can see this:</p>
@@ -66,20 +66,19 @@
 
   <div class="column stats-box">
     <div>
-      <h3 class="center">Group Statistics</h3>
-      <h3 class="center">{{groups?.name}}:</h3>
-      <p>Number of Students: </p>
-      <p>Number of Cards: </p>
-      <p>Percentage Complete:</p>
+      <h3 class="center">{{groups?.name}} Statistics</h3>
     </div>
 
     <div *ngFor="let subject of groups?.subjects">
         <h3>{{subject.name}}</h3>
-        <p>Percentage Complete:</p>
-        <p>Studied Cards: </p>
-        <p>Average Card Rating: </p>
-        <p>Easiest Cards: </p>
-        <p>Hardest Cards: </p>
+<!-- {{statsBySubject[subject?._id]?.avePercentageComplete}}" -->
+        <app-donut-chart [percentage]="getAverageCompleteForSubject(subject._id)"></app-donut-chart>
+        <p>{{statsBySubject[subject?._id]?.avePercentageComplete | number: ".0" }}% Complete </p>
+        <p>Average Card Rating: {{statsBySubject[subject?._id]?.aveAverageRating | number: ".1"}} </p>
+        <p>Average Cards Viewed: {{statsBySubject[subject?._id]?.aveCardsViewed | number: ".0"}} </p>
+        <p>Average Cards Mastered: {{statsBySubject[subject?._id]?.aveNumberCardsMastered | number: ".0"}}  </p>
+
+        cardRatingsDistribution
     </div> 
 
   </div>
