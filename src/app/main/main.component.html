@@ -60,7 +60,7 @@
     <div class="center admin" *ngIf="isAdmin">
       <p>Admin can see this:</p>
       <a class="button is-link" (click)="showAddSubForm()">Add Subject +</a>
-      <a class="button is-link" (click)="showAddUserForm()">Add User +</a>
+      <a class="button is-link" *ngIf="groups?.name != 'Private'" (click)="showAddUserForm()">Add User +</a>
     </div>
   </div>
 
