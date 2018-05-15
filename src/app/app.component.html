@@ -13,7 +13,7 @@
   
     <div id="navbarExampleTransparentExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item" (click)="newSetShow()">
+        <a class="navbar-item" (click)="newSetShow()" *ngIf="userService.isLoggedIn">
           Create new set
         </a>
         <div class="navbar-item has-dropdown is-hoverable" *ngIf="userService.isLoggedIn">

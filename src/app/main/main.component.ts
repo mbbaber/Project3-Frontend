@@ -217,7 +217,7 @@ export class MainComponent implements OnInit {
         .then((result: any) => {
           console.log("StatsBySubject: ")
           console.log(result)
-          this.statsBySubject[result.subjectId] = result
+          this.statsBySubject[subject._id] = result
         })
     })
 

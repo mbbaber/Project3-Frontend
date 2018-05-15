@@ -63,9 +63,11 @@ export class YourGroupsComponent implements OnInit {
 
   deleteGroup(groupId, userId){
     this.apiGroup.deleteThisGroup(groupId, userId)
-    .then((result)=>{
-      this.userGroups = result;
-      console.log(result);
+    .then(()=>{
+      // this.userGroups = result;
+      // console.log(result);
+      this.getUsersGroups();
+      this.apiGroup.delSubsOfThisGroupFromUser(userId, groupId)
       this.response.navigateByUrl(`/my-account/${userId}/groups`)
     })
     .catch((err)=>{

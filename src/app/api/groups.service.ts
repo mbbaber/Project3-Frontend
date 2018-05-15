@@ -45,7 +45,9 @@ export class GroupsService {
 
   deleteThisGroup(groupId, userId){
     return this.ajaxTruc
-    .put(`${BACKEND}/api/groups-of-the-user/${userId}/gr/${groupId}`, {new: true})
+    // .put(`${BACKEND}/api/groups-of-the-user/${userId}/gr/${groupId}`, 
+     .put(`${BACKEND}/api/delete/user/${userId}/group/${groupId}`,
+    {new: true})
     .toPromise()
     .then((apiResponse: Group[])=>{
       this.userGroups = apiResponse;
@@ -56,6 +58,16 @@ export class GroupsService {
   newGroup(groupCred: BeginningGroup){
     return this.ajaxTruc
     .post(`${BACKEND}/api/new-group`, groupCred, {withCredentials:true})
+    .toPromise()
+    .then((apiResponse:any)=>{  
+      this.userGroups = apiResponse;
+      return apiResponse;
+    })
+  }
+
+  createPrivateGroup(userId){
+    return this.ajaxTruc
+    .post(`${BACKEND}/api/private-group/${userId}`, {withCredentials: true})
     .toPromise()
     .then((apiResponse:any)=>{  
       this.userGroups = apiResponse;
@@ -88,14 +100,26 @@ export class GroupsService {
   deleteThisUserFromTheGroup(userId, groupId){
     return this.ajaxTruc
     .put(`${BACKEND}/api/delete/user/${userId}/group/${groupId}`,
-  {withCredentials: true})
+    {withCredentials: true})
     .toPromise()
     .then((apiResponse: any)=>{
       return apiResponse;
     })
   }
 
+  delSubsOfThisGroupFromUser(userId, groupId){
+    return this.ajaxTruc
+    .put(`${BACKEND}/api/delete/subs/${groupId}/user/${userId}`,
+  {withCredentials: true})
+  .toPromise()
+  .then((apiResponse: any)=>{
+    console.log('fucking work!')
+    return apiResponse;
+  })
+  }
   
+
+
 }
 
 export class Group {

@@ -25,6 +25,7 @@ export class AppComponent {
 
   formCredentials: SignUpCredentials = new SignUpCredentials();
   newGroup: BeginningGroup = new BeginningGroup();
+  privateGroup: BeginningGroup = new BeginningGroup();
   newSetOfCards: NewSubject = new NewSubject();
 
   constructor(
@@ -100,8 +101,9 @@ export class AppComponent {
 
   signUpSumbit(){
     this.userService.postSignUp(this.formCredentials)
-    .then(()=>{
+    .then((newUser)=>{
       this.signUpState = false;
+      this.apiGroup.createPrivateGroup(newUser.userInfo._id)
       this.response.navigateByUrl('/');
     })
     .catch((err)=>{
@@ -141,10 +143,11 @@ export class AppComponent {
 
   groupFormSubmit(){
     this.apiGroup.newGroup(this.newGroup)
-    .then(()=>{
+    .then((result)=>{
       this.getUsersGroups(this.userId);
       this.newGroupState = false;
-      this.response.navigateByUrl(`/my-account/${this.userId}`);
+      this.response.navigateByUrl(`/group/${result._id}`);
+      console.log('new group?', result)
     })
     .catch((err)=>{
       console.log(err, 'error form Submit')
