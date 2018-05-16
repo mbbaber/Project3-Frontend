@@ -1,6 +1,7 @@
 <div class="columns">
   <div class="main-section column ">
     <h1 class="center"> Your Groups</h1>
+    <h2 class="center">All of the groups you belong to</h2>
 
     <div class="box search">
       <div class="field has-addons">
@@ -21,7 +22,7 @@
               <!-- <p *ngIf="subjects">Tags: {{subjects?.tags}}</p> -->
             </div>
             <a class="button is-link right" [routerLink]="['/group', group._id]">See This Group</a>
-            <a class="button is-link right" *ngIf="group.name !='Private' " (click)="deleteGroup(group._id, userData._id)">Delete Group</a>
+            <a class="button is-link right" *ngIf="group.name !='Private' " (click)="deleteGroup(group._id, userData._id)">Leave Group</a>
           </div>
         </div>
       </article>
