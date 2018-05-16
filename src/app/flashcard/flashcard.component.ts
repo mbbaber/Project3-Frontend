@@ -137,16 +137,19 @@ export class FlashcardComponent implements OnInit {
         // The filter() method creates a new array with all elements that pass the test implemented by the provided function
         // create an array that only contains cards that are not rated (not in ratedStats array)
         var unseenCards = this.subject.cards.filter((card: Card) => {
+          
+
+          // if (card === null) {
           for (var i = 0; i < ratedStats.length; i++) {
-            if (card._id == ratedStats[i].card) {
-              return false
-            }
+              if (card._id == ratedStats[i].card) {
+                return false
+              }
           }
           return true
         });
 
         // generate a random number between 0 and 1 (var num= Math.random();)
-        var chooseNewCard = (ratedStats.length <= 3) || ((unseenCards.length > 0) && (Math.random() < 0.7))
+        var chooseNewCard = (ratedStats.length <= 0) || ((unseenCards.length > 0) && (Math.random() < 0.7))
 
         // set probabilty of getting new card (set whatever you want)
         if (chooseNewCard) {  // for instance, 70% of the time
