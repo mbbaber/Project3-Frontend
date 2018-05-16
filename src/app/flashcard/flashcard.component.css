@@ -5,9 +5,45 @@
 
 /**
  * ----------------------------------------
- * animation swing-in-left-fwd
+ * animation swing-in-left-fwd, animation swing-in-top-fwd
  * ----------------------------------------
  */
+
+ @-webkit-keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+}
+@keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+}
+
+
+
 @-webkit-keyframes swing-in-left-fwd {
   0% {
     -webkit-transform: rotateY(100deg);
@@ -39,6 +75,13 @@
     transform-origin: left;
     opacity: 1;
   }
+}
+
+.oneHundredMessage {
+  margin-top: 5%;
+  color: rgb(50, 152, 224);
+  font-size: 4vh;
+  text-align: center;
 }
 
 h1 {
@@ -223,6 +266,11 @@ p {
     cubic-bezier(0.175, 0.885, 0.32, 1.35) 0.25s both;
   animation: swing-in-left-fwd 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.35) 0.25s
     both;
+}
+
+.swing-in-top-fwd {
+	-webkit-animation: swing-in-top-fwd 1.25s cubic-bezier(0.175, 0.885, 0.320, 1.275) 1s both;
+	        animation: swing-in-top-fwd 1.25s cubic-bezier(0.175, .885, 0.320, 1.275) 1s both;
 }
 
 .white {

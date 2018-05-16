@@ -206,8 +206,11 @@ export class FlashcardComponent implements OnInit {
         console.log(percentageComplete)
         
         if(percentageComplete === 100){
-          this.oneHundredPercent = !this.oneHundredPercent;
+          this.oneHundredPercent = true;
+        } else {
+          this.oneHundredPercent = false;
         }
+      
 
         var cardsViewed = ratedStats.length
 

@@ -2,25 +2,22 @@
   <div class="main-section column is-two-thirds">
     <!-- loop through each card -->
 
-
-    <div *ngIf="oneHundredPercent">
-        <p>TESTING 100% HOORAY</p>
+   
+    <div class="oneHundredMessage" *ngIf="oneHundredPercent">
+        Congratulations! You have completed this subject.
       </div>
 
-    <div class="card front-card left">
+    <div class="card front-card left" (click)="flipBackVisibility()">
       <div class="card-content">
         <div class="content columns">
           <h3 class="center column is-four-fifths">{{currentCard?.front}}</h3>
-          <a (click)="flipBackVisibility()" class="flash-button column">
-            <b>➤</b>
-          </a>
         </div>
       </div>
 
     </div>
 
     <div *ngIf="classState.showForm">
-      <div class="card back-card left">
+      <div class="card back-card left swing-in-left-fwd">
         <div class="card-content">
           <div class="content columns">
             <h3 class="center column is-four-fifths">{{currentCard?.back}}</h3>
@@ -32,12 +29,13 @@
     <!--only when back of card is shown-->
 
     <div class="clear center">
-      <div *ngIf="classState.showForm">
+      <div *ngIf="classState.showForm" class="swing-in-top-fwd">
 
         <div class="clear center">
           <h1>How well did you know the answer?</h1>
 
         </div>
+
         <div class="e-size left center columns">
           <a class="column color1" (click)="rateCardandUpdate(1)">
             <p class="margin-top10">1</p>
