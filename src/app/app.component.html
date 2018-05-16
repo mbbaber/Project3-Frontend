@@ -132,9 +132,9 @@
 
 <div class="sign-up-window" *ngIf="newGroupState" >
   <div class="sign-up-pop">
-    <h2>Sign Up</h2>
+    <h2>Name your new group</h2>
     <form (ngSubmit)="groupFormSubmit()">
-      <label>Name of your new group:
+      <label>
         <input type="text" name="username" [(ngModel)]="newGroup.name" >
       </label>
       <button>Create</button>
@@ -146,7 +146,7 @@
   <div class="sign-up-pop">
     <h2>New set of cards</h2>
     <form (ngSubmit)="subjectFormSubmit()">
-      <label>Name of your new group:
+      <label>What's the subjects of this set?
         <input type="text" name="name" [(ngModel)]="newSetOfCards.name" >
       </label>
       <button>Create</button>

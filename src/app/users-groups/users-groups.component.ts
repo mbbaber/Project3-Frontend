@@ -11,12 +11,13 @@ import { Groups, GroupsService } from '../api/groups.service';
 })
 export class UsersGroupsComponent implements OnInit {
 
-  userData: User;
+  userData: any;
   userId: String;
 
   search: String ="";
   groupId: String;
   groups: Groups[];
+  userGroups: Groups[];
 
   constructor(
     public userService: UserService,
@@ -26,23 +27,24 @@ export class UsersGroupsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apiGroup.getGroupsList()
-    .then((result: Groups[]) => {
-      this.groups = result;
-    })
-    .catch(err => {
-      console.log(err)
-    })
 
     this.userService.checkLogin()
-    .then((result: User)=>{
+    .then((result: any)=>{
       this.userData = result;
+      this.apiGroup.getGroups(result.userInfo._id)
+      .then((result: Groups[])=>{
+        this.groups = result;
+      })
+      .catch((err)=>{
+        console.log('error fetching users groups', err);
+      })
     })
     .catch((err)=>{
       console.log('App login check error');
       console.log(err);
     })
 
+    
   }
 
   groupState(groupId){
@@ -51,8 +53,9 @@ export class UsersGroupsComponent implements OnInit {
 
   getUserData(){
     this.userService.getDataUser(this.userId)
-    .then((result: User)=>{
+    .then((result: any)=>{
       this.userData = result;
+
       console.log(this.userData);
     })
     .catch((err)=>{
@@ -61,5 +64,4 @@ export class UsersGroupsComponent implements OnInit {
     })
   }
   
-
 }

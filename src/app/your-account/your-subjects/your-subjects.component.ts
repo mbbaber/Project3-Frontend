@@ -13,8 +13,8 @@ export class YourSubjectsComponent implements OnInit {
   userData: User;
   userId: string;
   userSubs: Subject[] = [];
-  search: string = "";
-  
+  search: string;
+
   constructor(
     public userService: UserService,
     public actRoute: ActivatedRoute,
@@ -53,8 +53,15 @@ export class YourSubjectsComponent implements OnInit {
 
   getUsersSubjects(){
     this.apiGroup.getSubs(this.userId)
-    .then((result: Subject[])=>{
-      this.userSubs = result;
+    .then((result: any[])=>{
+      result.forEach((oneSub)=>{
+        if(oneSub.admin === this.userId){
+          this.userSubs.push(oneSub)
+          this.search = "";
+          console.log(this.userSubs)
+        }
+      })
+    //  this.userSubs = result;
     })
     .catch((err)=>{
       console.log('error fetching users groups', err);
@@ -72,4 +79,5 @@ export class YourSubjectsComponent implements OnInit {
       console.log('error deleting group', err);
     })
   }
+
 }
