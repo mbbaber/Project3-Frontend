@@ -12,7 +12,7 @@ import { StatsService, Stat, GroupStats } from '../api/stats.service';
 })
 
 export class MainComponent implements OnInit {
-  subjectId: string = "5af4551e2c4927aa694c05e0";
+  //subjectId: string = "5af4551e2c4927aa694c05e0";
   subject: Subject;
   groupsId: string;
   groups: any;
@@ -81,41 +81,41 @@ export class MainComponent implements OnInit {
   }
 
   //This function returns all the cards attached to the current subject
-  getCardsList() {
-    return this.apiSubject.getSubDetails(this.subjectId)
-      .then((result: Subject) => {
-        this.subject = result;
-        return this.subject;
-      })
-      .catch((err) => {
-        console.log('getCardsList details error')
-        console.log(err)
-      })
-  }
+  // getCardsList() {
+  //   return this.apiSubject.getSubDetails(this.subjectId)
+  //     .then((result: Subject) => {
+  //       this.subject = result;
+  //       return this.subject;
+  //     })
+  //     .catch((err) => {
+  //       console.log('getCardsList details error')
+  //       console.log(err)
+  //     })
+  // }
 
-  getCardsListForUser(userId: string) {
-    return this.apiSubject.getSubDetails(this.subjectId)
-      .then((result: Subject) => {
-        this.subject = result;
-        return this.subject;
-      })
-      .catch((err) => {
-        console.log('getCardsListById details error')
-        console.log(err)
-      })
-  }
+  // getCardsListForUser(userId: string) {
+  //   return this.apiSubject.getSubDetails(this.subjectId)
+  //     .then((result: Subject) => {
+  //       this.subject = result;
+  //       return this.subject;
+  //     })
+  //     .catch((err) => {
+  //       console.log('getCardsListById details error')
+  //       console.log(err)
+  //     })
+  // }
 
-  getStatsList() {
-    return this.apiStats.getAllStatsForUser(this.subjectId)
-      .then((result: Stat[]) => {
-        this.stats = result;
-        return this.stats;
-      })
-      .catch((err) => {
-        console.log('getStatsList details error')
-        console.log(err)
-      })
-  }
+  // getStatsList() {
+  //   return this.apiStats.getAllStatsForUser(this.subjectId)
+  //     .then((result: Stat[]) => {
+  //       this.stats = result;
+  //       return this.stats;
+  //     })
+  //     .catch((err) => {
+  //       console.log('getStatsList details error')
+  //       console.log(err)
+  //     })
+  // }
 
   getStatsListForUser(subjectId: string, userId: string) {
     return this.apiStats.getAllStatsForUserById(subjectId, userId)
@@ -220,8 +220,8 @@ export class MainComponent implements OnInit {
       this.computeStatsAcrossUsers(subject._id, usersArray)
         .then((result: any) => {
           console.log(subject._id, usersArray)
-          //console.log('Bbbbbbbbbb', result)
-          //this.statsBySubject[subject._id] = result; 
+          console.log('Bbbbbbbbbb', result)
+          this.statsBySubject[subject._id] = result; 
           this.statsBySubject[result.subjectId] = result
 
         })
@@ -270,7 +270,7 @@ export class MainComponent implements OnInit {
         .then((result) => {
           this.currentUserIndividualStats[subjectId] = individualStatsByUser.find(s => s.userId == result.userInfo._id)
           console.log("HERE!!!!!!!!!!!!!!", result)
-          console.log(individualStatsByUser)
+          console.log("NOW!!!!!!!!!!", individualStatsByUser)
         })
      
 
@@ -320,7 +320,7 @@ export class MainComponent implements OnInit {
   getIndividualStats(subjectId, userId) {
     return this.getStatsListForUser(subjectId, userId)
       .then((ratedStats: any) => {
-        const subjectCards = this.groups.subjects.find(s => s._id === this.subjectId).cards;
+        const subjectCards = this.groups.subjects.find(s => s._id === subjectId).cards;
         //get basic stats
         var numberOfCards = subjectCards.length
 
@@ -345,7 +345,7 @@ export class MainComponent implements OnInit {
         }, 0);
         var averageRating = (sumOfRatings / numberOfCards)
 
-        var percentageComplete = averageRating / 5 * 100
+        var percentageComplete = Math.floor(averageRating / 5 * 100)
 
         var cardsViewed = ratedStats.length
 

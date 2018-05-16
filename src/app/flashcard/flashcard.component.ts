@@ -48,6 +48,8 @@ export class FlashcardComponent implements OnInit {
   };
   individualStats: any;
 
+  oneHundredPercent: boolean = false;
+
   constructor(
     private reqTruc: ActivatedRoute, // where am I on the website + context (parameters)
     public apiGroup: GroupsService,
@@ -72,6 +74,7 @@ export class FlashcardComponent implements OnInit {
 
     console.log(this.apiGroup.currentGroup)
   }
+
 
   getCardsList() {
     return this.apiSubject.getSubDetails(this.subjectId)
@@ -148,6 +151,7 @@ export class FlashcardComponent implements OnInit {
           return true
         });
 
+        // TODO
         // generate a random number between 0 and 1 (var num= Math.random();)
         var chooseNewCard = (ratedStats.length <= 0) || ((unseenCards.length > 0) && (Math.random() < 0.7))
 
@@ -198,7 +202,12 @@ export class FlashcardComponent implements OnInit {
         }, 0);
         var averageRating = (sumOfRatings / numberOfCards)
 
-        var percentageComplete = averageRating / 5 * 100
+        var percentageComplete = Math.floor(averageRating / 5 * 100)
+        console.log(percentageComplete)
+        
+        if(percentageComplete === 100){
+          this.oneHundredPercent = !this.oneHundredPercent;
+        }
 
         var cardsViewed = ratedStats.length
 

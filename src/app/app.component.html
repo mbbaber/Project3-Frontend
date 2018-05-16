@@ -97,7 +97,7 @@
 <div class="log-in-window" *ngIf="logInState">
     <div class="log-in-pop">
       <h2>Log in</h2>
-      <form (ngSubmit)="logInSubmit()">
+      <form (ngSubmit)="logInSubmit();">
         <label>Username:
           <input type="text" name="username" [(ngModel)]="formCredentials.username" >
         </label>

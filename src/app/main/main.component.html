@@ -16,7 +16,7 @@
     </div>
     <!-- add for each subject div below-->
 
-
+  
     <a *ngFor="let subject of groups?.subjects | inputFilter : search" [routerLink]="['/g', groups._id, 'subject', subject._id]" (mouseenter)="mouseEnter(subject)" (mouseleave)="mouseLeave()" class="box">
       <article class="media">
         <div class="media-content">
@@ -118,4 +118,3 @@
     <button (click)="showAddUserForm()">Close</button>
   </div>
 </div>
-
