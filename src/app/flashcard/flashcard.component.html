@@ -2,6 +2,11 @@
   <div class="main-section column is-two-thirds">
     <!-- loop through each card -->
 
+
+    <div *ngIf="oneHundredPercent">
+        <p>TESTING 100% HOORAY</p>
+      </div>
+
     <div class="card front-card left">
       <div class="card-content">
         <div class="content columns">
@@ -31,6 +36,7 @@
 
         <div class="clear center">
           <h1>How well did you know the answer?</h1>
+
         </div>
         <div class="e-size left center columns">
           <a class="column color1" (click)="rateCardandUpdate(1)">
@@ -62,7 +68,7 @@
 
     <div class="light-grey">
       <span>
-        <h2 class="center white">My Statistics: Subject 1</h2>
+        <h2 class="center white">My Statistics: {{subject?.name}}</h2>
       </span>
     </div>
 
@@ -122,11 +128,6 @@
 
         </div>
       </div>
-
-
-
-
-
 
       <div class="columns">
         <div class="column center complete-font"> Best card:

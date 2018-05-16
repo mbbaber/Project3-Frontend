@@ -10,11 +10,14 @@ export class InputFilterPipe implements PipeTransform {
       return [];
     }
     
+//TODOIF: if we have time, come back this and make it so keyword doesn't disappear while typing
+  
     return items.filter(item=> 
 
-      item.name.toLowerCase().includes(searchThing.toLowerCase())
-      // item.keywords.includes(searchThing.toLowerCase())
+      item.name.toLowerCase().includes(searchThing.toLowerCase()) ||
+      item.keywords.toLowerCase().includes(searchThing.toLowerCase())
     );
   }
+
 
 }

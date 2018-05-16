@@ -130,6 +130,7 @@ export class AppComponent {
       this.currentUser = result.userInfo;
       this.logInState = false;
       this.response.navigateByUrl('/main');
+      
 
     })
     .catch((err)=>{
