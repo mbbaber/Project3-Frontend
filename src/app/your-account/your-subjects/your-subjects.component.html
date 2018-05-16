@@ -1,7 +1,8 @@
+<div class="card">
 <div class="columns">
   <div class="main-section column ">
-    <h1 class="center"> Your Card Subjects</h1>
-    <h2 class="center"> Manage sets of cards you've created</h2>
+    <h2 class="center"> Your Subjects</h2>
+    <p class="center"> Manage the cards you've created</p>
 
     <div class="box search">
       <div class="field has-addons">
@@ -23,10 +24,11 @@
               </div>
               <!-- this one below isnt possible because we dont have groupId -->
               <!-- <a class="button is-link right" [routerLink]="['/g', groups._id, 'subject', subject._id]">Go to this set</a> -->
-              <a class="button is-link right" [routerLink]="['/new-subject', group?._id]">Edit</a>
+              <a class="button color5 right" [routerLink]="['/new-subject', group?._id]">Edit</a>
              <!-- I think we don't want that since the subjects are now always stricty involved with groups -->
               <!-- <a class="button is-link right" (click)="deleteSubject(group._id, userData._id)">Leave this subject</a> -->
             </div>
           </div>
         </article>
     </div>
+  </div>

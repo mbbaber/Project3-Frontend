@@ -1,0 +1,35 @@
+
+p {
+    font-size: 2vh;
+}
+.columns {
+    height: 100%;
+}
+.card {
+    width: 85%;
+    height: auto;
+    padding: 5%;
+    }
+
+h2 {
+    font-size: 5vh;
+    text-align: center;
+    margin-bottom: 3vh;
+}
+
+h1 {
+    font-size: 25px;
+    padding: 30px;
+}
+
+h3 {
+    padding: 5vh;
+}
+
+h4 {
+    font-size: 3vh;
+    margin-left: 7vh;
+}
+.center {
+    text-align: center;
+}

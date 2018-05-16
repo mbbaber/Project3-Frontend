@@ -4,15 +4,13 @@
     
     <div class="box search">
         <div class="field has-addons">
-            <!--  -->
-              <input class="input" type="text" placeholder="find a group" [(ngModel)]="search" >
+              <input class="input" type="text" placeholder="Search Groups" [(ngModel)]="search" >
            
           </div>
     </div>
-    <!-- add for each subject div below-->
-    <!--  -->
+   
     <!-- *ngFor="let subject of groups?.subjects  " -->
-    <div class="box" *ngFor="let group of groups | inputFilter : search" (click)="groupState(group._id)">
+    <a class="box" *ngFor="let group of groups | inputFilter : search" (click)="groupState(group._id)" [routerLink]="['/group', group._id]">
         <article class="media">
           <div class="media-content">
             <div class="content">
@@ -22,18 +20,18 @@
                   <!-- <div *ngFor="let keyword of subject.keywords">{{keyword}}</div> -->
                   <!-- <p *ngIf="subjects">Tags: {{subjects?.tags}}</p> -->
               </div>
-              <a class="button is-link right" [routerLink]="['/group', group._id]">See This Group</a>
+  
             </div>
           </div>
         </article>
-      </div>
+      </a>
     
 
     
       <!-- if admin show this below -->
       <div class="center admin">
-        <p>Admin can see this:</p>
-        <a class="button is-link">Create a group +</a>
+
+        <a class="button color4">Create group </a>
       </div>
     </div>
 <!--     

@@ -23,15 +23,15 @@ export class StatsService {
       .toPromise();
   }
 
-  getAllStatsForUser(subjectId) {
+  getAllStatsForUser(groupId, subjectId) {
     return this.httpClient
-      .get(`${BACKEND}/stat/subject/${subjectId}`, {withCredentials: true})
+      .get(`${BACKEND}/stat/${groupId}/${subjectId}`, {withCredentials: true})
       .toPromise();
   }
 
-  getAllStatsForUserById(subjectId, userId) {
+  getAllStatsForUserById(groupId, subjectId, userId) {
     return this.httpClient
-      .get(`${BACKEND}/stat/subject/${subjectId}/${userId}`, {withCredentials: true})
+      .get(`${BACKEND}/stat/${groupId}/${subjectId}/${userId}`, {withCredentials: true})
       .toPromise();
   }
 

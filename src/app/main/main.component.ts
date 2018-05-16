@@ -22,11 +22,14 @@ export class MainComponent implements OnInit {
   isAdmin: boolean;
   usersArray: Array<string> = [];
   currentUserIndividualStats = {};
+  currentUserId: string;
 
 
   hoveredSubject: any;
 
   statsBySubject = {};
+
+  studyBuddy: any;
 
   // arrayOfUsersInGroup = groupStats.users
 
@@ -55,6 +58,7 @@ export class MainComponent implements OnInit {
         this.getSubjectsList()
           .then(group => {
             this.getGroupStatsList();
+            this.whoAmI();
           })
 
 
@@ -117,8 +121,8 @@ export class MainComponent implements OnInit {
   //     })
   // }
 
-  getStatsListForUser(subjectId: string, userId: string) {
-    return this.apiStats.getAllStatsForUserById(subjectId, userId)
+  getStatsListForUser(groupId: string, subjectId: string, userId: string) {
+    return this.apiStats.getAllStatsForUserById(groupId, subjectId, userId)
       .then((result: Stat[]) => {
         this.stats = result;
         return this.stats;
@@ -128,6 +132,94 @@ export class MainComponent implements OnInit {
         console.log(err)
       })
   }
+
+  // optimal study buddy is the user with the maximum distance to currentUser based on ratings of cards on subjects of the group.
+  getStudyBuddy() {
+
+    var distanceToCurrentUser = [];
+
+    // we need to get all the data first
+    var promises = [];
+    this.groups.users.forEach((user) => {
+      this.groups.subjects.forEach((subject)=> {
+        // we get the stats for all users in all subjects in current group
+        promises.push(this.getStatsListForUser(this.groupsId, subject._id, user._id))
+      }) 
+    
+    })
+
+    Promise.all(promises)
+      .then((result:any[]) => {
+
+        //get the current user stats in a nicer format
+        var currentUserStats = {}
+        result.forEach((stat) => { 
+          console.log(stat)
+          if (stat.user == this.currentUserId) {
+            //initialize
+            if( currentUserStats[stat.subject] === undefined) {
+              currentUserStats[stat.subject] = {}
+            }
+            //get the rating for the card for the subject we are looking at
+            currentUserStats[stat.subject][stat.card] = stat.rating;
+          }
+        })
+
+      
+        var differences = {} // that will contain all the squared differences with different users on different subjects
+        result.forEach((stat) => { 
+          //initialize the differences object
+          if (differences[stat.user] === undefined) {
+            differences[stat.user] = {}
+          }
+          if (differences[stat.user][stat.subject] === undefined) {
+            differences[stat.user][stat.subject] = 0
+          }
+
+          // check if user has seen the card
+          if (currentUserStats[stat.subject] && currentUserStats[stat.subject][stat.card]) {
+            differences[stat.user][stat.subject] += Math.pow(currentUserStats[stat.subject][stat.card] - stat.rating, 2)
+          }
+        })
+
+        //get user with max distance
+        var furthestUser;
+        var furthestDistance;
+        this.groups.users.forEach(user =>{
+          if (user._id != this.currentUserId){
+            var distance = 0;
+            for (var subject in differences[user._id]){
+              distance += differences[user._id][subject];
+            }
+            if (furthestUser === undefined){
+              furthestUser = user;
+              furthestDistance = distance;
+            } else {
+              if (furthestDistance < distance){
+                furthestDistance = distance;
+                furthestUser = user;
+              }
+            }
+          }
+        })
+
+        console.log(furthestUser);
+
+        this.studyBuddy = furthestUser;
+      });
+
+      
+  }
+
+
+whoAmI(){
+  this.userService.checkLogin()
+      .then((result) => {
+          this.currentUserId = result.userInfo._id 
+        })
+}
+
+
 
   checkIfAdmin() {
     this.userService.checkLogin()
@@ -217,7 +309,7 @@ export class MainComponent implements OnInit {
     //Compute stats for each subject across all users in the group
     this.groups.subjects.forEach(subject => {
 
-      this.computeStatsAcrossUsers(subject._id, usersArray)
+      this.computeStatsAcrossUsers(this.groupsId, subject._id, usersArray)
         .then((result: any) => {
           console.log(subject._id, usersArray)
           console.log('Bbbbbbbbbb', result)
@@ -259,10 +351,10 @@ export class MainComponent implements OnInit {
   }
 
 
-  computeStatsAcrossUsers(subjectId: string, users: string[]) {
+  computeStatsAcrossUsers(groupId: string, subjectId: string, users: string[]) {
     return Promise.all(
 
-      users.map(userId => this.getIndividualStats(subjectId, userId))
+      users.map(userId => this.getIndividualStats(groupId, subjectId, userId))
     ).then((individualStatsByUser: any) => {
 
       
@@ -317,8 +409,8 @@ export class MainComponent implements OnInit {
   //         worstCard (max, iteration, not average) 
 
  
-  getIndividualStats(subjectId, userId) {
-    return this.getStatsListForUser(subjectId, userId)
+  getIndividualStats(groupId, subjectId, userId) {
+    return this.getStatsListForUser(groupId, subjectId, userId)
       .then((ratedStats: any) => {
         const subjectCards = this.groups.subjects.find(s => s._id === subjectId).cards;
         //get basic stats

@@ -8,10 +8,10 @@
 <div class="add-new-card">
     <form (ngSubmit)="newCardSubmit()">
             <label>Front:
-                <input type="text" name="front" [(ngModel)]="newCard.front" >
+                <input type="text" name="front" [(ngModel)]="newCard.front" placeholder="">
             </label>
             <label>Back:
-                <input type="text" name="back" [(ngModel)]="newCard.back" >
+                <input type="text" name="back" [(ngModel)]="newCard.back" placeholder="" >
             </label>
             <button>Add</button>
     </form>

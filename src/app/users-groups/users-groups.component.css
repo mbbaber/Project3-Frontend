@@ -1,6 +1,21 @@
+a.box:hover {
+    background-color: rgb(243, 250, 173);
+    border-color: rgba(64,64,64,1);
+}
+a.box {
+    margin-bottom: 1px;
+}
 h1 {
     font-size: 25px;
     padding: 30px;
+}
+.main-section {
+    background-color: whitesmoke;
+    height: 45em;
+}
+h2 {
+    font-size: 20px;
+    text-align: center;
 }
 
 h3 {
@@ -37,3 +52,13 @@ h3 {
 .control {
     width: 90vh;
 }
+
+.color4 {
+    background-color: rgb(152, 213, 164);
+  }
+  
+  .color4:hover { 
+    color: black;
+    background-color:  rgb(99, 189, 117);
+    
+  }

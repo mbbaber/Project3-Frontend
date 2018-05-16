@@ -14,11 +14,11 @@
     <div id="navbarExampleTransparentExample" class="navbar-menu">
       <div class="navbar-start">
         <a class="navbar-item" (click)="newSetShow()" *ngIf="userService.isLoggedIn">
-          Create new set
+          Create Subject
         </a>
         <div class="navbar-item has-dropdown is-hoverable" *ngIf="userService.isLoggedIn">
           <a class="navbar-link" >
-            Groups
+            Your Groups
           </a>
           <div class="navbar-dropdown is-boxed">
             
@@ -43,9 +43,7 @@
                     {{currentUser?.username}}
                   </a>
                   <div class="navbar-dropdown is-boxed is-right">
-                    <a class="navbar-item" href="#">
-                      One Thing
-                    </a>
+                    
                     <a class="navbar-item"  [routerLink]="['/my-account', userId]">
                     <!-- [routerLink]="['/user', userService.currentUser._id]"  -->
                       Your Account

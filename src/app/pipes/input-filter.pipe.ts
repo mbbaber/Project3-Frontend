@@ -15,7 +15,8 @@ export class InputFilterPipe implements PipeTransform {
     return items.filter(item=> 
 
       item.name.toLowerCase().includes(searchThing.toLowerCase()) ||
-      item.keywords.toLowerCase().includes(searchThing.toLowerCase())
+      (item.keywords 
+        && item.keywords.find(k => k.toLowerCase().includes(searchThing.toLowerCase())))
     );
   }
 

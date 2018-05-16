@@ -1,3 +1,31 @@
+a.box:hover {
+    background-color: rgb(243, 250, 173);
+    border-color: rgba(64,64,64,1);
+}
+a.box {
+    margin-bottom: 1px;
+}
+
+body {
+    background-color: whitesmoke;
+}
+p {
+    font-size: 2vh;
+}
+
+.card {
+    width: 85%;
+    height: auto;
+    padding: 5%;
+    background-color: whitesmoke;
+    }
+
+h2 {
+    font-size: 5vh;
+    text-align: center;
+    margin-bottom: 3vh;
+}
+
 h1 {
     font-size: 25px;
     padding: 30px;
@@ -37,3 +65,12 @@ h3 {
 .control {
     width: 90vh;
 }
+
+.color5 {
+    background-color: rgb(50, 152, 224);
+  }
+  
+  .color5:hover { 
+    color: black;
+    background-color: rgb(53, 130, 186);
+  }

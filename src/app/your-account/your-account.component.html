@@ -1,20 +1,20 @@
-<p class="menu-label">Hi, {{userData?.username}}!</p>
+<h1 class="center">Hi, {{userData?.username}}!</h1>
 <div class="columns">
-    <aside class="column is-2 is-fullheight section is-hidden-mobile">
-        <p class="menu-label is-hidden-touch">Navigation</p>
-        <ul class="menu-list">
+    <aside class="column is-2 is-fullheight section is-hidden-mobile grey">
+        <h1 class="is-hidden-touch center">Navigation</h1>
+        <ul class="">
             <li>
-                <a [routerLink]="['./groups']" class=""> Groups</a>
+                <a [routerLink]="['./groups']" class=""> <h4>Groups</h4></a>
             </li>
             <li>
-                <a [routerLink]="['./subjects']">Subjects </a>
+                <a [routerLink]="['./subjects']"><h4>Subjects </h4></a>
             </li>
             <li>
-                <a [routerLink]="['./details']" class="">My Account</a>
+                <a [routerLink]="['./details']" class=""><h4>My Account</h4></a>
             </li>
         </ul>
     </aside>
-    <div class="column is-10">
+    <div class="column is-10 off-white">
         <router-outlet></router-outlet>
     </div>
 </div>

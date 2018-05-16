@@ -4,20 +4,13 @@
 
     <div class="box search">
       <div class="field has-addons">
-        <div class="control">
-          <input class="input" type="text" placeholder="Search Group 1 Subjects" [(ngModel)]="search">
+          <input class="input" type="text" placeholder="Search Subjects" [(ngModel)]="search">
         </div>
-        <div class="control">
-          <a class="button is-info">
-            Search
-          </a>
-        </div>
-      </div>
     </div>
     <!-- add for each subject div below-->
 
   
-    <a *ngFor="let subject of groups?.subjects | inputFilter : search" [routerLink]="['/g', groups._id, 'subject', subject._id]" (mouseenter)="mouseEnter(subject)" (mouseleave)="mouseLeave()" class="box">
+    <a class="box"*ngFor="let subject of groups?.subjects | inputFilter : search" [routerLink]="['/g', groups._id, 'subject', subject._id]" (mouseenter)="mouseEnter(subject)" (mouseleave)="mouseLeave()" class="box">
       <article class="media">
         <div class="media-content">
           <div class="content">
@@ -58,11 +51,18 @@
 
     <!-- if admin show this below -->
     <div class="center admin" *ngIf="isAdmin">
-      <p>Admin can see this:</p>
-      <a class="button is-link" (click)="showAddSubForm()">Add Subject +</a>
-      <a class="button is-link" *ngIf="groups?.name != 'Private'" (click)="showAddUserForm()">Add User +</a>
+      <!-- <p>Admin can see this:</p> -->
+      <a class="button color4" (click)="showAddSubForm()">Add Subject</a>
+      <a class="button color4" *ngIf="groups?.name != 'Private'" (click)="showAddUserForm()">Add User</a>
+    </div>
+
+    <a class="button center big-marg color2" (click)="getStudyBuddy()">Get Study Buddy</a>
+    <div *ngIf="studyBuddy">
+      <h4 class="center">{{studyBuddy.username}}</h4>
     </div>
   </div>
+
+
 
   <div class="column stats-box">
     <div class="light-grey">

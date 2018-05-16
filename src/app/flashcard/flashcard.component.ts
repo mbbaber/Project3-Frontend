@@ -5,36 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, SubjectsService, Card } from '../api/subjects.service';
 import { Stat, StatsService } from '../api/stats.service';
 
-//Pie chart
-//import { Component } from '@angular/core';
-
-
 @Component({
   selector: 'app-flashcard',
   templateUrl: './flashcard.component.html',
   styleUrls: ['./flashcard.component.css'],
-  //Pie chart
-  //selector: ,
-  //templateUrl: './pie-chart-demo.html'
 })
-
-// //Pie chart
-// export class PieChartDemoComponent {
-//   // Pie
-//   public pieChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
-//   public pieChartData:number[] = [300, 500, 100];
-//   public pieChartType:string = 'pie';
- 
-//   // events
-//   public chartClicked(e:any):void {
-//     console.log(e);
-//   }
- 
-//   public chartHovered(e:any):void {
-//     console.log(e);
-//   }
-// }
-
 export class FlashcardComponent implements OnInit {
   // properties (aka fields) of the class
   subjectId: string;
@@ -89,7 +64,7 @@ export class FlashcardComponent implements OnInit {
   }
 
   getStatsList() {
-    return this.apiStats.getAllStatsForUser(this.subjectId)
+    return this.apiStats.getAllStatsForUser(this.groupId, this.subjectId)
       .then((result: Stat[]) => {
         this.stats = result;
         return this.stats;
@@ -201,6 +176,9 @@ export class FlashcardComponent implements OnInit {
           return a + b.rating;
         }, 0);
         var averageRating = (sumOfRatings / numberOfCards)
+
+        console.log(ratedStats)
+        console.log(numberOfCards)
 
         var percentageComplete = Math.floor(averageRating / 5 * 100)
         console.log(percentageComplete)

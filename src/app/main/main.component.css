@@ -1,9 +1,29 @@
-
+a.box:hover {
+    background-color: rgb(243, 250, 173);
+    border-color: rgba(64,64,64,1);
+}
+a.box {
+    margin-bottom: 1px;
+}
 h1 {
     font-size: 25px;
     padding: 30px;
 }
-
+.float-center {
+    float: center;
+}
+.big-marg {
+    margin-left: 42%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+p {
+    font-size: 15px;
+    color: black
+}
+h4 {
+    font-size: 3vh;
+}
 h2 {
     font-size: 20px;
     text-align: center;
@@ -39,7 +59,7 @@ h3, h2 {
 }
 
 .admin {
-    margin: 5%;
+    margin-top: 3%;
 }
 
 .stats-box {
@@ -50,6 +70,25 @@ h3, h2 {
     padding: 0;
 }
 
+.color4 {
+    background-color: rgb(152, 213, 164);
+  }
+  
+  .color4:hover { 
+    color: black;
+    background-color:  rgb(99, 189, 117);
+    
+  }
+
+  .color2 {
+    background-color: rgb(250, 156, 88);
+  }
+  
+  .color2:hover { 
+    color: black;
+    background-color: rgb(223, 135, 72);
+   
+  }
 .progress {
   width: 75%  
 }
