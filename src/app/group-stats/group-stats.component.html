@@ -1,0 +1,74 @@
+<div>
+    <h2>{{subject.name}}: {{statsBySubject[subject?._id]?.numberOfUsers}} Users</h2>
+
+    <div class="columns">
+        <div class="pie-pad column is-half" style="position: relative">
+            <app-donut-chart [percentage]="getAverageCompleteForSubject(subject._id)"></app-donut-chart>
+          <h2 class="pie-font" style="position: absolute; top: 26%; left: 38%">{{statsBySubject[subject?._id]?.avePercentageComplete | number: ".0" }}</h2>
+        </div>
+        <div class="column">
+          <div class=" padding-top complete-font">
+            <div class=""> Average %</div>
+            Complete</div>
+
+        </div>
+      </div>
+
+      <div class="columns">
+          <div class="column is-half">
+            <progress class="progress is-info is-large margin-left" value="{{statsBySubject[subject?._id]?.aveCardsViewed}}" max="{{statsBySubject[subject?._id]?.numberOfCards}}"></progress>
+          </div>
+          <div class="column">
+            <div class="left-align">
+              <div class="center">Average Cards Viewed:</div>
+              <div class="center">{{statsBySubject[subject?._id]?.aveCardsViewed | number: ".0"}}/{{statsBySubject[subject?._id]?.numberOfCards}}</div>
+            </div>
+          </div>
+        </div>
+        <br/>
+        
+        <div class="columns">
+            <div class="column is-half">
+              <progress class="progress is-info is-large margin-left" value="{{statsBySubject[subject?._id]?.aveNumberCardsMastered}}" max="{{statsBySubject[subject?._id]?.numberOfCards}}"></progress>
+            </div>
+
+            <div class="column">
+
+              <div class="left-align">
+                <div class="center">
+                  Average Cards Mastered:
+                </div>
+                <div class="center">
+                    {{statsBySubject[subject?._id]?.aveNumberCardsMastered | number: ".0"}} / {{statsBySubject[subject?._id]?.numberOfCards}}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+<!--- working -->
+    
+<div class="columns">
+    <div class="pie-pad2 column is-half">
+      <app-pie-chart [chartdata]="getDistributionForDonut(subject?._id)"></app-pie-chart>
+    </div>
+    <div class="column">
+      <div class="distrib-font padding-top">
+        <div class="rating-font">Rating</div>
+        Distribution</div>
+
+    </div>
+  </div>
+
+  <!-- cardRatingsDistribution -->
+
+
+
+
+    <p>Average Card Rating: {{statsBySubject[subject?._id]?.aveAverageRating | number: ".1"}} </p>
+
+
+  </div>
+
+

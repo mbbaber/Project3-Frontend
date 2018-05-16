@@ -1,0 +1,251 @@
+h1 {
+    font-size: 3.5vh;
+    padding: 0.5vh;
+    color: rgba(64,64,64,1)
+  }
+  
+  h2 {
+    font-size: 3vh;
+    text-align: center;
+    padding: 3%;
+    padding-top: 4%;
+  }
+  
+  .main-section {
+    background-color: whitesmoke;
+  }
+  
+  h3 {
+    color: rgba(40,40,40,1);
+  }
+  
+  .center {
+    text-align: center;
+  }
+  .light-grey {
+    background-color: rgba(64,64,64,1);
+  }
+  
+  .margin-left{
+    margin-left: 18%;
+  }
+  .left {
+    float: left;
+  }
+  
+  .right {
+    float: right;
+  }
+  
+  .little-pad-left {
+    padding-left: 5%;
+  }
+  .pad-left{
+    padding-left: 20%;
+  }
+  .box {
+    width: 75%;
+    margin: auto;
+  }
+  
+  .stats-box {
+    background-color: rgba(40,40,40,1);
+    height: 100vh;
+    color: white;
+    overflow: scroll;
+    padding: 0%;
+  }
+  
+  .progress {
+    width: 90%  
+  }
+  
+  /* Everything above here is shared with main component */
+  /* cards */ 
+  
+  .card {
+    /* border: 1px solid lightgrey; */
+    border-bottom: 3vh solid;
+    border-bottom-color:  rgba(64,64,64,1);;
+    float: left;
+    background: #fff;
+    padding: 2vh;
+  }
+  
+  .best-card {
+    /* border: 1px solid lightgrey; */
+    border-bottom: 3vh solid;
+    border-bottom-color: rgb(50, 152, 224);
+    float: left;
+    background: #fff;
+    padding: 2vh;
+  }
+  
+  .front-card {
+    width: 45%;
+    height: 52vh;
+    margin-left: 5%;
+    margin-top: 7vh;
+    margin-bottom: 5vh;
+  }
+  
+  .back-card {
+    width: 45%;
+    height: 52vh;
+    margin-right: 5%;
+    margin-top: 7vh;
+    margin-bottom: 5vh;
+    
+  }
+  .column {
+    padding-top: 0%;
+    padding-bottom: 0%;
+  }
+  .small-card {
+      width: 65%;
+      height: 10vh;
+  }
+  .pie-font{
+    font-size: 6.5vh;
+  }
+  .complete-font {
+    padding-left: 4vh;
+  }
+  
+  .distrib-font {
+    padding-left: 3vh;
+  }
+  
+  .rating-font {
+    padding-left: 2vh;
+  }
+  
+  
+  .percent-font {
+    font-size: 3.5vh;
+    padding-left: 2.5vh;
+  }
+  
+  .padding-top {
+    padding-top: 7vh; 
+  
+  }
+  
+  .left-align {
+    text-align: left
+  }
+  
+  .pie-pad {
+    width: 60%;
+    margin: 0 auto;
+    padding-top: 5%;
+    padding-bottom: 6%;
+  }
+  
+  .pie-pad2 {
+    width: 60%;
+    margin: 0 auto;
+    padding-top: 0%;
+    padding-bottom: 5%;
+  }
+  
+  .card-content {
+    padding: 0%;
+    padding-top: 5%;
+  }
+  
+  .e-size {
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 4vh;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    color: rgba(64,64,64,1);
+    box-shadow: 3px 3px 0px 0px rgba(0,0,0,0.1);
+    
+    width: 90%;
+  }
+  
+  p {
+    color: rgba(40,40,40,1);
+    margin-bottom: 0%;
+  }
+  
+  .margin-top10 {
+    margin-top: 10%
+  }
+  .swing-in-left-fwd {
+    -webkit-animation: swing-in-left-fwd 1.75s
+      cubic-bezier(0.175, 0.885, 0.32, 1.35) 0.25s both;
+    animation: swing-in-left-fwd 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.35) 0.25s
+      both;
+  }
+  
+  .white {
+    color: white;
+  }
+  .flash-button {
+    font-size: 5vh;
+    width: auto;
+    color: rgba(64,64,64,1);
+    padding: 0px;
+  }
+  
+  .color1 {
+    background-color: rgb(208, 56, 77);
+    height: 13vh;
+  }
+  
+  .color1:hover { 
+    color: black;
+    background-color: rgb(175, 47, 64);
+  }
+  
+  .color2 {
+    background-color: rgb(250, 156, 88);
+    height: 13vh;
+  }
+  
+  .color2:hover { 
+    color: black;
+    background-color: rgb(223, 135, 72);
+   
+  }
+  
+  .color3 {
+    background-color: rgb(243, 250, 173);
+    height: 13vh;
+  }
+  
+  .color3:hover { 
+    color: black;
+    background-color: rgb(217, 226, 118);
+    
+  }
+  
+  .color4 {
+    background-color: rgb(152, 213, 164);
+    height: 13vh;
+  }
+  
+  .color4:hover { 
+    color: black;
+    background-color:  rgb(99, 189, 117);
+    
+  }
+  
+  .color5 {
+    background-color: rgb(50, 152, 224);
+    height: 13vh;
+  }
+  
+  .color5:hover { 
+    color: black;
+    background-color: rgb(53, 130, 186);
+  }
+  
+  .smallfont {
+    font-size: 2.5vh;
+    margin-top: 0%;
+  }

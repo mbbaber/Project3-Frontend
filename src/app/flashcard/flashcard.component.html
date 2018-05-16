@@ -1,11 +1,12 @@
 <div class="columns">
-  <div class="main-section column is-three-quarters">
+  <div class="main-section column is-two-thirds">
     <!-- loop through each card -->
+
     <div class="card front-card left">
       <div class="card-content">
-        <div class="content">
-          <h3 class="center">{{currentCard?.front}}</h3>
-          <a (click)="flipBackVisibility()" class="flash-button right">
+        <div class="content columns">
+          <h3 class="center column is-four-fifths">{{currentCard?.front}}</h3>
+          <a (click)="flipBackVisibility()" class="flash-button column">
             <b>➤</b>
           </a>
         </div>
@@ -14,10 +15,10 @@
     </div>
 
     <div *ngIf="classState.showForm">
-      <div class="card back-card left swing-in-left-fwd">
+      <div class="card back-card left">
         <div class="card-content">
-          <div class="content">
-            <h3 class="center">{{currentCard?.back}}</h3>
+          <div class="content columns">
+            <h3 class="center column is-four-fifths">{{currentCard?.back}}</h3>
           </div>
         </div>
       </div>
@@ -27,77 +28,123 @@
 
     <div class="clear center">
       <div *ngIf="classState.showForm">
-        <div class="answer-box">
-          How well did you know the answer?
+
+        <div class="clear center">
+          <h1>How well did you know the answer?</h1>
         </div>
-        <div class="center">
-          <span class="e-size left center">
-            <a (click)="rateCardandUpdate(1)">😫</a>
-            <a (click)="rateCardandUpdate(2)">☹️</a>
-            <a (click)="rateCardandUpdate(3)">🤔</a>
-            <a (click)="rateCardandUpdate(4)">😊</a>
-            <a (click)="rateCardandUpdate(5)">😎</a>
-          </span>
+        <div class="e-size left center columns">
+          <a class="column color1" (click)="rateCardandUpdate(1)">
+            <p class="margin-top10">1</p>
+            <p class="smallfont">Not at all</p>
+          </a>
+          <a class="column color2" (click)="rateCardandUpdate(2)">
+            <p class="margin-top10">2</p>
+          </a>
+          <a class="column color3" (click)="rateCardandUpdate(3)">
+            <p class="margin-top10">3</p>
+          </a>
+          <a class="column color4" (click)="rateCardandUpdate(4)">
+            <p class="margin-top10">4</p>
+          </a>
+          <a class="column color5" (click)="rateCardandUpdate(5)">
+            <p class="margin-top10">5</p>
+            <p class="smallfont">Perfectly</p>
+          </a>
         </div>
+
       </div>
     </div>
+
   </div>
+
+
   <div class="column stats-box">
-    <h3>My Statistics: Subject 1</h3>
+
+    <div class="light-grey">
+      <span>
+        <h2 class="center white">My Statistics: Subject 1</h2>
+      </span>
+    </div>
 
     <div *ngIf="individualStats">
 
-        <div>Percentage Complete: {{individualStats?.percentageComplete | number:'.0'}}%
-        <progress class="progress" value="{{individualStats?.percentageComplete | number:'.0'}}" max="100"></progress>
-        <!-- {{individualStats?.percentageComplete | number:'.0'}}% -->
-        </div>
 
-        <div>Cards Viewed: {{individualStats?.cardsViewed}}/{{individualStats?.numberOfCards}}
-        <progress class="progress" value="{{individualStats?.cardsViewed}}" max="{{individualStats?.numberOfCards}}"></progress>
+      <div class="columns">
+        <div class="pie-pad column is-half" style="position: relative">
+          <app-donut-chart [percentage]="getAverageComplete()"></app-donut-chart>
+          <h2 class="pie-font" style="position: absolute; top: 26%; left: 38%">{{individualStats?.percentageComplete | number:'.0'}}</h2>
         </div>
-
-    
-        <div>Cards Mastered: {{individualStats?.numberCardsMastered}}/{{individualStats?.numberOfCards}}
-        <progress class="progress is-link" value="{{individualStats?.numberCardsMastered}}" max="{{individualStats?.numberOfCards}}"></progress>
-        </div>
-
-      <div>Card Distribution:
-          1: <progress class="progress is-danger" value="{{individualStats?.cardRatingsDistribution['1']}}" max="{{individualStats?.numberOfCards}}"></progress>
-          2: <progress class="progress is-warning" value="{{individualStats?.cardRatingsDistribution['2']}}" max="{{individualStats?.numberOfCards}}"></progress>
-          3: <progress class="progress is-success" value="{{individualStats?.cardRatingsDistribution['3']}}" max="{{individualStats?.numberOfCards}}"></progress>
-          4: <progress class="progress is-info" value="{{individualStats?.cardRatingsDistribution['4']}}" max="{{individualStats?.numberOfCards}}"></progress>
-          5: <progress class="progress is-link" value="{{individualStats?.cardRatingsDistribution['5']}}" max="{{individualStats?.numberOfCards}}"></progress>
+        <div class="column">
+          <div class=" padding-top complete-font">
+            <div class="percent-font">%</div>
+            Complete</div>
 
         </div>
+      </div>
 
-        <!-- <div style="display: block">
-            <canvas baseChart
-                    [data]="pieChartData"
-                    [labels]="pieChartLabels"
-                    [chartType]="pieChartType"
-                    (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
-          </div> -->
-        <div class="columns">
-          <div class="column">
-            <p>Best card:</p>
-            <div class="card small-card">
-              <p class="center">{{individualStats?.bestCard.front}}</p>
+
+
+      <div class="columns">
+        <div class="column is-half">
+          <progress class="progress is-info is-large margin-left" value="{{individualStats?.cardsViewed}}" max="{{individualStats?.numberOfCards}}"></progress>
+        </div>
+        <div class="column">
+          <div class="left-align">
+            <div class="center">Cards Viewed:</div>
+            <div class="center">{{individualStats?.cardsViewed}}/{{individualStats?.numberOfCards}}</div>
+          </div>
+        </div>
+      </div>
+      <br/>
+
+      <div class="columns">
+        <div class="column is-half">
+          <progress class="progress is-info is-large margin-left" value="{{individualStats?.numberCardsMastered}}" max="{{individualStats?.numberOfCards}}"></progress>
+        </div>
+        <div class="column">
+          <div class="left-align">
+            <div class="center">Cards Mastered:</div>
+            <div class="center">
+
+              {{individualStats?.numberCardsMastered}}/{{individualStats?.numberOfCards}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="pie-pad2 column is-half">
+          <app-pie-chart [chartdata]="getDistributionForDonut()"></app-pie-chart>
+        </div>
+        <div class="column">
+          <div class="distrib-font padding-top">
+            <div class="rating-font">Rating</div>
+            Distribution</div>
+
+        </div>
+      </div>
+
+
+
+
+
+
+      <div class="columns">
+        <div class="column center complete-font"> Best card:
+          <div class="best-card small-card margin-left">
+            <p class="center">{{individualStats?.bestCard.front}}</p>
           </div>
         </div>
 
-        <div class="column">Worst Card:
-            <div class="card small-card">
-              <p class="center">{{individualStats?.worstCard.front}}</p>
+        <div class="column center "> Worst Card:
+          <div class="card small-card margin-left">
+            <p class="center">{{individualStats?.worstCard.front}}</p>
           </div>
         </div>
-        </div>
-          
+      </div>
 
-
-        
 
     </div>
-    
+
   </div>
+
 </div>

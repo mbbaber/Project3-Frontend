@@ -1,5 +1,5 @@
 <div class="columns">
-  <div class="main-section column is-three-quarters">
+  <div class="main-section column is-two-thirds">
     <h1 class="center">{{groups?.name}}: Subjects</h1>
 
     <div class="box search">
@@ -17,7 +17,7 @@
     <!-- add for each subject div below-->
 
 
-    <a *ngFor="let subject of groups?.subjects | inputFilter : search" [routerLink]="['/g', groups._id, 'subject', subject._id]" class="box">
+    <a *ngFor="let subject of groups?.subjects | inputFilter : search" [routerLink]="['/g', groups._id, 'subject', subject._id]" (mouseenter)="mouseEnter(subject)" (mouseleave)="mouseLeave()" class="box">
       <article class="media">
         <div class="media-content">
           <div class="content">
@@ -30,7 +30,7 @@
             </div>
             <div class="right">
               <p>{{statsBySubject[subject?._id]?.numberOfCards}} cards</p>
-              <p>{{individualStats?.percentageComplete | number:'.0'}}% Complete</p>
+              <p>{{currentUserIndividualStats[subject?._id]?.percentageComplete | number:'.0'}}% Complete</p>
               <!-- <p>{{statsBySubject[subject?._id]?.avePercentageComplete | number: ".0" }}% Complete</p> -->
             </div>
 
@@ -65,20 +65,12 @@
   </div>
 
   <div class="column stats-box">
-    <div>
-      <h3 class="center">{{groups?.name}} Statistics</h3>
+    <div class="light-grey">
+      <span><h1 class="center">{{groups?.name}} Statistics</h1></span>
     </div>
 
-    <div *ngFor="let subject of groups?.subjects">
-        <h3>{{subject.name}}</h3>
-<!-- {{statsBySubject[subject?._id]?.avePercentageComplete}}" -->
-        <app-donut-chart [percentage]="getAverageCompleteForSubject(subject._id)"></app-donut-chart>
-        <p>{{statsBySubject[subject?._id]?.avePercentageComplete | number: ".0" }}% Complete </p>
-        <p>Average Card Rating: {{statsBySubject[subject?._id]?.aveAverageRating | number: ".1"}} </p>
-        <p>Average Cards Viewed: {{statsBySubject[subject?._id]?.aveCardsViewed | number: ".0"}} </p>
-        <p>Average Cards Mastered: {{statsBySubject[subject?._id]?.aveNumberCardsMastered | number: ".0"}}  </p>
-
-        cardRatingsDistribution
+    <div *ngIf="hoveredSubject">
+      <app-group-stats [subject]="hoveredSubject" [statsBySubject]="statsBySubject"></app-group-stats>
     </div> 
 
   </div>

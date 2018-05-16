@@ -99,6 +99,31 @@ export class FlashcardComponent implements OnInit {
 
   // DETERMINE CARD ORDER
 
+  getAverageComplete(){
+    return this.individualStats.percentageComplete; 
+  }
+
+  getDistributionForDonut(){
+    var distributionForDonut = [];
+    var sumOfCardRatings = this.individualStats.cardRatingsDistribution['1']
+    + this.individualStats.cardRatingsDistribution['2']
+    + this.individualStats.cardRatingsDistribution['3']
+    + this.individualStats.cardRatingsDistribution['4']
+    + this.individualStats.cardRatingsDistribution['5']
+
+    var arrayOfRatings = [this.individualStats.cardRatingsDistribution['1'], 
+    this.individualStats.cardRatingsDistribution['2'],
+    this.individualStats.cardRatingsDistribution['3'],
+    this.individualStats.cardRatingsDistribution['4'],
+    this.individualStats.cardRatingsDistribution['5']
+  ]
+    arrayOfRatings.forEach((one) => {
+      var percentage = (one / sumOfCardRatings) * 100
+      distributionForDonut.push(percentage)
+    }); 
+    return distributionForDonut;
+  }
+
   getNextCard() {
     this.flipBackVisibility();
 

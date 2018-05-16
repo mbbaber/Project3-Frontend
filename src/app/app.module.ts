@@ -24,6 +24,8 @@ import { CreateNewSubjectComponent } from './create-new-subject/create-new-subje
 import { UserPipePipe } from './pipes/user-pipe.pipe';
 import { ChartsModule } from 'ng2-charts';
 import { DonutChartComponent } from './donut-chart/donut-chart.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { GroupStatsComponent } from './group-stats/group-stats.component';
 
 
 
@@ -43,7 +45,9 @@ import { DonutChartComponent } from './donut-chart/donut-chart.component';
     UserAccountComponent,
     CreateNewSubjectComponent,
     UserPipePipe,
-    DonutChartComponent
+    DonutChartComponent,
+    PieChartComponent,
+    GroupStatsComponent
   ],
   imports: [
     BrowserModule,

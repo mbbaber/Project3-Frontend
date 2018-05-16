@@ -21,6 +21,10 @@ export class MainComponent implements OnInit {
   subjects: any;
   isAdmin: boolean;
   usersArray: Array<string> = [];
+  currentUserIndividualStats = {};
+
+
+  hoveredSubject: any;
 
   statsBySubject = {};
 
@@ -208,16 +212,18 @@ export class MainComponent implements OnInit {
   //this function populates the stats for the current group
   getGroupStatsList() {
     var usersArray = this.groups.users.map(one => one._id); // extract the user ids
-    usersArray.push(this.groups.admin);
+    usersArray.push(this.groups.admin); 
 
     //Compute stats for each subject across all users in the group
     this.groups.subjects.forEach(subject => {
 
       this.computeStatsAcrossUsers(subject._id, usersArray)
         .then((result: any) => {
-          console.log("StatsBySubject: ")
-          console.log(result)
-          this.statsBySubject[subject._id] = result
+          console.log(subject._id, usersArray)
+          console.log('Bbbbbbbbbb', result)
+          //this.statsBySubject[subject._id] = result; 
+          this.statsBySubject[result.subjectId] = result
+
         })
     })
 
@@ -252,13 +258,25 @@ export class MainComponent implements OnInit {
       })
   }
 
+
   computeStatsAcrossUsers(subjectId: string, users: string[]) {
     return Promise.all(
+
       users.map(userId => this.getIndividualStats(subjectId, userId))
     ).then((individualStatsByUser: any) => {
 
-      const numberOfUsers = this.groups.users.length
-      var arr = individualStatsByUser.filter(s => s.cardsViewed > 0) // ?????
+      
+      this.userService.checkLogin()
+        .then((result) => {
+          this.currentUserIndividualStats[subjectId] = individualStatsByUser.find(s => s.userId == result.userInfo._id)
+          console.log("HERE!!!!!!!!!!!!!!", result)
+          console.log(individualStatsByUser)
+        })
+     
+
+      const numberOfUsers = users.length
+
+      var arr = individualStatsByUser.filter(s => s.cardsViewed > 0) 
 
       var numberOfCards = this.groups.subjects.find(s => s._id === subjectId).cards.length
 
@@ -277,6 +295,7 @@ export class MainComponent implements OnInit {
       })
 
       return {
+        numberOfUsers,
         subjectId,
         aveAverageRating,
         avePercentageComplete,
@@ -302,7 +321,6 @@ export class MainComponent implements OnInit {
     return this.getStatsListForUser(subjectId, userId)
       .then((ratedStats: any) => {
         const subjectCards = this.groups.subjects.find(s => s._id === this.subjectId).cards;
-
         //get basic stats
         var numberOfCards = subjectCards.length
 
@@ -321,9 +339,6 @@ export class MainComponent implements OnInit {
             worstCard: null
           }
         }
-
-        console.log('rated stats', ratedStats)
-
 
         var sumOfRatings = ratedStats.reduce(function (a, b) {
           return a + b.rating;
@@ -398,5 +413,13 @@ export class MainComponent implements OnInit {
         console.log(err)
       })
   };
+
+  mouseEnter(subject) {
+    this.hoveredSubject = subject;
+  }
+
+  mouseLeave(subject) {
+    this.hoveredSubject = null;
+  }
 
 }
