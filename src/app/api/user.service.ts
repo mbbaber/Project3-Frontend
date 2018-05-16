@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/operator/toPromise';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
   isLoggedIn: boolean;
   currentUser: User;
   constructor(
-    public toBackEnd: HttpClient
+    public toBackEnd: HttpClient,
+    public router: Router
   ) { }
 
   postSignUp(userCred: SignUpCredentials){

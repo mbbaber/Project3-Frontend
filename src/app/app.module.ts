@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MainComponent } from './main/main.component';
-import { UserService } from './services/user.service';
+import { UserService } from './api/user.service';
 
 import { FlashcardComponent } from './flashcard/flashcard.component';
 import { YourAccountComponent } from './your-account/your-account.component';
@@ -26,6 +26,9 @@ import { ChartsModule } from 'ng2-charts';
 import { DonutChartComponent } from './donut-chart/donut-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { GroupStatsComponent } from './group-stats/group-stats.component';
+import { AuthenticationService } from './api/authentication.service';
+import { FormsStateService } from './api/forms-state.service';
+import { AdminAuthenticateService } from './api/admin-authenticate.service';
 
 
 
@@ -56,7 +59,14 @@ import { GroupStatsComponent } from './group-stats/group-stats.component';
     FormsModule,
     ChartsModule
   ],
-  providers: [GroupsService, SubjectsService, UserService, StatsService],
+  providers: [
+    GroupsService, 
+    SubjectsService, 
+    UserService, 
+    StatsService, 
+    AuthenticationService,
+    FormsStateService,
+    AdminAuthenticateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

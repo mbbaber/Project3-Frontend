@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import { Subject, Card } from './subjects.service';
 import { Group } from './groups.service';
-import { User } from '../services/user.service';
+import { User } from '../api/user.service';
 
 // Serive allows us to get additional data or do operations outside of the frontend
 // i.e. sending a request to mongo to get data from DB

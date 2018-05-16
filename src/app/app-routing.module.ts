@@ -9,25 +9,33 @@ import { YourGroupsComponent } from './your-account/your-groups/your-groups.comp
 import { YourSubjectsComponent } from './your-account/your-subjects/your-subjects.component';
 import { UserAccountComponent } from './your-account/user-account/user-account.component';
 import { CreateNewSubjectComponent } from './create-new-subject/create-new-subject.component';
+import { AuthenticationService } from './api/authentication.service';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   //main component = user's main page (groups is in drop down menu)
-
-  //{path: 'main/:userId', component: MainComponent},
-  { path: 'group/:groupId', component: MainComponent},
+  { path: 'group/:groupId', 
+    component: MainComponent,
+    canActivate: [AuthenticationService]},
   { path: 'my-account/:userId', 
     component: YourAccountComponent,
+    canActivate: [AuthenticationService],
     children: [
-      {path: 'groups', component: YourGroupsComponent},
-      {path: 'details', component: UserAccountComponent},
-      {path: 'subjects', component: YourSubjectsComponent}
+      {path: 'groups', component: YourGroupsComponent, canActivate: [AuthenticationService]},
+      {path: 'details', component: UserAccountComponent, canActivate: [AuthenticationService]},
+      {path: 'subjects', component: YourSubjectsComponent, canActivate: [AuthenticationService]}
     ]},
-  { path: 'main', component: UsersGroupsComponent },
-  { path: 'new-subject/:subId', component: CreateNewSubjectComponent },
+  { path: 'main', 
+    component: UsersGroupsComponent, 
+    canActivate: [AuthenticationService] },
+  { path: 'new-subject/:subId', 
+    component: CreateNewSubjectComponent, 
+    canActivate: [AuthenticationService] },
 
 
-  {path: 'g/:groupId/subject/:subjectId', component: FlashcardComponent},
+  {path: 'g/:groupId/subject/:subjectId', 
+    component: FlashcardComponent, 
+    canActivate: [AuthenticationService]},
 
   //Error Component
   // {path: '**', component: HomepageComponent },

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { GroupsService, Groups, BeginningGroup } from './api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService, SignUpCredentials, User } from './services/user.service';
 import { NewSubject, SubjectsService } from './api/subjects.service';
+import { User, SignUpCredentials, UserService } from './api/user.service';
+import { FormsStateService } from './api/forms-state.service';
 
 
 @Component({
@@ -40,17 +41,11 @@ export class AppComponent {
     private resTruc: Router,
     public userService: UserService,
     public response: Router,
-    public apiSub: SubjectsService
+    public apiSub: SubjectsService,
+    public popUps: FormsStateService
   ){ }
 
   ngOnInit() {
-    // this.apiGroup.getGroupsList()
-    //   .then((result: Groups[]) => {
-    //     this.groups = result;
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   }) //this gets all of the groups from the DB
     
     this.userService.checkLogin()
     .then((result)=>{

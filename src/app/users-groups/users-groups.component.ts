@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, User } from '../services/user.service';
+import { UserService, User } from '../api/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Groups, GroupsService } from '../api/groups.service';

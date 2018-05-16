@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GroupsService, Group } from '../api/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, SubjectsService, Card, chooseSub, } from '../api/subjects.service';
-import { UserService, User } from '../services/user.service';
+import { UserService, User } from '../api/user.service';
 import { StatsService, Stat, GroupStats } from '../api/stats.service';
 
 @Component({
