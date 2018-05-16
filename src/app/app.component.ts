@@ -11,6 +11,12 @@ import { NewSubject, SubjectsService } from './api/subjects.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  // for error messages
+  isErrMsg: boolean = false;
+  displayMsg: string;
+
+
   groupsId: string;
   groups: Groups[];
 
@@ -108,6 +114,10 @@ export class AppComponent {
     })
     .catch((err)=>{
       console.log('signup error');
+      //changed this for printing error messages
+      console.log(err.error.message)
+      this.isErrMsg = true;
+      this.displayMsg = err.error.message;
       console.log(err);
     })
   }
@@ -124,6 +134,9 @@ export class AppComponent {
     })
     .catch((err)=>{
       console.log('login error');
+      console.log(err.error.message)
+      this.isErrMsg = true;
+      this.displayMsg = err.error.message;
       console.log(err);
     })
   }

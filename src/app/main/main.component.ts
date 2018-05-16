@@ -220,7 +220,7 @@ export class MainComponent implements OnInit {
       this.computeStatsAcrossUsers(subject._id, usersArray)
         .then((result: any) => {
           console.log(subject._id, usersArray)
-          console.log('Bbbbbbbbbb', result)
+          //console.log('Bbbbbbbbbb', result)
           //this.statsBySubject[subject._id] = result; 
           this.statsBySubject[result.subjectId] = result
 
@@ -281,7 +281,7 @@ export class MainComponent implements OnInit {
       var numberOfCards = this.groups.subjects.find(s => s._id === subjectId).cards.length
 
       var aveAverageRating = (arr.reduce(function (a, b) { return a + b.averageRating }, 0)) / numberOfUsers;
-      var avePercentageComplete = (arr.reduce(function (a, b) { return a + b.percentageComplete }, 0)) / numberOfUsers;
+      var avePercentageComplete = Math.floor((arr.reduce(function (a, b) { return a + b.percentageComplete }, 0)) / numberOfUsers);
       var aveCardsViewed = (arr.reduce(function (a, b) { return a + b.cardsViewed }, 0)) / numberOfUsers;
       var aveNumberCardsMastered = (arr.reduce(function (a, b) { return a + b.numberCardsMastered }, 0)) / numberOfUsers;
 

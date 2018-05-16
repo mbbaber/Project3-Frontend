@@ -104,6 +104,7 @@
         <label>Password:
           <input type="password" name="password" [(ngModel)]="formCredentials.password" >
         </label>
+        <div *ngIf="isErrMsg">{{displayMsg}}</div>
         <button>Log In</button>
       </form>
     </div>
@@ -123,6 +124,7 @@
         <label>E-mail:
           <input type="email" name="email" [(ngModel)]="formCredentials.email">
         </label>
+        <div *ngIf="isErrMsg">{{displayMsg}}</div>
         <button>Sign Up</button>
       </form>
     </div>
