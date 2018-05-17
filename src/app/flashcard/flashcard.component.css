@@ -133,7 +133,7 @@ h3 {
 /* Everything above here is shared with main component */
 /* cards */ 
 
-.card {
+.big-card {
   /* border: 1px solid lightgrey; */
   border-bottom: 3vh solid;
   border-bottom-color:  rgba(64,64,64,1);;
@@ -144,8 +144,6 @@ h3 {
 
 .best-card {
   /* border: 1px solid lightgrey; */
-  border-bottom: 3vh solid;
-  border-bottom-color: rgb(50, 152, 224);
   float: left;
   background: #fff;
   padding: 2vh;
