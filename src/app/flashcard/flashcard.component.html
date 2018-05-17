@@ -9,8 +9,8 @@
 
     <div class="card front-card left" (click)="flipBackVisibility()">
       <div class="card-content ">
-        <div class="content columns ">
-          <h3 class="center column is-four-fifths ">{{currentCard?.front}}</h3>
+        <div class="content ">
+          <h3 class="center">{{currentCard?.front}}</h3>
         </div>
       </div>
 
@@ -19,8 +19,8 @@
     <div *ngIf="classState.showForm ">
       <div class="card back-card left scale-in-hor-left ">
         <div class="card-content ">
-          <div class="content columns ">
-            <h3 class="center column is-four-fifths ">{{currentCard?.back}}</h3>
+          <div class="content ">
+            <h3 class="center ">{{currentCard?.back}}</h3>
           </div>
         </div>
       </div>
@@ -141,7 +141,7 @@
         </div>
 
         <div class="column center "> Worst Card:
-          <div class="card small-card margin-left ">
+          <div class="best-card small-card margin-left ">
             <p class="center ">{{individualStats?.worstCard.front}}</p>
           </div>
         </div>

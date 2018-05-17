@@ -29,7 +29,7 @@ export class MainComponent implements OnInit {
 
   statsBySubject = {};
 
-  studyBuddy: any;
+  studyBuddy: any = {};
 
   // arrayOfUsersInGroup = groupStats.users
 
@@ -374,8 +374,8 @@ export class MainComponent implements OnInit {
 
       var aveAverageRating = (arr.reduce(function (a, b) { return a + b.averageRating }, 0)) / numberOfUsers;
       var avePercentageComplete = Math.floor((arr.reduce(function (a, b) { return a + b.percentageComplete }, 0)) / numberOfUsers);
-      var aveCardsViewed = (arr.reduce(function (a, b) { return a + b.cardsViewed }, 0)) / numberOfUsers;
-      var aveNumberCardsMastered = (arr.reduce(function (a, b) { return a + b.numberCardsMastered }, 0)) / numberOfUsers;
+      var aveCardsViewed = Math.floor((arr.reduce(function (a, b) { return a + b.cardsViewed }, 0))) / numberOfUsers;
+      var aveNumberCardsMastered = (Math.floor(arr.reduce(function (a, b) { return a + b.numberCardsMastered }, 0))) / numberOfUsers;
 
       var cardRatingsDistribution = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
       arr.forEach((stat) => {

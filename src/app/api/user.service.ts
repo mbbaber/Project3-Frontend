@@ -16,7 +16,7 @@ export class UserService {
 
   postSignUp(userCred: SignUpCredentials){
     return this.toBackEnd
-    .post(`${environment.backUrl}/auth/signup`,
+    .post(`${environment.backUrl}/a/auth/signup`,
     userCred,
     { withCredentials: true }
   )
@@ -29,7 +29,7 @@ export class UserService {
 
   postLogIn(userCred: LogInCredentials){
     return this.toBackEnd
-    .post(`${environment.backUrl}/auth/login`,
+    .post(`${environment.backUrl}/a/auth/login`,
       userCred,
     {withCredentials: true})
     .toPromise()
@@ -43,7 +43,7 @@ export class UserService {
 
   checkLogin(){
     return this.toBackEnd
-    .get(`${environment.backUrl}/auth/checklogin`, {withCredentials: true})
+    .get(`${environment.backUrl}/a/auth/checklogin`, {withCredentials: true})
     .toPromise()
     .then((apiResponse: any)=>{
       if(apiResponse.userInfo){
@@ -60,7 +60,7 @@ export class UserService {
 
   getLogOut(){
     return this.toBackEnd
-    .get(`${environment.backUrl}/auth/logout`, {withCredentials: true})
+    .get(`${environment.backUrl}/a/auth/logout`, {withCredentials: true})
     .toPromise()
     .then((apiResponse: any)=>{
       this.isLoggedIn = false;
@@ -72,7 +72,7 @@ export class UserService {
 
   getDataUser(userId){
     return this.toBackEnd
-    .get(`${environment.backUrl}/auth/user/${userId}`)
+    .get(`${environment.backUrl}/a/auth/user/${userId}`)
     .toPromise()
     .then((apiResponse: any)=>{
       this.currentUser = apiResponse.userInfo;
@@ -82,7 +82,7 @@ export class UserService {
 
   getAllUsersWhoBelong(groupId){
     return this.toBackEnd
-    .get(`${environment.backUrl}/auth/all-users-who-belong/${groupId}`)
+    .get(`${environment.backUrl}/a/auth/all-users-who-belong/${groupId}`)
     .toPromise()
     .then((apiResponse: any)=>{
       console.log('belong', apiResponse)
@@ -92,7 +92,7 @@ export class UserService {
 
   getAllUsersWhoDontBelong(groupId){
     return this.toBackEnd
-    .get(`${environment.backUrl}/auth/all-users-who-dont-belong/${groupId}`)
+    .get(`${environment.backUrl}/a/auth/all-users-who-dont-belong/${groupId}`)
     .toPromise()
     .then((apiResponse: any)=>{
       console.log('dont belong', apiResponse)

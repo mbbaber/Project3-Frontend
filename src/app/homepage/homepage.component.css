@@ -2,25 +2,98 @@
   position: relative;
   z-index: 1;
 } */
+@-webkit-keyframes flip-in-ver-left {
+  0% {
+    -webkit-transform: rotateY(80deg);
+            transform: rotateY(80deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+    opacity: 1;
+  }
+}
+@keyframes flip-in-ver-left {
+  0% {
+    -webkit-transform: rotateY(80deg);
+            transform: rotateY(80deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+    opacity: 1;
+  }
+}
 
- 
- .myDiv .background {
+
+.flip-in-ver-left {
+	-webkit-animation: flip-in-ver-left 0.75s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s both;
+	        animation: flip-in-ver-left 0.75s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s both;
+}
+
+ .box-grad1 {
+  background: linear-gradient(rgb(223, 213, 214), rgb(208, 56, 77),rgb(175, 47, 64));
+ }
+
+ .box-grad2 {
+  background: linear-gradient(rgb(240, 221, 200), rgb(250, 156, 88), rgb(223, 135, 72));
+ }
+
+ .box-grad3 {
+  background: linear-gradient(rgb(233, 238, 190),rgb(243, 250, 173), rgb(217, 226, 118));
+ }
+
+ .box-grad4 {
+  background: linear-gradient(rgb(214, 245, 212),  rgb(152, 213, 164), rgb(99, 189, 117));
+ }
+
+ .box-grad5 {
+  background: linear-gradient(rgb(193, 212, 240), rgb(50, 152, 224), rgb(53, 130, 186));
+ }
+
+.background {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100vw;
+    height: 70vh;
+}
+
+
+ .myDiv {
     background-image: url("../../assets/main-bg.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     width: 100vw;
     height: 70vh;
-    /* opacity: 0.65; */
+    /* opacity: 0.45; */
+    
   } 
+
+
+
+
+
+  .front-card {
+    width: 30%;
+    height: 40vh;
+    margin-right: 7%;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+  }
 
   h1 {
     font-size: 7vh;
-    color: black;
+    color: rgba(40,40,40,1);
+    margin-left: 10%;
+    margin-top: 7vh;
+    margin-bottom: 0%;
   }
   h2 {
     font-size: 5vh;
-    color: black
+    color: rgba(64,64,64,1);
+    margin-left: 10%;
   }
  p {
    font-size: 3vh;

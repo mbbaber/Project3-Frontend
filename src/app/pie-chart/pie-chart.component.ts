@@ -15,7 +15,7 @@ export class PieChartComponent {
     {
       backgroundColor: ["rgb(208, 56, 77)", "rgb(250, 156, 88)", "rgb(243, 250, 173)", "rgb(152, 213, 164)", "rgb(50, 152, 224)"],
       borderColor: ["rgb(208, 56, 77)", "rgb(250, 156, 88)", "rgb(243, 250, 173)", "rgb(152, 213, 164)", "rgb(50, 152, 224)"],
-      //borderWidth: [2, 0],
+      borderWidth: [0, 0, 0, 0, 0],
 
     }];
 
