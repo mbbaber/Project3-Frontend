@@ -56,8 +56,8 @@
 
 
 .fade-in {
-	-webkit-animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1s both;
-	        animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1s both;
+	-webkit-animation: fade-in 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.5s both;
+	        animation: fade-in 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.5s both;
 }
 
 
@@ -172,6 +172,11 @@ h3 {
 .small-card {
     width: 65%;
     height: 10vh;
+}
+
+.small-card:hover {
+  width: 80%;
+  height: 12vh;
 }
 .pie-font{
   font-size: 6.5vh;

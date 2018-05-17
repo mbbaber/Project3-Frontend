@@ -29,7 +29,7 @@ export class MainComponent implements OnInit {
 
   statsBySubject = {};
 
-  studyBuddy: any;
+  studyBuddy: any = {};
 
   // arrayOfUsersInGroup = groupStats.users
 
