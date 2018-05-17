@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/operator/toPromise';
 import { toPromise } from 'rxjs/operator/toPromise';
-import { AdminAuthenticateService } from './admin-authenticate.service';
 import {environment} from '../../environments/environment';
 
 const BACKEND= environment.backUrl;

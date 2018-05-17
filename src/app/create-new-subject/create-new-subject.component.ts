@@ -18,6 +18,7 @@ export class CreateNewSubjectComponent implements OnInit {
 
   newCard: NewCard = new NewCard();
 
+
   constructor(
     public subService: SubjectsService,
     public actRoute: ActivatedRoute,
@@ -59,6 +60,9 @@ export class CreateNewSubjectComponent implements OnInit {
       this.subjectData = result;
       this.subjectCards = result.cards;
       this.subjectKeywords = result.keywords;
+      this.newCard.front = "";
+      this.newCard.back = "";
+
     })
     .catch((err)=>{
       console.log(err, 'error adding a new card')

@@ -31,7 +31,7 @@ const routes: Routes = [
     canActivate: [AuthenticationService] },
   { path: 'new-subject/:subId', 
     component: CreateNewSubjectComponent, 
-    canActivate: [AdminAuthenticateService] },
+    canActivate: [AuthenticationService] },
 
 
   {path: 'g/:groupId/subject/:subjectId', 
