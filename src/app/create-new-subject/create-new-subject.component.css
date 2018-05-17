@@ -25,3 +25,11 @@
   .center {
       text-align:center;
   }
+
+  h2 {
+      font-size: 3vh;
+  }
+
+  p {
+      font-size: 2vh;
+  }
