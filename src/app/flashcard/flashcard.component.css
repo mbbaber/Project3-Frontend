@@ -81,6 +81,8 @@ h2 {
   padding-top: 4%;
 }
 
+
+
 .main-section {
   background-color: whitesmoke;
 }
@@ -136,12 +138,17 @@ h3 {
 .big-card {
   /* border: 1px solid lightgrey; */
   border-bottom: 3vh solid;
-  border-bottom-color:  rgba(64,64,64,1);;
+  border-bottom-color:  rgba(64,64,64,1);
   float: left;
   background: #fff;
   padding: 2vh;
 }
-
+.pad-card {
+  padding-top: 15%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
+}
 .best-card {
   /* border: 1px solid lightgrey; */
   float: left;

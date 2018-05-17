@@ -29,8 +29,8 @@
 
 
 .flip-in-ver-left {
-	-webkit-animation: flip-in-ver-left 0.75s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s both;
-	        animation: flip-in-ver-left 0.75s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s both;
+	-webkit-animation: flip-in-ver-left 0.75s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.25s both;
+	        animation: flip-in-ver-left 0.75s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.25s both;
 }
 
  .box-grad1 {
@@ -38,28 +38,33 @@
  }
 
  .box-grad2 {
-  background: linear-gradient(rgb(240, 221, 200), rgb(250, 156, 88), rgb(223, 135, 72));
+  background: linear-gradient(rgb(238, 226, 213), rgb(250, 156, 88), rgb(223, 135, 72));
  }
 
  .box-grad3 {
-  background: linear-gradient(rgb(233, 238, 190),rgb(243, 250, 173), rgb(217, 226, 118));
+  background: linear-gradient(rgb(246, 248, 226),rgb(243, 250, 173), rgb(217, 226, 118));
  }
 
  .box-grad4 {
-  background: linear-gradient(rgb(214, 245, 212),  rgb(152, 213, 164), rgb(99, 189, 117));
+  background: linear-gradient(rgb(226, 247, 225),  rgb(152, 213, 164), rgb(99, 189, 117));
  }
 
  .box-grad5 {
-  background: linear-gradient(rgb(193, 212, 240), rgb(50, 152, 224), rgb(53, 130, 186));
+  background: linear-gradient(rgb(217, 229, 248), rgb(50, 152, 224), rgb(53, 130, 186));
  }
 
 .background {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.6);
   width: 100vw;
     height: 70vh;
 }
-
-
+.icon {
+  font-size: 7vh;
+  color: black;
+}
+h3 {
+  padding-top: 20%
+}
  .myDiv {
     background-image: url("../../assets/main-bg.jpg");
     -webkit-background-size: cover;
@@ -70,7 +75,9 @@
     /* opacity: 0.45; */
     
   } 
-
+ p{
+   margin-bottom: 2vh;
+ }
 
 
 
@@ -84,10 +91,10 @@
   }
 
   h1 {
-    font-size: 7vh;
+    font-size: 8vh;
     color: rgba(40,40,40,1);
     margin-left: 10%;
-    margin-top: 7vh;
+    margin-top: 7.5vh;
     margin-bottom: 0%;
   }
   h2 {
@@ -97,6 +104,7 @@
   }
  p {
    font-size: 3vh;
+   color: black;
  }
   .column {
     margin-right: 0%;
