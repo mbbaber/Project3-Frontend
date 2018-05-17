@@ -318,7 +318,7 @@ export class MainComponent implements OnInit {
       this.computeStatsAcrossUsers(this.groupsId, subject._id, usersArray)
         .then((result: any) => {
           console.log(subject._id, usersArray)
-          console.log('Bbbbbbbbbb', result)
+          //console.log('Bbbbbbbbbb', result)
           this.statsBySubject[subject._id] = result; 
           this.statsBySubject[result.subjectId] = result
 
@@ -338,7 +338,7 @@ export class MainComponent implements OnInit {
     this.apiGroup.addThisUserToThisGroup(userId, this.groupsId)
       .then((result) => {
         this.usersUpdate();
-        console.log(result)
+        //console.log(result)
       })
       .catch((err) => {
         console.log(err)
@@ -349,7 +349,7 @@ export class MainComponent implements OnInit {
     this.apiGroup.deleteThisUserFromTheGroup(userId, this.groupsId)
       .then((result) => {
         this.usersUpdate();
-        console.log(result);
+        //console.log(result);
       })
       .catch((err) => {
         console.log(err)
@@ -367,8 +367,6 @@ export class MainComponent implements OnInit {
       this.userService.checkLogin()
         .then((result) => {
           this.currentUserIndividualStats[subjectId] = individualStatsByUser.find(s => s.userId == result.userInfo._id)
-          console.log("HERE!!!!!!!!!!!!!!", result)
-          console.log("NOW!!!!!!!!!!", individualStatsByUser)
         })
      
 

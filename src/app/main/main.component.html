@@ -18,8 +18,8 @@
               <h4>
                 <strong>{{subject?.name}}</strong>
               </h4>
-              Tags:
-              <span *ngFor="let keyword of subject?.keywords">{{keyword}} </span>
+        
+              <span *ngFor="let keyword of subject?.keywords">#{{keyword}} </span>
             </div>
             <div class="right">
               <p>{{statsBySubject[subject?._id]?.numberOfCards}} cards</p>

@@ -10,7 +10,7 @@
     <div class="card front-card left" (click)="flipBackVisibility()">
       <div class="card-content ">
         <div class="content ">
-          <h3 class="center">{{currentCard?.front}}</h3>
+          <h3 class="center pad-card">{{currentCard?.front}}</h3>
         </div>
       </div>
 
@@ -20,7 +20,7 @@
       <div class="card back-card left scale-in-hor-left ">
         <div class="card-content ">
           <div class="content ">
-            <h3 class="center ">{{currentCard?.back}}</h3>
+            <h3 class="center pad-card ">{{currentCard?.back}}</h3>
           </div>
         </div>
       </div>
@@ -75,7 +75,9 @@
 
       <div class="columns ">
         <div class="pie-pad column is-half " style="position: relative ">
-          <app-donut-chart [percentage]="getAverageComplete() "></app-donut-chart>
+
+          <app-donut-chart [percentage]="getAverageComplete()"></app-donut-chart>
+
           <h2 class="pie-font " style="position: absolute; top: 26%; left: 38% ">{{individualStats?.percentageComplete | number:'.0'}}</h2>
         </div>
         <div class="column ">
