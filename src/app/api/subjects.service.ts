@@ -114,7 +114,32 @@ export class SubjectsService {
     })
   }
   
+  postThisKeyword(keyword, subId){
+    return this.ajaxTruc
+    .put(`${BACKEND}/a/subject/add-keyword/${subId}/${keyword}`, {withCredentials: true})
+    .toPromise()
+    .then((apiResponse: any)=>{
+      return apiResponse;
+    })
+  }
  
+  deleteThisKeyword(keyword, subId){
+    return this.ajaxTruc
+    .put(`${BACKEND}/a/subject/delete-keyword/${subId}/${keyword}`, {withCredentials: true})
+    .toPromise()
+    .then((apiResponse: any)=>{
+      return apiResponse;
+    })
+  }
+ 
+  sendMessage(message){
+    return this.ajaxTruc
+    .post(`${BACKEND}/a/api/process-message`, message, {withCredentials: true})
+    .toPromise()
+    .then((apiResponse: any)=>{
+      return apiResponse;
+    })
+  }
 
 }
 
@@ -151,4 +176,11 @@ export class newSubSave{
 
 export class chooseSub{
   name: string
+}
+
+export class email{
+  sender: string;
+  senderEmail: string;
+  message: string;
+  email: string
 }
