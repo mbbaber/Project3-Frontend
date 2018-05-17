@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
+import {environment} from '../../environments/environment';
 
 // this is backend base url
-const BACKEND = "http://localhost:3000";
+const BACKEND = environment.backUrl;
 
 @Injectable()
 export class GroupsService {

@@ -2,25 +2,25 @@
   <div class="main-section column is-two-thirds">
     <!-- loop through each card -->
 
-   
+
     <div class="oneHundredMessage" *ngIf="oneHundredPercent">
-        Congratulations! You have completed this subject.
-      </div>
+      Congratulations! You have completed this subject.
+    </div>
 
     <div class="card front-card left" (click)="flipBackVisibility()">
-      <div class="card-content">
-        <div class="content columns">
-          <h3 class="center column is-four-fifths">{{currentCard?.front}}</h3>
+      <div class="card-content ">
+        <div class="content columns ">
+          <h3 class="center column is-four-fifths ">{{currentCard?.front}}</h3>
         </div>
       </div>
 
     </div>
 
-    <div *ngIf="classState.showForm">
-      <div class="card back-card left scale-in-hor-left">
-        <div class="card-content">
-          <div class="content columns">
-            <h3 class="center column is-four-fifths">{{currentCard?.back}}</h3>
+    <div *ngIf="classState.showForm ">
+      <div class="card back-card left scale-in-hor-left ">
+        <div class="card-content ">
+          <div class="content columns ">
+            <h3 class="center column is-four-fifths ">{{currentCard?.back}}</h3>
           </div>
         </div>
       </div>
@@ -28,31 +28,31 @@
 
     <!--only when back of card is shown-->
 
-    <div class="clear center">
-      <div *ngIf="classState.showForm" class="fade-in">
+    <div class="clear center ">
+      <div *ngIf="classState.showForm " class="fade-in ">
 
-        <div class="clear center">
+        <div class="clear center ">
           <h1>How well did you know the answer?</h1>
 
         </div>
 
-        <div class="e-size left center columns">
-          <a class="column color1" (click)="rateCardandUpdate(1)">
-            <p class="margin-top10">1</p>
-            <p class="smallfont">Not at all</p>
+        <div class="e-size left center columns ">
+          <a class="column color1 " (click)="rateCardandUpdate(1) ">
+            <p class="margin-top10 ">1</p>
+            <p class="smallfont ">Not at all</p>
           </a>
-          <a class="column color2" (click)="rateCardandUpdate(2)">
-            <p class="margin-top10">2</p>
+          <a class="column color2 " (click)="rateCardandUpdate(2) ">
+            <p class="margin-top10 ">2</p>
           </a>
-          <a class="column color3" (click)="rateCardandUpdate(3)">
-            <p class="margin-top10">3</p>
+          <a class="column color3 " (click)="rateCardandUpdate(3) ">
+            <p class="margin-top10 ">3</p>
           </a>
-          <a class="column color4" (click)="rateCardandUpdate(4)">
-            <p class="margin-top10">4</p>
+          <a class="column color4 " (click)="rateCardandUpdate(4) ">
+            <p class="margin-top10 ">4</p>
           </a>
-          <a class="column color5" (click)="rateCardandUpdate(5)">
-            <p class="margin-top10">5</p>
-            <p class="smallfont">Perfectly</p>
+          <a class="column color5 " (click)="rateCardandUpdate(5) ">
+            <p class="margin-top10 ">5</p>
+            <p class="smallfont ">Perfectly</p>
           </a>
         </div>
 
@@ -62,25 +62,25 @@
   </div>
 
 
-  <div class="column stats-box">
+  <div class="column stats-box ">
 
-    <div class="light-grey">
+    <div class="light-grey ">
       <span>
-        <h2 class="center white">My Statistics: {{subject?.name}}</h2>
+        <h2 class="center white ">My Statistics: {{subject?.name}}</h2>
       </span>
     </div>
 
-    <div *ngIf="individualStats">
+    <div *ngIf="individualStats ">
 
 
-      <div class="columns">
-        <div class="pie-pad column is-half" style="position: relative">
-          <app-donut-chart [percentage]="getAverageComplete()"></app-donut-chart>
-          <h2 class="pie-font" style="position: absolute; top: 26%; left: 38%">{{individualStats?.percentageComplete | number:'.0'}}</h2>
+      <div class="columns ">
+        <div class="pie-pad column is-half " style="position: relative ">
+          <app-donut-chart [percentage]="getAverageComplete() "></app-donut-chart>
+          <h2 class="pie-font " style="position: absolute; top: 26%; left: 38% ">{{individualStats?.percentageComplete | number:'.0'}}</h2>
         </div>
-        <div class="column">
-          <div class=" padding-top complete-font">
-            <div class="percent-font">%</div>
+        <div class="column ">
+          <div class=" padding-top complete-font ">
+            <div class="percent-font ">%</div>
             Complete</div>
 
         </div>
@@ -88,55 +88,61 @@
 
 
 
-      <div class="columns">
-        <div class="column is-half">
-          <progress class="progress is-info is-large margin-left" value="{{individualStats?.cardsViewed}}" max="{{individualStats?.numberOfCards}}"></progress>
+      <div class="columns ">
+        <div class="column is-half ">
+          <progress class="progress is-info is-large margin-left " value="{{individualStats?.cardsViewed}} " max="{{individualStats?.numberOfCards}} "></progress>
         </div>
-        <div class="column">
-          <div class="left-align">
-            <div class="center">Cards Viewed:</div>
-            <div class="center">{{individualStats?.cardsViewed}}/{{individualStats?.numberOfCards}}</div>
+        <div class="column ">
+          <div class="left-align ">
+            <div class="center ">Cards Viewed:</div>
+            <div class="center ">{{individualStats?.cardsViewed}}/{{individualStats?.numberOfCards}}</div>
           </div>
         </div>
       </div>
       <br/>
 
-      <div class="columns">
-        <div class="column is-half">
-          <progress class="progress is-info is-large margin-left" value="{{individualStats?.numberCardsMastered}}" max="{{individualStats?.numberOfCards}}"></progress>
+      <div class="columns ">
+        <div class="column is-half ">
+          <progress class="progress is-info is-large margin-left " value="{{individualStats?.numberCardsMastered}}
+      " max="{{individualStats?.numberOfCards}} "></progress>
         </div>
-        <div class="column">
-          <div class="left-align">
-            <div class="center">Cards Mastered:</div>
-            <div class="center">
+        <div class="column ">
+          <div class="left-align ">
+            <div class="center ">Cards Mastered:</div>
+            <div class="center ">
 
               {{individualStats?.numberCardsMastered}}/{{individualStats?.numberOfCards}}</div>
           </div>
         </div>
       </div>
 
-      <div class="columns">
-        <div class="pie-pad2 column is-half">
-          <app-pie-chart [chartdata]="getDistributionForDonut()"></app-pie-chart>
+      <div class="columns ">
+        <div class="pie-pad2 column is-half ">
+          <app-pie-chart [chartdata]="getDistributionForDonut() "></app-pie-chart>
         </div>
-        <div class="column">
-          <div class="distrib-font padding-top">
-            <div class="rating-font">Rating</div>
-            Distribution</div>
+        <div class="column ">
+          <div class="distrib-font padding-top ">
+
+            <div class="rating-font ">Rating
+
+            </div>
+
+            Distribution
+          </div>
 
         </div>
       </div>
 
-      <div class="columns">
-        <div class="column center complete-font"> Best card:
-          <div class="best-card small-card margin-left">
-            <p class="center">{{individualStats?.bestCard.front}}</p>
+      <div class="columns ">
+        <div class="column center complete-font "> Best card:
+          <div class="best-card small-card margin-left ">
+            <p class="center ">{{individualStats?.bestCard.front}}</p>
           </div>
         </div>
 
         <div class="column center "> Worst Card:
-          <div class="card small-card margin-left">
-            <p class="center">{{individualStats?.worstCard.front}}</p>
+          <div class="card small-card margin-left ">
+            <p class="center ">{{individualStats?.worstCard.front}}</p>
           </div>
         </div>
       </div>
@@ -145,5 +151,7 @@
     </div>
 
   </div>
+
+
 
 </div>
