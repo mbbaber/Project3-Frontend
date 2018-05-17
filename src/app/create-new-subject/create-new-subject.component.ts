@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjectsService, Subject, Card, NewCard } from '../api/subjects.service';
 import { ActivatedRoute } from '@angular/router';
+import { AdminAuthenticateService } from '../api/admin-authenticate.service';
 
 @Component({
   selector: 'app-create-new-subject',
@@ -19,7 +20,8 @@ export class CreateNewSubjectComponent implements OnInit {
 
   constructor(
     public subService: SubjectsService,
-    public actRoute: ActivatedRoute
+    public actRoute: ActivatedRoute,
+    public adminAuth: AdminAuthenticateService
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,7 @@ export class CreateNewSubjectComponent implements OnInit {
   getSubjectData(){
     this.subService.getSubInfo(this.subjectId)
     .then((result)=>{
+      // this.adminAuth.getAdmin(result.admin)
       this.subjectData= result;
       this.subjectCards = result.cards;
       this.subjectKeywords = result.keywords;

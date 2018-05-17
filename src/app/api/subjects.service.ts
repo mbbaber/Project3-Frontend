@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/operator/toPromise';
 import { toPromise } from 'rxjs/operator/toPromise';
+import { AdminAuthenticateService } from './admin-authenticate.service';
 import {environment} from '../../environments/environment';
 
 const BACKEND= environment.backUrl;
@@ -13,9 +14,10 @@ export class SubjectsService {
   subToSave: newSubSave;
   cardOfThisSub: Card[];
   kewordsOfThisSub: Array<string>;
-
+  subsAdmin: any;
   userSubs: Subject[];
-  constructor(private ajaxTruc: HttpClient) { }
+  constructor(
+    private ajaxTruc: HttpClient) { }
   
   getSubjectsList(groupId) {
     return this.ajaxTruc
@@ -67,6 +69,8 @@ export class SubjectsService {
     .get(`${BACKEND}/a/subject/${subId}`)
     .toPromise()
     .then((apiResponse: any)=>{
+     
+      this.subsAdmin = apiResponse.admin
       this.cardOfThisSub = apiResponse.cards;
       this.kewordsOfThisSub = apiResponse.keywords;
       this.subToSave = apiResponse;

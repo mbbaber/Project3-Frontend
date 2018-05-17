@@ -74,35 +74,45 @@ export class AppComponent {
   groupState(groupId){
     this.apiGroup.currentGroup = groupId;
   }
-
+//***************************STATES OF POP UP WINDOWS*************** */
   logInShow(){
-    if(this.signUpState===true || this.newGroupState === true){
+    if(this.signUpState===true || this.newGroupState === true || this.newCardsState === true ){
       this.signUpState = false;
       this.newGroupState = false;
+      this.newCardsState = false;
     }
     this.logInState = !this.logInState;
   }
   signUpShow(){
-    if(this.logInState===true || this.newGroupState == true){
+    if(this.logInState===true || this.newGroupState == true || this.newCardsState === true){
       this.logInState = false;
       this.newGroupState = false;
+      this.newCardsState = false;
     }
     this.signUpState = !this.signUpState;
   }
   newGroupShow(){
-    if(this.logInState === true || this.newGroupState ===true){
+    if(this.logInState === true || this.newGroupState ===true || this.newCardsState === true){
       this.logInState = false;
       this.signUpState = false;
+      this.newCardsState = false;
     }
     this.newGroupState = !this.newGroupState;
   }
   newSetShow(){
+    if(this.logInState === true || this.newGroupState ===true || this.signUpState ===true){
+      this.logInState = false;
+      this.signUpState = false;
+      this.newGroupState = false;
+    }
     this.newCardsState = !this.newCardsState;
   }
 
+//***************************STATES OF POP UP WINDOWS- FINISHED *************** */
   signUpSumbit(){
     this.userService.postSignUp(this.formCredentials)
     .then((newUser)=>{
+      this.isErrMsg = false;
       this.signUpState = false;
       this.apiGroup.createPrivateGroup(newUser.userInfo._id)
       this.response.navigateByUrl('/');

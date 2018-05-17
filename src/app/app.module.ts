@@ -29,7 +29,7 @@ import { GroupStatsComponent } from './group-stats/group-stats.component';
 import { AuthenticationService } from './api/authentication.service';
 import { FormsStateService } from './api/forms-state.service';
 import { AdminAuthenticateService } from './api/admin-authenticate.service';
-
+// import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 
 
 
@@ -58,6 +58,7 @@ import { AdminAuthenticateService } from './api/admin-authenticate.service';
     HttpClientModule,
     FormsModule,
     ChartsModule
+    // Angular2FontawesomeModule
   ],
   providers: [
     GroupsService, 
@@ -66,7 +67,8 @@ import { AdminAuthenticateService } from './api/admin-authenticate.service';
     StatsService, 
     AuthenticationService,
     FormsStateService,
-    AdminAuthenticateService],
+    AdminAuthenticateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

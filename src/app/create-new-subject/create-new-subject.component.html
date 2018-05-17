@@ -1,19 +1,25 @@
 <h2 class="center">{{subjectData?.name}}</h2>
 
-<div class="one-card margin" *ngFor="let oneCard of subjectCards">
-    <div class="question">{{oneCard.front}}</div>
-    <div class="answer">{{oneCard.back}}</div>
-    <button class="color1" (click)="deleteCardSubmit(oneCard._id)">Delete</button>
+<div class="column">
+    <div class="columns is-half">
+        <div class="one-card margin" *ngFor="let oneCard of subjectCards">
+        <div class="question">{{oneCard.front}}</div>
+        <div class="answer">{{oneCard.back}}</div>
+        <button class="color1" (click)="deleteCardSubmit(oneCard._id)">Delete</button>
+    </div>
+    
+    <div class="add-new-card">
+        <form (ngSubmit)="newCardSubmit()">
+                <label><p>Front:</p>
+                    <input class="input" type="text" name="front" [(ngModel)]="newCard.front" placeholder="">
+                </label> <br><br>
+                <label><p>Back:</p>
+                    <input class="input" type="text" name="back" [(ngModel)]="newCard.back" placeholder="" >
+                </label> <br><br>
+                <button class="btn color4">Add</button>
+        </form>
+    </div></div>
+    <div class="columns is-half"></div>
 </div>
 
-<div class="add-new-card">
-    <form (ngSubmit)="newCardSubmit()">
-            <label><p>Front:</p>
-                <input type="text" name="front" [(ngModel)]="newCard.front" placeholder="">
-            </label> <br><br>
-            <label><p>Back:</p>
-                <input type="text" name="back" [(ngModel)]="newCard.back" placeholder="" >
-            </label> <br><br>
-            <button class="color4">Add</button>
-    </form>
-</div>
+

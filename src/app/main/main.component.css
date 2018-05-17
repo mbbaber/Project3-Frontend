@@ -14,7 +14,7 @@ h1 {
 }
 .big-marg {
     margin-left: 42%;
-    margin-top: 2%;
+    margin-top: 1%;
     margin-bottom: 1%;
 }
 p {
@@ -116,21 +116,32 @@ h3, h2 {
 .log-in-pop{
     background-color: white;
     position: fixed;
-    left: 30vw;
-    top: 20vh;
-    width: 40vw;
-    height: 60vh;
+    left: 20vw;
+    top: 15vh;
+    width: 60vw;
+    height: 70vh;
     -webkit-box-shadow: 0px 0px 12px 3px rgba(54, 54, 54, 0.76); 
     box-shadow: 0px 0px 12px 3px rgba(54,54,54,0.76);
+   padding-top: 1%;
+   padding-bottom: 1%;
+   position: relative;
+   border-radius: 5px;
+    
 }
 
-.sign-up-pop{
+.sign-up-pop-sub{
     background-color: white;
     position: fixed;
-    left: 30vw;
-    top: 20vh;
-    width: 40vw;
-    height: 60vh;
+    left: 20vw;
+    top: 10vh;
+    width: 60vw;
+    height: 80vh;
     -webkit-box-shadow: 0px 0px 12px 3px rgba(54, 54, 54, 0.76); 
     box-shadow: 0px 0px 12px 3px rgba(54,54,54,0.76);
+    padding-top: 1%;
+    padding-bottom: 1%;
+    position: relative;
+    border-radius: 5px;
+
 }
+
