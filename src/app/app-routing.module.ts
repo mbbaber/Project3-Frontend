@@ -10,6 +10,7 @@ import { YourSubjectsComponent } from './your-account/your-subjects/your-subject
 import { UserAccountComponent } from './your-account/user-account/user-account.component';
 import { CreateNewSubjectComponent } from './create-new-subject/create-new-subject.component';
 import { AuthenticationService } from './api/authentication.service';
+import { AdminAuthenticateService } from './api/admin-authenticate.service';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -30,7 +31,7 @@ const routes: Routes = [
     canActivate: [AuthenticationService] },
   { path: 'new-subject/:subId', 
     component: CreateNewSubjectComponent, 
-    canActivate: [AuthenticationService] },
+    canActivate: [AdminAuthenticateService] },
 
 
   {path: 'g/:groupId/subject/:subjectId', 

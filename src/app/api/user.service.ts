@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
+  userId: any;
   isLoggedIn: boolean;
   currentUser: User;
   constructor(
@@ -46,6 +47,7 @@ export class UserService {
     .then((apiResponse: any)=>{
       if(apiResponse.userInfo){
         this.isLoggedIn = true;
+        this.userId = apiResponse.userInfo._id;
       }else{
         this.isLoggedIn = false;
       }

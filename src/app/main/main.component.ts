@@ -39,7 +39,6 @@ export class MainComponent implements OnInit {
   addUserState: boolean = false;
   addSubState: boolean = false;
   search: string = "";
-  selectedSubjectId: string = "";
 
 
   constructor(
@@ -212,12 +211,12 @@ export class MainComponent implements OnInit {
   }
 
 
-whoAmI(){
+  whoAmI(){
   this.userService.checkLogin()
       .then((result) => {
           this.currentUserId = result.userInfo._id 
         })
-}
+  }
 
 
 
@@ -239,10 +238,21 @@ whoAmI(){
       })
   }
 
+  showAddUserForm() {
+    if(this.addSubState === true){
+      this.addSubState = false;
+    }
+    this.addUserState = !this.addUserState;
+    this.usersUpdate();
+  }
+
   showAddSubForm() {
     this.apiSubject.getAllTheSubjects()
       .then((result) => {
         this.subjects = result;
+        if( this.addUserState === true){
+          this.addUserState = false;
+        }
         this.addSubState = !this.addSubState;
         console.log(result)
       })
@@ -251,16 +261,10 @@ whoAmI(){
       })
 
     console.log(this.subjects)
-
   }
 
-  chooseThisSub(event: any) {
-    this.selectedSubjectId = event.target.value;
-    console.log(this.selectedSubjectId)
-  }
-
-  addThisSub() {
-    this.apiGroup.addSubjectToGroup(this.selectedSubjectId, this.groupsId)
+  addThisSub(subId) {
+    this.apiGroup.addSubjectToGroup(subId, this.groupsId)
       .then((result) => {
         this.addSubState = false;
         this.getSubjectsList()
@@ -289,10 +293,6 @@ whoAmI(){
       })
   }
 
-  showAddUserForm() {
-    this.addUserState = !this.addUserState;
-    this.usersUpdate();
-  }
 
   getAverageCompleteForSubject(subjectId){
     if (!this.statsBySubject[subjectId]) {

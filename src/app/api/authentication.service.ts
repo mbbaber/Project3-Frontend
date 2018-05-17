@@ -17,11 +17,11 @@ export class AuthenticationService implements CanActivate{
 
 
   canActivate() {
-    if(this.userService.isLoggedIn === true){
-      return true;
-    }else{
+    if(this.userService.isLoggedIn === false){
       this.router.navigateByUrl('/');
       return false;
+    }else{
+      return true;
     }
   }
 }

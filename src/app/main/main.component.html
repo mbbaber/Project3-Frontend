@@ -10,7 +10,7 @@
     <!-- add for each subject div below-->
 
   
-    <a class="box"*ngFor="let subject of groups?.subjects | inputFilter : search" [routerLink]="['/g', groups._id, 'subject', subject._id]" (mouseenter)="mouseEnter(subject)" (mouseleave)="mouseLeave()" class="box">
+    <div class="box"*ngFor="let subject of groups?.subjects | inputFilter : search" [routerLink]="['/g', groups._id, 'subject', subject._id]" (mouseenter)="mouseEnter(subject)" (mouseleave)="mouseLeave()" class="box">
       <article class="media">
         <div class="media-content">
           <div class="content">
@@ -30,7 +30,7 @@
           </div>
         </div>
       </article>
-    </a>
+    </div>
 
     <!-- <div *ngFor="let subject of groups?.subjects" class="box">
     <article class="media">
@@ -79,41 +79,83 @@
 </div>
 
 <div class="sign-up-window center" *ngIf="addSubState">
-  <div class="sign-up-pop">
-    <h2> Add a Subject</h2> <br><br>
-    <form (change)="chooseThisSub($event)">
-      <label>Name of Subject:<br><br>
-        <!-- <div class="field has-addons"> -->
-          <div class="control is-expanded">
-            <div class="select is-fullwidth">
-              <select class="center" name="country">
-                <option class="center" *ngFor="let oneSub of subjects" value="{{oneSub?._id}}">{{oneSub?.name}}</option><br>
-              </select>
+  <div class="sign-up-pop-sub ">
+    <i class="fa fa-window-close fa-2x icon-close" (click)="showAddSubForm()"></i>
+    <h2> Add a Subject</h2>
+    <div class="box search">
+        <div class="field has-addons">
+          <input class="input" type="text" placeholder="Search Subjects" [(ngModel)]="search">
+        </div>
+    </div>
+    <div class='height to-scroll'>
+    <div class="box" *ngFor="let subject of subjects | inputFilter : search" (mouseenter)="mouseEnter(subject)" (mouseleave)="mouseLeave()">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+                <div class="left">
+                  <h4>
+                    <strong>{{subject?.name}}</strong>
+                  </h4>
+                </div>
+                <div class="right">
+                    <i class="fas fa-plus-circle fa-2x add-button" (click)="addThisSub(subject?._id)"></i>
+                </div>
+              </div>
             </div>
-          </div><br>
-            <button type="submit" class="button color4" (click)="addThisSub()">Choose</button>
-      
-        <!-- </div> -->
-      </label>
-    </form>
+          </article>
+        </div>
+    </div>
   </div>
 </div>
 
 <div class="sign-up-window center" *ngIf="addUserState">
-  <div class="sign-up-pop columns">
-    <div class="column is-half" >
-      <div *ngFor="let one of allUsersWhoBelong"> {{one.username}} 
-          <button class="color1" (click)="deleteUserFromGroup(one._id)">Delete</button>
+  <div class="sign-up-pop-sub columns">
+    <i class="fa fa-window-close fa-2x icon-close" (click)="showAddUserForm()"></i>
+    <div class="column is-half to-scroll">
+        <h2 class="center">Users of this group</h2>
+      <div *ngFor="let one of allUsersWhoBelong" class="box">
+        <div class="media">
+          <div class="media-content">
+            <div class="content">
+              <div class="left">
+                {{one.username}}
+              </div>
+              <div class="right">
+                  <i class="fas fa-minus-circle delete-button" (click)="deleteUserFromGroup(one._id)"></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="column is-half">
-      <h2 class="center">Add a User</h2><br><br>
-      <input class="center" type="text" name="username" [(ngModel)]="searchUser">
-      <div *ngFor="let user of allUsersWhoDontBelong | userPipe : searchUser">
-        <span>{{user.username}}</span>
-        <button class=" center color4" (click)="addUserToGroup(user._id)">Add</button>
+    <div class="column is-half to-scroll">
+      <h2 class="center">Add a User</h2>
+      <div class="media">
+        <div class="media-content">
+          <div class="content">
+            <input class=" input " type="text" name="username" [(ngModel)]="searchUser">
+          </div>
+        </div>
+      </div>
+
+     
+      <div *ngFor="let user of allUsersWhoDontBelong | userPipe : searchUser" class="box">
+        <div class="media">
+          <div class="media-content">
+            <div class="content">
+              <div class="left">
+                <span>{{user.username}}</span>
+              </div>
+              <div class="right">
+                <i class="fas fa-plus-circle add-button" (click)="addUserToGroup(user._id)"></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <button (click)="showAddUserForm()">Close</button>
   </div>
 </div>
+
+
+<!-- <i class="fas fa-plus-circle fa-4x add-icon"></i> -->

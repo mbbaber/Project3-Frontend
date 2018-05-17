@@ -1,81 +1,66 @@
-.our-nav-class{
-    -webkit-box-shadow: 0px 0px 12px 3px rgba(0,0,0,0.76); 
-    box-shadow: 0px 0px 12px 3px rgba(0,0,0,0.76);
-    height: 60px;
-}
-
-.log-in-window,
-.sign-up-window{
-    background-color: rgba(155, 155, 155, 0.664);
-    height: 100vh;
-    width: 50vw;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
-.log-in-pop{
-    background-color: white;
-    position: fixed;
-    left: 38vw;
-    top: 20vh;
-    width: 30vw;
-    height: 60vh;
-    -webkit-box-shadow: 0px 0px 12px 3px rgba(54, 54, 54, 0.76); 
-    box-shadow: 0px 0px 12px 3px rgba(54,54,54,0.76);
-   padding-top: 3%;
-    
-}
-
-.sign-up-pop{
-    background-color: white;
-    position: fixed;
-    left: 38vw;
-    top: 20vh;
-    width: 30vw;
-    height: 60vh;
-    -webkit-box-shadow: 0px 0px 12px 3px rgba(54, 54, 54, 0.76); 
-    box-shadow: 0px 0px 12px 3px rgba(54,54,54,0.76);
-    padding-top: 3%;
+.our-nav-class {
+  -webkit-box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.76);
+  box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.76);
+  height: 60px;
 }
 
 .color1 {
-    background-color: rgb(208, 56, 77);
-  }
-  
-  .color1:hover { 
-    color: black;
-    background-color: rgb(175, 47, 64);
-  }
+  background-color: rgb(208, 56, 77);
+}
 
-  .color4 {
-    background-color: rgb(152, 213, 164);
-  }
-  
-  .color4:hover { 
-    color: black;
-    background-color:  rgb(99, 189, 117);
-    
-  }
+.color1:hover {
+  color: black;
+  background-color: rgb(175, 47, 64);
+}
 
-  .margin {
-      margin-left: 5%;
-      margin-top: 3%
-  }
+.color4 {
+  background-color: rgb(152, 213, 164);
+}
 
-  .center {
-      text-align:center;
-  }
+.color4:hover {
+  color: black;
+  background-color: rgb(99, 189, 117);
+}
 
-  h2 {
-      font-size: 4vh;
-  }
+.margin {
+  margin-left: 5%;
+  margin-top: 3%;
+}
 
-  p {
-      font-size: 3vh;
-  }
+.center {
+  text-align: center;
+}
 
-  .button {
-    height: 6vh;
-    width: auto;
-  }
+h2 {
+  font-size: 4vh;
+}
+
+p {
+  font-size: 3vh;
+}
+
+.button {
+  height: 6vh;
+  width: auto;
+}
+
+.icon {
+  vertical-align: middle;
+  color: grey;
+}
+
+.icon-close {
+  vertical-align: middle;
+  color: tomato;
+  float: right;
+  position: absolute;
+  top: -2px;
+  right: 0;
+  cursor: pointer;
+}
+
+/* .add-icon{
+    position: fixed;
+    left: 50px;
+    bottom: 50px;
+} */

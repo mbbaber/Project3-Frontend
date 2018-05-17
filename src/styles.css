@@ -1,6 +1,98 @@
+@import '~font-awesome/css/font-awesome.css';
 @import url('https://fonts.googleapis.com/css?family=Francois+One');
 body {
     font-family: 'Francois One', sans-serif;
 }
 
 
+.icon{
+    vertical-align: middle;
+    color: grey;
+}
+
+.icon-close{
+    vertical-align: middle;
+    color: tomato;
+    float: right;
+    position: absolute;
+    top: -2px;
+    right: 0;
+    cursor: pointer;
+}
+
+
+.delete-button{
+    color: tomato;
+    cursor: pointer;
+}
+
+.add-button{
+    color: rgb(152, 213, 164);
+    cursor: pointer;
+}
+
+.log-in-window,
+.sign-up-window{
+    background-color: rgba(155, 155, 155, 0.664);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.log-in-pop{
+    background-color: white;
+    position: fixed;
+    left: 35vw;
+    top: 20vh;
+    width: 30vw;
+    height: auto;
+    -webkit-box-shadow: 0px 0px 12px 3px rgba(54, 54, 54, 0.76); 
+    box-shadow: 0px 0px 12px 3px rgba(54,54,54,0.76);
+    padding: 3% 3%;
+   position: relative;
+   border-radius: 5px
+    
+}
+
+.sign-up-pop{
+    background-color: white;
+    position: fixed;
+    left: 35vw;
+    top: 20vh;
+    width: 30vw;
+    height: auto;
+    -webkit-box-shadow: 0px 0px 12px 3px rgba(54, 54, 54, 0.76); 
+    box-shadow: 0px 0px 12px 3px rgba(54,54,54,0.76);
+    padding: 3% 3%;
+    position: relative;
+    border-radius: 5px
+}
+
+.height{
+    height: 40vh;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.to-scroll{
+    overflow-y: auto;
+}
+
+.to-scroll::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	background-color: #F5F5F5;
+}
+
+.to-scroll::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+.to-scroll::-webkit-scrollbar-thumb
+{
+	background-color: #7ff385;
+}

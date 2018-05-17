@@ -29,6 +29,7 @@
             
             <hr class="navbar-divider">
             <a (click)="newGroupShow()" class="navbar-item">
+              <i class="fas fa-plus icon"></i>
               Add a group
             </a>
           </div>
@@ -45,24 +46,26 @@
                   <div class="navbar-dropdown is-boxed is-right">
                     
                     <a class="navbar-item"  [routerLink]="['/my-account', userId]">
-                    <!-- [routerLink]="['/user', userService.currentUser._id]"  -->
+                      <i class="fas fa-address-card icon"></i>
                       Your Account
-                      
                     </a>
                     <hr class="navbar-divider">
                     <a class="navbar-item" (click)="logOutSubmit()">
-                        <!-- <span class="icon">
-                          <i class="fas fa-download"></i>
-                        </span> -->
-                        <span>Log out</span>
+                        <span>
+                          <i class="fas fa-sign-out-alt icon"></i>
+                          Log out
+                        </span>
+                        <!-- <div style="font-size:3em; color:Tomato">
+                          <i class="fa fa-times-circle"></i>
+                        </div> -->
                     </a>
                   </div>
                 </div>
             <p class="control" *ngIf="!userService.isLoggedIn">
               <a class="bd-tw-button button" (click)="logInShow()">
-                <!-- <span class="icon">
-                  <i class="fab fa-twitter"></i>
-                </span> -->
+                <span class="icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                </span>
                 <span>
                   Log In
                 </span>
@@ -93,14 +96,15 @@
 
 
 <div class="log-in-window center " *ngIf="logInState">
-    <div class="log-in-pop">
+  <div class="log-in-pop">
+      <i class="fa fa-window-close fa-2x icon-close" (click)="logInShow()"></i>
       <h2 class="center">Log in</h2><br>
-      <form (ngSubmit)="logInSubmit();">
+      <form (ngSubmit)="logInSubmit()">
         <label><p>Username:</p>
-          <input type="text" name="username" [(ngModel)]="formCredentials.username" >
+          <input class="input" type="text" name="username" [(ngModel)]="formCredentials.username" >
         </label> <br><br>
         <label><p>Password:</p>
-          <input type="password" name="password" [(ngModel)]="formCredentials.password" >
+          <input class="input" type="password" name="password" [(ngModel)]="formCredentials.password" >
         </label> <br><br>
         <div *ngIf="isErrMsg">{{displayMsg}}</div>
         <button class="center color4 button" >Log In</button>
@@ -111,16 +115,17 @@
 
 <div class="sign-up-window center" *ngIf="signUpState">
     <div class="sign-up-pop">
+      <i class="fa fa-window-close fa-2x icon-close" (click)="signUpShow()"></i>
       <h2 class="center">Sign Up</h2><br>
       <form (ngSubmit)="signUpSumbit()">
         <label><p>Username:</p>
-          <input type="text" name="username" [(ngModel)]="formCredentials.username" >
+          <input class="input" type="text" name="username" [(ngModel)]="formCredentials.username" >
         </label><br><br>
         <label><p>Password:</p>
-          <input type="password" name="password" [(ngModel)]="formCredentials.password">
+          <input  class="input" type="password" name="password" [(ngModel)]="formCredentials.password">
         </label><br><br>
         <label><p>E-mail:</p>
-          <input type="email" name="email" [(ngModel)]="formCredentials.email">
+          <input  class="input" type="email" name="email" [(ngModel)]="formCredentials.email">
         </label><br><br>
         <div *ngIf="isErrMsg">{{displayMsg}}</div>
         <button class="center color4 button">Sign Up</button>
@@ -130,10 +135,11 @@
 
 <div class="sign-up-window center" *ngIf="newGroupState" >
   <div class="sign-up-pop">
+      <i class="fa fa-window-close fa-2x icon-close" (click)="newGroupShow()"></i>
     <h2 class ="center">New Group Name:</h2>
     <form (ngSubmit)="groupFormSubmit()">
       <label>
-        <input type="text" name="username" [(ngModel)]="newGroup.name" >
+         <input class="input" type="text" name="username" [(ngModel)]="newGroup.name" >
       </label><br><br>
       <button class="center color4 button">Create</button>
     </form>
@@ -142,13 +148,18 @@
 
 <div class="sign-up-window center" *ngIf="newCardsState" >
   <div class="sign-up-pop">
+      <i class="fa fa-window-close fa-2x icon-close" (click)="newSetShow()"></i>
     <h2 class="center">New set of cards</h2><br><br>
     <form (ngSubmit)="subjectFormSubmit()">
       <label><p>New Subject name:</p>
-        <input type="text" name="name" [(ngModel)]="newSetOfCards.name" >
+        <input  class="input" type="text" name="name" [(ngModel)]="newSetOfCards.name" >
       </label><br><br>
       <button class="center color4 button" >Create</button>
     </form>
   </div>
 </div>
 <!-- TODO: Maybe a footer? -pk -->
+
+
+<!-- maybe later for adding something -->
+<!-- <i class="fas fa-plus-circle fa-4x add-icon"></i> -->
