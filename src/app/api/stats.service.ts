@@ -20,26 +20,26 @@ export class StatsService {
   
   getStatsList(ids) {
     return this.httpClient
-      .patch(`${BACKEND}/stat`,ids, {withCredentials: true})
+      .patch(`${BACKEND}/a/stat`,ids, {withCredentials: true})
       .toPromise();
   }
 
   getAllStatsForUser(groupId, subjectId) {
     return this.httpClient
-      .get(`${BACKEND}/stat/${groupId}/${subjectId}`, {withCredentials: true})
+      .get(`${BACKEND}/a/stat/${groupId}/${subjectId}`, {withCredentials: true})
       .toPromise();
   }
 
   getAllStatsForUserById(groupId, subjectId, userId) {
     return this.httpClient
-      .get(`${BACKEND}/stat/${groupId}/${subjectId}/${userId}`, {withCredentials: true})
+      .get(`${BACKEND}/a/stat/${groupId}/${subjectId}/${userId}`, {withCredentials: true})
       .toPromise();
   }
 
     
   getAllStatsForUsersInGroup(groupId) {
     return this.httpClient
-      .get(`${BACKEND}/group-info/${groupId}`, {withCredentials: true})
+      .get(`${BACKEND}/a/group-info/${groupId}`, {withCredentials: true})
       .toPromise();
 }
 

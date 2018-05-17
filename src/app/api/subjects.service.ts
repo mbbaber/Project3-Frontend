@@ -19,19 +19,19 @@ export class SubjectsService {
   
   getSubjectsList(groupId) {
     return this.ajaxTruc
-      .get(`${BACKEND}/group/${groupId}`)
+      .get(`${BACKEND}/a/group/${groupId}`)
       .toPromise();
   }
 
   getSubDetails(subjectId){
     return this.ajaxTruc 
-      .get(`${BACKEND}/subject/${subjectId}`)
+      .get(`${BACKEND}/a/subject/${subjectId}`)
       .toPromise()
   }
 
   getSubs(userId){
     return this.ajaxTruc
-    .get(`${BACKEND}/subject/user-subs/${userId}`)
+    .get(`${BACKEND}/a/subject/user-subs/${userId}`)
     .toPromise()
     .then((apiResponse: any)=>{
       this.userSubs = apiResponse;
@@ -41,7 +41,7 @@ export class SubjectsService {
 
   deleteThisSub(subId, userId){
     return this.ajaxTruc
-    .put(`${BACKEND}/subject/subs-of-the-user/${userId}/gr/${subId}`, {new: true})
+    .put(`${BACKEND}/a/subject/subs-of-the-user/${userId}/gr/${subId}`, {new: true})
     .toPromise()
     .then((apiResponse: Subject[])=>{
       this.userSubs = apiResponse;
@@ -51,7 +51,7 @@ export class SubjectsService {
 
   newSub(subCred: NewSubject){
     return this.ajaxTruc
-    .post(`${BACKEND}/subject/new-subject`,
+    .post(`${BACKEND}/a/subject/new-subject`,
     subCred,
     {withCredentials: true})
     .toPromise()
@@ -64,7 +64,7 @@ export class SubjectsService {
 
   getSubInfo(subId){
     return this.ajaxTruc
-    .get(`${BACKEND}/subject/${subId}`)
+    .get(`${BACKEND}/a/subject/${subId}`)
     .toPromise()
     .then((apiResponse: any)=>{
       this.cardOfThisSub = apiResponse.cards;
@@ -77,7 +77,7 @@ export class SubjectsService {
 
   getAllTheSubjects(){
     return this.ajaxTruc
-    .get(`${BACKEND}/subject/all-subjects`)
+    .get(`${BACKEND}/a/subject/all-subjects`)
     .toPromise()
     .then((apiResponse: any)=>{
       this.allSubs = apiResponse;
@@ -87,7 +87,7 @@ export class SubjectsService {
 
   getCardInfo(cardInfo: NewCard, subId: string){
     return this.ajaxTruc
-    .put(`${BACKEND}/subject/add-card/${subId}`,
+    .put(`${BACKEND}/a/subject/add-card/${subId}`,
         cardInfo,
       {withCredentials: true})
     .toPromise()
@@ -100,7 +100,7 @@ export class SubjectsService {
 
   deleteThisCard(card, subjectId){
     return this.ajaxTruc
-    .put(`${BACKEND}/subject/sub/${subjectId}/card/${card}`,
+    .put(`${BACKEND}/a/subject/sub/${subjectId}/card/${card}`,
     card,
     {withCredentials: true})
     .toPromise()
