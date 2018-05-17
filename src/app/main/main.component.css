@@ -28,7 +28,11 @@ h2 {
     font-size: 20px;
     text-align: center;
 }
-
+.select {
+    width: 50vh;
+    text-align: center;
+    margin-left: 40%
+}
 .main-section {
     background-color: whitesmoke;
 }

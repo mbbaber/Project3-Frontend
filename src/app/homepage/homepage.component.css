@@ -1,7 +1,7 @@
-.myDiv {
+/* .myDiv {
   position: relative;
   z-index: 1;
-}
+} */
 
  
  .myDiv .background {
@@ -11,7 +11,7 @@
     -o-background-size: cover;
     width: 100vw;
     height: 70vh;
-    opacity: 0.65;
+    /* opacity: 0.65; */
   } 
 
   h1 {

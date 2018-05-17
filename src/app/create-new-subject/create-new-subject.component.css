@@ -1,0 +1,27 @@
+.color1 {
+    background-color: rgb(208, 56, 77);
+  }
+  
+  .color1:hover { 
+    color: black;
+    background-color: rgb(175, 47, 64);
+  }
+
+  .color4 {
+    background-color: rgb(152, 213, 164);
+  }
+  
+  .color4:hover { 
+    color: black;
+    background-color:  rgb(99, 189, 117);
+    
+  }
+
+  .margin {
+      margin-left: 5%;
+      margin-top: 3%
+  }
+
+  .center {
+      text-align:center;
+  }

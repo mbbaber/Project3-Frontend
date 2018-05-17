@@ -102,6 +102,14 @@ export class FlashcardComponent implements OnInit {
     return distributionForDonut;
   }
 
+  // changeCardColor() {
+  //   // get current card id
+  //   // get rating for that card 
+  //   stat.rating
+  //   if (this.currentCard._id === this.stats.card)
+  //   this.stats
+  // }
+
   getNextCard() {
     this.flipBackVisibility();
 

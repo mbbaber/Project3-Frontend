@@ -78,41 +78,40 @@
 
 </div>
 
-<div class="sign-up-window" *ngIf="addSubState">
+<div class="sign-up-window center" *ngIf="addSubState">
   <div class="sign-up-pop">
-    <h2> Subject adding</h2>
+    <h2> Add a Subject</h2> <br><br>
     <form (change)="chooseThisSub($event)">
-      <label>Which subject do you want to add to your group ?
-        <div class="field has-addons">
+      <label>Name of Subject:<br><br>
+        <!-- <div class="field has-addons"> -->
           <div class="control is-expanded">
             <div class="select is-fullwidth">
-              <select name="country">
-                <option *ngFor="let oneSub of subjects" value="{{oneSub?._id}}">{{oneSub?.name}}</option>
+              <select class="center" name="country">
+                <option class="center" *ngFor="let oneSub of subjects" value="{{oneSub?._id}}">{{oneSub?.name}}</option><br>
               </select>
             </div>
-          </div>
-          <div class="control">
-            <button type="submit" class="button is-primary" (click)="addThisSub()">Choose</button>
-          </div>
-        </div>
+          </div><br>
+            <button type="submit" class="button color4" (click)="addThisSub()">Choose</button>
+      
+        <!-- </div> -->
       </label>
     </form>
   </div>
 </div>
 
-<div class="sign-up-window" *ngIf="addUserState">
+<div class="sign-up-window center" *ngIf="addUserState">
   <div class="sign-up-pop columns">
     <div class="column is-half" >
       <div *ngFor="let one of allUsersWhoBelong"> {{one.username}} 
-          <button (click)="deleteUserFromGroup(one._id)">Delete</button>
+          <button class="color1" (click)="deleteUserFromGroup(one._id)">Delete</button>
       </div>
     </div>
     <div class="column is-half">
-      <h2> User adding</h2>
-      <input type="text" name="username" [(ngModel)]="searchUser">
+      <h2 class="center">Add a User</h2><br><br>
+      <input class="center" type="text" name="username" [(ngModel)]="searchUser">
       <div *ngFor="let user of allUsersWhoDontBelong | userPipe : searchUser">
         <span>{{user.username}}</span>
-        <button (click)="addUserToGroup(user._id)">Add</button>
+        <button class=" center color4" (click)="addUserToGroup(user._id)">Add</button>
       </div>
     </div>
     <button (click)="showAddUserForm()">Close</button>
