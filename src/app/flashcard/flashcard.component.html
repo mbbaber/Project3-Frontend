@@ -7,17 +7,17 @@
       Congratulations! You have completed this subject.
     </div>
 
-    <div class="card front-card left" (click)="flipBackVisibility()">
+    <div class="card front-card left {{currentCardColor}}" (click)="flipBackVisibility()">
       <div class="card-content ">
         <div class="content ">
           <h3 class="center pad-card">{{currentCard?.front}}</h3>
         </div>
       </div>
-
     </div>
+    
 
     <div *ngIf="classState.showForm ">
-      <div class="card back-card left scale-in-hor-left ">
+      <div class="card back-card left scale-in-hor-left {{currentCardColor}}">
         <div class="card-content ">
           <div class="content ">
             <h3 class="center pad-card ">{{currentCard?.back}}</h3>
@@ -60,7 +60,6 @@
     </div>
 
   </div>
-
 
   <div class="column stats-box ">
 

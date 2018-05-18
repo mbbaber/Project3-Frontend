@@ -16,6 +16,11 @@ export class FlashcardComponent implements OnInit {
   subject: Subject;
   groupId: string;
   stats: Stat[];
+
+  currentCardRating: number;
+  currentCardColor: string;
+
+
   currentCardId: number = -1;
   currentCard: Card;
   classState: any = {
@@ -45,8 +50,6 @@ export class FlashcardComponent implements OnInit {
           
 
       })
-
-
     console.log(this.apiGroup.currentGroup)
   }
 
@@ -75,7 +78,6 @@ export class FlashcardComponent implements OnInit {
       })
   }
 
-  // DETERMINE CARD ORDER
 
   getAverageComplete(){
     return this.individualStats.percentageComplete; 
@@ -102,20 +104,12 @@ export class FlashcardComponent implements OnInit {
     return distributionForDonut;
   }
 
-  // changeCardColor() {
-  //   // get current card id
-  //   // get rating for that card 
-  //   stat.rating
-  //   if (this.currentCard._id === this.stats.card)
-  //   this.stats
-  // }
-
   getNextCard() {
     this.flipBackVisibility();
+    
 
     this.getStatsList()
       .then((stats: Stat[]) => {
-
         var ratedStats = stats.filter((stat) => {
           return stat.rating !== 0;
         });
@@ -124,7 +118,6 @@ export class FlashcardComponent implements OnInit {
         // create an array that only contains cards that are not rated (not in ratedStats array)
         var unseenCards = this.subject.cards.filter((card: Card) => {
           
-
           // if (card === null) {
           for (var i = 0; i < ratedStats.length; i++) {
               if (card._id == ratedStats[i].card) {
@@ -141,21 +134,36 @@ export class FlashcardComponent implements OnInit {
         // set probabilty of getting new card (set whatever you want)
         if (chooseNewCard) {  // for instance, 70% of the time
           this.currentCard = unseenCards[0];
+          this.currentCardColor = null;
+          this.currentCardRating = null;
         } else {
+          
 
           // show the cards by rank
           var choices = [];
           ratedStats.forEach((stat) => {
             const numberOfAppearances = 6 - stat.rating
             for (var i = 0; i < numberOfAppearances; i++) {
-              choices.push(stat.card)
+              choices.push(stat)
             }
           })
           var randomCardIndex = Math.floor(Math.random() * choices.length)
-          this.currentCard = choices[randomCardIndex];
+          // while the card is the same, pick a new one (garuntees new card)
+          console.log(this.currentCard)
+          console.log(choices[randomCardIndex].card)
+          if (this.currentCard) { // before we assign the first card, currentCard is always null
+            while (this.currentCard._id === choices[randomCardIndex].card) {
+              randomCardIndex = Math.floor(Math.random() * choices.length)
+            }
+          }
+          
+          // this.currentCard = choices[randomCardIndex];
 
           this.currentCard = this.subject.cards.find((card) => {
-            if (card._id === choices[randomCardIndex]) {
+            if (card._id === choices[randomCardIndex].card) {
+              this.currentCardRating = choices[randomCardIndex].rating;
+              this.currentCardColor = `bottom-color${this.currentCardRating}`
+              console.log("Changed color:" + this.currentCardColor)
               return true
             }
             return false
@@ -269,8 +277,13 @@ export class FlashcardComponent implements OnInit {
   }
 
   rateCardandUpdate(rating: number) {
-    this.getNextCard();
-  
+    
+    //To guarantee we don't write a null card to the stats table
+    if (!this.currentCard) {
+      return
+    }
+
+
     let ids = {
       card: this.currentCard,
       group: this.groupId,
@@ -283,6 +296,7 @@ export class FlashcardComponent implements OnInit {
         console.log(result);
         this.stats = result;
         this.getIndividualStats();
+        this.getNextCard();
       })
       .catch((err) => {
         console.log('error rate card and update');

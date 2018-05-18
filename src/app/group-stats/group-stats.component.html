@@ -4,7 +4,7 @@
     <div class="columns">
         <div class="pie-pad column is-half" style="position: relative">
             <app-donut-chart [percentage]="getAverageCompleteForSubject(subject._id)"></app-donut-chart>
-          <h2 class="pie-font" style="position: absolute; top: 26%; left: 38%">{{statsBySubject[subject?._id]?.avePercentageComplete | number: ".0" }}</h2>
+          <h2 class="pie-font" style="position: absolute; top: 26%; left: 38%">{{statsBySubject[subject?._id]?.avePercentageComplete | number:'1.0-0' }}</h2>
         </div>
         <div class="column">
           <div class=" padding-top complete-font">
@@ -21,7 +21,7 @@
           <div class="column">
             <div class="left-align">
               <div class="center">Average Cards Viewed:</div>
-              <div class="center">{{statsBySubject[subject?._id]?.aveCardsViewed | number: ".0"}}/{{statsBySubject[subject?._id]?.numberOfCards}}</div>
+              <div class="center">{{statsBySubject[subject?._id]?.aveCardsViewed | number:'1.0-0'}}/{{statsBySubject[subject?._id]?.numberOfCards}}</div>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
                   Average Cards Mastered:
                 </div>
                 <div class="center">
-                    {{statsBySubject[subject?._id]?.aveNumberCardsMastered | number: ".0"}} / {{statsBySubject[subject?._id]?.numberOfCards}}
+                    {{statsBySubject[subject?._id]?.aveNumberCardsMastered | number:'1.0-0'}} / {{statsBySubject[subject?._id]?.numberOfCards}}
                 </div>
               </div>
 

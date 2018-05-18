@@ -266,6 +266,10 @@ p {
   padding: 0px;
 }
 
+.bottom-color1 {
+  border-bottom: 10px solid rgb(208, 56, 77);
+}
+
 .color1 {
   background-color: rgb(208, 56, 77);
   height: 13vh;
@@ -274,6 +278,10 @@ p {
 .color1:hover { 
   color: black;
   background-color: rgb(175, 47, 64);
+}
+
+.bottom-color2 {
+  border-bottom: 10px solid rgb(250, 156, 88);
 }
 
 .color2 {
@@ -287,6 +295,10 @@ p {
  
 }
 
+.bottom-color3 {
+  border-bottom: 10px solid rgb(243, 250, 173);
+}
+
 .color3 {
   background-color: rgb(243, 250, 173);
   height: 13vh;
@@ -298,6 +310,10 @@ p {
   
 }
 
+.bottom-color4 {
+  border-bottom: 10px solid rgb(152, 213, 164);
+}
+
 .color4 {
   background-color: rgb(152, 213, 164);
   height: 13vh;
@@ -307,6 +323,10 @@ p {
   color: black;
   background-color:  rgb(99, 189, 117);
   
+}
+
+.bottom-color5 {
+  border-bottom: 10px solid rgb(50, 152, 224);
 }
 
 .color5 {
