@@ -544,13 +544,15 @@ export class MainComponent implements OnInit {
       sender: this.currentUser.username, 
       senderEmail: this.currentUser.email, 
       message: mail, 
-      email: studyBuddy.email
+      email: studyBuddy.email,
+      group: this.groups.name
     }
     console.log(message)
-
+    // 
     this.apiSubject.sendMessage(message)
     .then((result)=>{
       console.log("SUCCESS")
+      this.emailFormShow()
       //flash message success???????
     })
     .catch((err) => {
