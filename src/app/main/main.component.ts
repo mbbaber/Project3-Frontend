@@ -125,6 +125,7 @@ export class MainComponent implements OnInit {
     return this.apiStats.getAllStatsForUserById(groupId, subjectId, userId)
       .then((result: Stat[]) => {
         this.stats = result;
+        //console.log("result is here", this.stats)
         return this.stats;
       })
       .catch((err) => {
@@ -133,31 +134,42 @@ export class MainComponent implements OnInit {
       })
   }
 
+
+
   // optimal study buddy is the user with the maximum distance to currentUser based on ratings of cards on subjects of the group.
   getStudyBuddy() {
 
     var distanceToCurrentUser = [];
 
     // we need to get all the data first
+
     var promises = [];
-    this.groups.users.forEach((user) => {
-      this.groups.subjects.forEach((subject)=> {
+    
+    this.groups.subjects.forEach((subject) => {
+      this.groups.users.forEach((user) => {
         // we get the stats for all users in all subjects in current group
         promises.push(this.getStatsListForUser(this.groupsId, subject._id, user._id))
-      }) 
-    
-    })
+      })
+     //Making sure to gets the stats for the admin too!
+      promises.push(this.getStatsListForUser(this.groupsId, subject._id, this.groups.admin))
+    })  
+
 
     Promise.all(promises)
-      .then((result:any[]) => {
+    .then((listOfResults:any[]) => {
+
+      //flattening the result of the promises 
+      //(list of list of stats => list of stats) 
+      var result = [];
+      listOfResults.forEach(r => {result = result.concat(r)})
 
         //get the current user stats in a nicer format
         var currentUserStats = {}
         result.forEach((stat) => { 
-          console.log(stat)
+          //console.log(stat)
           if (stat.user == this.currentUserId) {
             //initialize
-            if( currentUserStats[stat.subject] === undefined) {
+            if(currentUserStats[stat.subject] === undefined) {
               currentUserStats[stat.subject] = {}
             }
             //get the rating for the card for the subject we are looking at
@@ -171,9 +183,11 @@ export class MainComponent implements OnInit {
           //initialize the differences object
           if (differences[stat.user] === undefined) {
             differences[stat.user] = {}
+            //console.log("line 174 undefined")
           }
           if (differences[stat.user][stat.subject] === undefined) {
             differences[stat.user][stat.subject] = 0
+            //console.log("line 178 undefined")
           }
 
           // check if user has seen the card
@@ -181,6 +195,8 @@ export class MainComponent implements OnInit {
             differences[stat.user][stat.subject] += Math.pow(currentUserStats[stat.subject][stat.card] - stat.rating, 2)
           }
         })
+        //console.log("differences", differences)
+        // SOME CODE //
 
         //get user with max distance
         var furthestUser;
@@ -188,22 +204,27 @@ export class MainComponent implements OnInit {
         this.groups.users.forEach(user =>{
           if (user._id != this.currentUserId){
             var distance = 0;
+            
             for (var subject in differences[user._id]){
               distance += differences[user._id][subject];
+              console.log("distance1", distance)
             }
+
             if (furthestUser === undefined){
               furthestUser = user;
               furthestDistance = distance;
+              console.log("furthest distance", distance)
             } else {
               if (furthestDistance < distance){
                 furthestDistance = distance;
                 furthestUser = user;
+                console.log("distance2", distance)
               }
             }
           }
         })
 
-        console.log(furthestUser);
+        console.log("furthest", furthestUser);
 
         this.studyBuddy = furthestUser;
       });
@@ -230,9 +251,9 @@ export class MainComponent implements OnInit {
           console.log('youre the admin of this group')
           this.isAdmin = true;
         } else {
-          console.log(result.userInfo._id, this.groups.admin)
+          //console.log(result.userInfo._id, this.groups.admin)
           this.isAdmin = false;
-          console.log('youre NOT the admin of this group')
+          //console.log('youre NOT the admin of this group')
         }
       })
       .catch((err) => {
@@ -317,7 +338,7 @@ export class MainComponent implements OnInit {
 
       this.computeStatsAcrossUsers(this.groupsId, subject._id, usersArray)
         .then((result: any) => {
-          console.log(subject._id, usersArray)
+          //console.log(subject._id, usersArray)
           //console.log('Bbbbbbbbbb', result)
           this.statsBySubject[subject._id] = result; 
           this.statsBySubject[result.subjectId] = result

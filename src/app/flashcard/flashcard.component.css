@@ -178,12 +178,12 @@ h3 {
 }
 .small-card {
     width: 65%;
-    height: 10vh;
+    height: 14vh;
 }
 
 .small-card:hover {
   width: 80%;
-  height: 12vh;
+  height: 16vh;
 }
 .pie-font{
   font-size: 6.5vh;

@@ -129,7 +129,7 @@ export class FlashcardComponent implements OnInit {
 
         // TODO
         // generate a random number between 0 and 1 (var num= Math.random();)
-        var chooseNewCard = (ratedStats.length <= 0) || ((unseenCards.length > 0) && (Math.random() < 0.7))
+        var chooseNewCard = (ratedStats.length <= 0) || ((unseenCards.length > 0) && (Math.random() < 0.9))
 
         // set probabilty of getting new card (set whatever you want)
         if (chooseNewCard) {  // for instance, 70% of the time
