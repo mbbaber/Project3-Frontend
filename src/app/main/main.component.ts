@@ -266,6 +266,7 @@ export class MainComponent implements OnInit {
   }
 
   showAddUserForm() {
+    this.search = "";
     if(this.addSubState === true){
       this.addSubState = false;
     }
@@ -274,6 +275,7 @@ export class MainComponent implements OnInit {
   }
 
   showAddSubForm() {
+    this.search= "";
     this.apiSubject.getAllTheSubjects()
       .then((result) => {
         this.subjects = result;
@@ -538,6 +540,8 @@ export class MainComponent implements OnInit {
   mouseLeave(subject) {
     this.hoveredSubject = null;
   }
+
+  message = "";
 
   sendMessageToBuddy(studyBuddy, mail){
     const message = {

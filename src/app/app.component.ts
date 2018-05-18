@@ -78,6 +78,8 @@ export class AppComponent {
   }
 //***************************STATES OF POP UP WINDOWS*************** */
   logInShow(){
+    this.formCredentials.username = "";
+    this.formCredentials.password = "";
     if(this.signUpState===true || this.newGroupState === true || this.newCardsState === true ){
       this.signUpState = false;
       this.newGroupState = false;
@@ -86,6 +88,9 @@ export class AppComponent {
     this.logInState = !this.logInState;
   }
   signUpShow(){
+    this.formCredentials.username = "";
+    this.formCredentials.password = "";
+    this.formCredentials.email = "";
     if(this.logInState===true || this.newGroupState == true || this.newCardsState === true){
       this.logInState = false;
       this.newGroupState = false;
@@ -94,6 +99,7 @@ export class AppComponent {
     this.signUpState = !this.signUpState;
   }
   newGroupShow(){
+    this.newGroup.name = "";
     if(this.logInState === true || this.newGroupState ===true || this.newCardsState === true){
       this.logInState = false;
       this.signUpState = false;
@@ -102,6 +108,7 @@ export class AppComponent {
     this.newGroupState = !this.newGroupState;
   }
   newSetShow(){
+    this.newSetOfCards.name = "";
     if(this.logInState === true || this.newGroupState ===true || this.signUpState ===true){
       this.logInState = false;
       this.signUpState = false;
