@@ -15,6 +15,8 @@ export class AppComponent {
 
   // for error messages
   isErrMsg: boolean = false;
+
+  
   displayMsg: string;
 
 
