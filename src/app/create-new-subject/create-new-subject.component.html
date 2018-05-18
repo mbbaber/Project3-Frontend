@@ -15,14 +15,14 @@
                     </label>
                     <label class="column auto center">
                         <p><br>  </p>
-                        <button class="invisible ">
-                            <i class="fas fa-plus-circle add-button fa-2x"></i>
+                        <button class="invisible move-left ">
+                            <i class="fas fa-plus-circle fa-3x .marg-left2 add-button"></i>
                         </button>
                     </label>
                 </form>
             </div>
             <div class="box container  is-fluid center">
-                <div class="columns is-variable is-2" *ngFor="let oneCard of subjectCards">
+                <div class="columns is-variable is-2 margin-top" *ngFor="let oneCard of subjectCards">
                     <div class="question column box is-two-fifths center">{{oneCard.front}}</div>
                     <div class="answer column box is-two-fifths center">{{oneCard.back}}</div>
                     <div class="invisible column is-one-fifth center" (click)="deleteCardSubmit(oneCard._id)">
@@ -55,7 +55,7 @@
             <div class="box add-new-card columns" *ngFor="let oneWord of subjectKeywords">
                 <div class="question left column is-three-quarters">{{oneWord}}</div>
                 <div class="right column is-one-quarter">
-                    <i class="fas fa-minus-circle delete-button" (click)="deleteKeywordSubmit(oneWord)"></i>
+                    <i class="fas fa-minus-circle delete-button fa-2x margin-left" (click)="deleteKeywordSubmit(oneWord)"></i>
                 </div>
             </div>
         </div>

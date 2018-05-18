@@ -1,6 +1,30 @@
 .is-two-fifths {
 margin-left: 5%;
 }
+
+.add-new-card {
+    width: 25vw;
+    margin: 0%;
+}
+.move-left {
+    margin-left: 0.5vw;
+}
+.margin-left {
+    margin-left: 1.5vw;
+}
+.delete-button {
+    padding: 0%;
+    width: 32px;
+    height: 32px;
+    margin-top: 1vh;
+}
+.margin-top {
+    margin-top: 1vh;
+}
+.is-one-fifth {
+    padding: 0%;
+    width: 12%;
+}
 .color1 {
     background-color: rgb(208, 56, 77);
   }
