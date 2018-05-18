@@ -39,7 +39,7 @@ const routes: Routes = [
     canActivate: [AuthenticationService]},
 
   //Error Component
-  // {path: '**', component: HomepageComponent },
+  {path: '**', component: HomepageComponent }
 ];
 
 @NgModule({
