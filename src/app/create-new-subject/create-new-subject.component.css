@@ -35,6 +35,21 @@
   }
 
  .invisible{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     border: none;
  }
+
+ .question,
+ .answer{
+    word-wrap: break-word;
+ }
+
+ .my-container{
+    margin-top: 24px;
+ }
+
+ .make-bigger{
+    font-size: 5vh;
+    padding: 10px;
+    margin: 5px;
+}

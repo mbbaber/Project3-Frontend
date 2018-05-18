@@ -56,10 +56,10 @@
       <a class="button color4" *ngIf="groups?.name != 'Private'" (click)="showAddUserForm()">Add User</a>
     </div>
 
-    <a class="button center big-marg color2" (click)="getStudyBuddy()">Get Study Buddy</a>
-    <div *ngIf="studyBuddy">
+    <a class="button center big-marg color2" (click)="getStudyBuddy()" *ngIf="groups?.name != 'Private'">Get Study Buddy</a>
+    <div *ngIf="studyBuddy" class="center">
       <h4 class="center">{{studyBuddy.username}}</h4>
-      <span *ngIf="studyBuddyDiv" (click)="emailFormShow()">E-mail {{studyBuddy.username}} to set up a study session!</span>
+      <span class=" cursor" *ngIf="studyBuddyDiv" (click)="emailFormShow()">E-mail {{studyBuddy.username}} to set up a study session!</span>
     </div>
   </div>
 
@@ -159,11 +159,22 @@
 </div>
 
 <div class="sign-up-window center" *ngIf="emailForm">
-  <div class="sign-up-pop-sub">
-      <i class="fa fa-window-close fa-2x icon-close" (click)="emailFormShow()"></i>
-      <h2>Your message to {{studyBuddy.username}}</h2>
-      <textarea [(ngModel)]="message"></textarea>
-      <button (click)="sendMessageToBuddy(studyBuddy, message)"> SEND <i class="fas fa-envelope fa-2x"  ></i> </button>
+  <div class="sign-up-pop-auto">
+    <i class="fa fa-window-close fa-2x icon-close" (click)="emailFormShow()"></i>
+    <h2>Your message to
+      <b>{{studyBuddy.username}}:</b>
+    </h2>
+    <div class="field-body center">
+      <div class="field ">
+        <div class="control center">
+          <textarea class="my-padding" cols="50" rows="10" type="text" placeholder="Your message" [(ngModel)]="message"></textarea><br>
+          <a class="button  big-marg color2" (click)="sendMessageToBuddy(studyBuddy, message)">
+            <span>Send</span>
+            <i class=" my-ic fas fa-envelope icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
