@@ -50,6 +50,7 @@ export class CreateNewSubjectComponent implements OnInit {
     })
   }
 
+
   newCardSubmit(){
     if(this.newCard.front === "" || this.newCard.back === ""){
       return;
@@ -59,12 +60,30 @@ export class CreateNewSubjectComponent implements OnInit {
       this.subjectData = result;
       this.subjectCards = result.cards;
       this.subjectKeywords = result.keywords;
+      this.newCard.front = "";
+      this.newCard.back = "";
     })
     .catch((err)=>{
       console.log(err, 'error adding a new card')
     })
   }
   
+  newKeywordSubmit(keyword){
+    if(keyword === ""){
+      return;
+    }
+    this.subService.postThisKeyword(keyword, this.subjectId)
+      .then((result)=>{
+        this.getSubjectData()
+        console.log(result)
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+
+  }
+  
+
   deleteCardSubmit(card){
     console.log(card)
     this.subService.deleteThisCard(card, this.subjectId)
@@ -75,5 +94,18 @@ export class CreateNewSubjectComponent implements OnInit {
     .catch((err)=>{
       console.log(err);
     })
+  }
+
+  deleteKeywordSubmit(keyword){
+
+    this.subService.deleteThisKeyword(keyword, this.subjectId)
+      .then((result)=>{
+        this.getSubjectData()
+        console.log(result)
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+
   }
 }

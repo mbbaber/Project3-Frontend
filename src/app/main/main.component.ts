@@ -23,8 +23,8 @@ export class MainComponent implements OnInit {
   usersArray: Array<string> = [];
   currentUserIndividualStats = {};
   currentUserId: string;
-
-
+  currentUser: any;
+  studyBuddyDiv: boolean = false;
   hoveredSubject: any;
 
   statsBySubject = {};
@@ -38,6 +38,7 @@ export class MainComponent implements OnInit {
   thisSub: chooseSub;
   addUserState: boolean = false;
   addSubState: boolean = false;
+  emailForm: boolean = false;
   search: string = "";
 
 
@@ -207,7 +208,7 @@ export class MainComponent implements OnInit {
         this.studyBuddy = furthestUser;
       });
 
-      
+      this.studyBuddyDiv= true;
   }
 
 
@@ -215,6 +216,7 @@ export class MainComponent implements OnInit {
   this.userService.checkLogin()
       .then((result) => {
           this.currentUserId = result.userInfo._id 
+          this.currentUser = result.userInfo
         })
   }
 
@@ -236,6 +238,10 @@ export class MainComponent implements OnInit {
       .catch((err) => {
         console.log('err seeing if admin')
       })
+  }
+
+  emailFormShow(){
+    this.emailForm = !this.emailForm;
   }
 
   showAddUserForm() {
@@ -510,6 +516,26 @@ export class MainComponent implements OnInit {
 
   mouseLeave(subject) {
     this.hoveredSubject = null;
+  }
+
+  sendMessageToBuddy(studyBuddy, mail){
+    const message = {
+      sender: this.currentUser.username, 
+      senderEmail: this.currentUser.email, 
+      message: mail, 
+      email: studyBuddy.email
+    }
+    console.log(message)
+
+    this.apiSubject.sendMessage(message)
+    .then((result)=>{
+      console.log("SUCCESS")
+      //flash message success???????
+    })
+    .catch((err) => {
+      console.log("sending email error")
+      console.log(err)
+    })
   }
 
 }

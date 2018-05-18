@@ -1,25 +1,53 @@
 <h2 class="center">{{subjectData?.name}}</h2>
 
-<div class="column">
-    <div class="columns is-half">
-        <div class="one-card margin" *ngFor="let oneCard of subjectCards">
-        <div class="question">{{oneCard.front}}</div>
-        <div class="answer">{{oneCard.back}}</div>
-        <button class="color1" (click)="deleteCardSubmit(oneCard._id)">Delete</button>
-    </div>
-    
-    <div class="add-new-card">
-        <form (ngSubmit)="newCardSubmit()">
-                <label><p>Front:</p>
+<div class="columns is-5">
+    <div class="column is-two-thirds">
+        <div class="one-card margin columns" *ngFor="let oneCard of subjectCards">
+            <div class="question column is-two-fifths">{{oneCard.front}}</div>
+            <div class="answer column is-two-fifths">{{oneCard.back}}</div>
+            <button class="invisible is-one-fifth" (click)="deleteCardSubmit(oneCard._id)">
+                <i class="fas fa-minus-circle delete-button fa-2x"></i>
+            </button>
+        </div>
+
+        <div class="add-new-card">
+            <form (ngSubmit)="newCardSubmit()" class="columns">
+                <label class="column is-two-fifths">
+                    <p>Front:</p>
                     <input class="input" type="text" name="front" [(ngModel)]="newCard.front" placeholder="">
-                </label> <br><br>
-                <label><p>Back:</p>
-                    <input class="input" type="text" name="back" [(ngModel)]="newCard.back" placeholder="" >
-                </label> <br><br>
-                <button class="btn color4">Add</button>
-        </form>
-    </div></div>
-    <div class="columns is-half"></div>
+                </label>
+                <label class="column is-two-fifths">
+                    <p>Back:</p>
+                    <input class="input" type="text" name="back" [(ngModel)]="newCard.back" placeholder="">
+                </label>
+                <button class="invisible is-one-fifth">
+                    <i class="fas fa-plus-circle add-button fa-2x"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="column is-one-third">
+        <div class="add-new-card">
+            <form>
+                <label>
+                    <p>Add a keyword to {{subjectData?.name}}</p>
+                    <div class="columns">
+                        <span class=" column is-four-fifths">
+                            <input class="input " type="text" name="front" [(ngModel)]="keyword" placeholder="">
+                        </span>
+
+                        <span class=" column is-one-fifth">
+                            <i class="fas fa-plus-circle fa-2x add-button" (click)="newKeywordSubmit(keyword)"></i>
+                        </span>
+                    </div>
+                </label>
+
+                <!-- <button class="btn color4">Add</button> -->
+            </form>
+        </div>
+        <div class="one-card margin box" *ngFor="let oneWord of subjectKeywords">
+            <div class="question left">{{oneWord}}</div>
+            <i class="fas fa-minus-circle delete-button right" (click)="deleteKeywordSubmit(oneWord)"></i>
+        </div>
+    </div>
 </div>
-
-
