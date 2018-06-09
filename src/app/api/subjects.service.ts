@@ -58,7 +58,7 @@ export class SubjectsService {
     .toPromise()
     .then((apiResponse:any)=>{  
       this.subToSave = apiResponse;
-      console.log(apiResponse)
+      // console.log(apiResponse)
       return apiResponse;
     })
   }
@@ -73,7 +73,7 @@ export class SubjectsService {
       this.cardOfThisSub = apiResponse.cards;
       this.kewordsOfThisSub = apiResponse.keywords;
       this.subToSave = apiResponse;
-      console.log(apiResponse)
+      // console.log(apiResponse)
       return apiResponse;
     })
   }
@@ -96,7 +96,7 @@ export class SubjectsService {
     .toPromise()
     .then((apiResponse: any)=>{
       this.subToSave = apiResponse;
-      console.log(apiResponse)
+      // console.log(apiResponse)
       return apiResponse;
     })
   }
@@ -109,7 +109,7 @@ export class SubjectsService {
     .toPromise()
     .then((apiResponse: any)=>{
       this.subToSave = apiResponse;
-      console.log(apiResponse)
+      // console.log(apiResponse)
       return apiResponse;
     })
   }

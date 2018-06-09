@@ -88,7 +88,7 @@ export class GroupsService {
   }
 
   addThisUserToThisGroup(userId, groupId){
-    console.log('works')
+    // console.log('works')
     return this.ajaxTruc
     .put(`${BACKEND}/a/api/us/${userId}/gr/${groupId}`,
     {withCredentials: true})

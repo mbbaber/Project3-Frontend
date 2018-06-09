@@ -26,7 +26,7 @@ export class UserAccountComponent implements OnInit {
     this.actRoute.parent.paramMap
       .subscribe((myParams) => {
         this.userId = myParams.get('userId');
-        console.log(this.userId)
+        // console.log(this.userId)
       })
 
     this.getUserData()
@@ -36,7 +36,7 @@ export class UserAccountComponent implements OnInit {
     this.userService.getDataUser(this.userId)
     .then((result: User)=>{
       this.userData = result;
-      console.log(this.userData);
+      // console.log(this.userData);
     })
     .catch((err)=>{
       console.log("error fetching user data");

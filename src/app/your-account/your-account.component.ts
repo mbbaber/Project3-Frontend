@@ -37,7 +37,7 @@ export class YourAccountComponent implements OnInit {
     this.userService.getDataUser(this.userId)
     .then((result: User)=>{
       this.userData = result;
-      console.log(this.userData);
+      // console.log(this.userData);
     })
     .catch((err)=>{
       console.log("error fetching user data");

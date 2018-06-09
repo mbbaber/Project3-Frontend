@@ -43,7 +43,7 @@ export class YourSubjectsComponent implements OnInit {
     this.userService.getDataUser(this.userId)
     .then((result: User)=>{
       this.userData = result;
-      console.log(this.userData);
+      // console.log(this.userData);
     })
     .catch((err)=>{
       console.log("error fetching user data");
@@ -58,7 +58,7 @@ export class YourSubjectsComponent implements OnInit {
         if(oneSub.admin === this.userId){
           this.userSubs.push(oneSub)
           this.search = "";
-          console.log(this.userSubs)
+          // console.log(this.userSubs)
         }
       })
     //  this.userSubs = result;
@@ -72,7 +72,7 @@ export class YourSubjectsComponent implements OnInit {
     this.apiGroup.deleteThisSub(subId, userId)
     .then((result)=>{
       this.userSubs = result;
-      console.log(result);
+      // console.log(result);
       this.response.navigateByUrl(`/my-account/${userId}/subjects`)
     })
     .catch((err)=>{

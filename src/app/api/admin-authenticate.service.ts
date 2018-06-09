@@ -25,7 +25,7 @@ export class AdminAuthenticateService implements CanActivate{
 
   canActivate() {
       if(this.userService.isLoggedIn === true ){
-        console.log("ssss")
+        // console.log("ssss")
         return true;
       }else{
         // this.router.navigateByUrl('/');

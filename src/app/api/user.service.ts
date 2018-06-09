@@ -52,7 +52,7 @@ export class UserService {
       }else{
         this.isLoggedIn = false;
       }
-      console.log(this.isLoggedIn)
+      // console.log(this.isLoggedIn)
       this.currentUser = apiResponse.userInfo;
       return apiResponse;
     })
@@ -65,7 +65,7 @@ export class UserService {
     .then((apiResponse: any)=>{
       this.isLoggedIn = false;
       this.currentUser = apiResponse.userInfo;
-      console.log('youre logged out', this.isLoggedIn)
+      // console.log('youre logged out', this.isLoggedIn)
       return apiResponse;
     })
   }
@@ -85,7 +85,7 @@ export class UserService {
     .get(`${environment.backUrl}/a/auth/all-users-who-belong/${groupId}`)
     .toPromise()
     .then((apiResponse: any)=>{
-      console.log('belong', apiResponse)
+      // console.log('belong', apiResponse)
      return apiResponse;
     })
   }
@@ -95,7 +95,7 @@ export class UserService {
     .get(`${environment.backUrl}/a/auth/all-users-who-dont-belong/${groupId}`)
     .toPromise()
     .then((apiResponse: any)=>{
-      console.log('dont belong', apiResponse)
+      // console.log('dont belong', apiResponse)
      return apiResponse;
     })
   }

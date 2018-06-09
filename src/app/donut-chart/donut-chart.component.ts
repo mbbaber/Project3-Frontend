@@ -30,7 +30,7 @@ export class DonutChartComponent {
 
   // events
   public chartClicked(e:any):void {
-    console.log(e);
+    // console.log(e);
   }
 
   public chartData() {
@@ -38,7 +38,7 @@ export class DonutChartComponent {
   }
 
   public chartHovered(e:any):void {
-    console.log(e);
+    // console.log(e);
   }
 
 }

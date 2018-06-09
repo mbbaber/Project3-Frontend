@@ -56,7 +56,7 @@ export class UsersGroupsComponent implements OnInit {
     .then((result: any)=>{
       this.userData = result;
 
-      console.log(this.userData);
+      // console.log(this.userData);
     })
     .catch((err)=>{
       console.log("error fetching user data");

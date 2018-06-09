@@ -175,7 +175,7 @@ export class AppComponent {
       this.getUsersGroups(this.userId);
       this.newGroupState = false;
       this.response.navigateByUrl(`/group/${result._id}`);
-      console.log('new group?', result)
+      // console.log('new group?', result)
     })
     .catch((err)=>{
       console.log(err, 'error form Submit')
@@ -185,7 +185,7 @@ export class AppComponent {
   subjectFormSubmit(){
     this.apiSub.newSub(this.newSetOfCards)
     .then((result)=>{
-      console.log(result)
+      // console.log(result)
       this.newCardsState = false;
       this.response.navigateByUrl(`/new-subject/${result._id}`);
     })

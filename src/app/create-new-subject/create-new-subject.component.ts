@@ -75,7 +75,7 @@ export class CreateNewSubjectComponent implements OnInit {
     this.subService.postThisKeyword(keyword, this.subjectId)
       .then((result)=>{
         this.getSubjectData()
-        console.log(result)
+        // console.log(result)
       })
       .catch((err)=>{
         console.log(err);
@@ -85,7 +85,7 @@ export class CreateNewSubjectComponent implements OnInit {
   
 
   deleteCardSubmit(card){
-    console.log(card)
+    // console.log(card)
     this.subService.deleteThisCard(card, this.subjectId)
     .then((result)=>{
       this.subjectData = result;
@@ -101,7 +101,7 @@ export class CreateNewSubjectComponent implements OnInit {
     this.subService.deleteThisKeyword(keyword, this.subjectId)
       .then((result)=>{
         this.getSubjectData()
-        console.log(result)
+        // console.log(result)
       })
       .catch((err)=>{
         console.log(err);
